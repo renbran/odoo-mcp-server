@@ -1,0 +1,27 @@
+name = "odoo-mcp-server"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Environment variables (configure via Cloudflare dashboard or wrangler secret)
+# [env.production]
+# vars = { ENVIRONMENT = "production" }
+
+# Example of secrets to set:
+# wrangler secret put ODOO_API_KEY
+# wrangler secret put ODOO_URL
+# wrangler secret put ODOO_DB
+# wrangler secret put ODOO_USERNAME
+# wrangler secret put ODOO_PASSWORD
+
+[observability]
+enabled = true
+
+# Rate limiting and resource limits
+[limits]
+cpu_ms = 50000
+
+# KV namespace for caching (optional)
+# [[kv_namespaces]]
+# binding = "ODOO_CACHE"
+# id = "your-kv-namespace-id"
