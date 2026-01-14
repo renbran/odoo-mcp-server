@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Activity Types for Job Requisition -->
+        <record id="mail_activity_requisition_review" model="mail.activity.type">
+            <field name="name">Review Job Requisition</field>
+            <field name="summary">Review and submit job requisition</field>
+            <field name="res_model">recruitment.job.requisition</field>
+            <field name="icon">fa-search</field>
+            <field name="delay_count">1</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <record id="mail_activity_create_applications" model="mail.activity.type">
+            <field name="name">Create Applications</field>
+            <field name="summary">Create application records from approved requisition</field>
+            <field name="res_model">recruitment.job.requisition</field>
+            <field name="icon">fa-plus-square</field>
+            <field name="delay_count">1</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <!-- Activity Types for Application -->
+        <record id="mail_activity_application_review" model="mail.activity.type">
+            <field name="name">Review Application</field>
+            <field name="summary">Review and process application</field>
+            <field name="res_model">recruitment.application</field>
+            <field name="icon">fa-check-square-o</field>
+            <field name="delay_count">2</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <record id="mail_activity_schedule_interview" model="mail.activity.type">
+            <field name="name">Schedule Interview</field>
+            <field name="summary">Schedule candidate interview</field>
+            <field name="res_model">recruitment.application</field>
+            <field name="icon">fa-calendar</field>
+            <field name="delay_count">3</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <!-- Activity Types for Contract -->
+        <record id="mail_activity_contract_review" model="mail.activity.type">
+            <field name="name">Review Contract</field>
+            <field name="summary">Review and finalize contract terms</field>
+            <field name="res_model">recruitment.contract</field>
+            <field name="icon">fa-file-text-o</field>
+            <field name="delay_count">2</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <record id="mail_activity_contract_signing" model="mail.activity.type">
+            <field name="name">Contract Signing</field>
+            <field name="summary">Obtain contract signatures</field>
+            <field name="res_model">recruitment.contract</field>
+            <field name="icon">fa-pencil-square-o</field>
+            <field name="delay_count">5</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <!-- Activity Types for Deployment -->
+        <record id="mail_activity_deployment_preparation" model="mail.activity.type">
+            <field name="name">Prepare Deployment</field>
+            <field name="summary">Prepare deployment documentation and logistics</field>
+            <field name="res_model">recruitment.deployment</field>
+            <field name="icon">fa-suitcase</field>
+            <field name="delay_count">3</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <record id="mail_activity_visa_processing" model="mail.activity.type">
+            <field name="name">Process Visa</field>
+            <field name="summary">Process visa and work permit</field>
+            <field name="res_model">recruitment.deployment</field>
+            <field name="icon">fa-id-card-o</field>
+            <field name="delay_count">7</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <record id="mail_activity_arrange_travel" model="mail.activity.type">
+            <field name="name">Arrange Travel</field>
+            <field name="summary">Book flights and arrange accommodation</field>
+            <field name="res_model">recruitment.deployment</field>
+            <field name="icon">fa-plane</field>
+            <field name="delay_count">5</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <record id="mail_activity_arrival_confirmation" model="mail.activity.type">
+            <field name="name">Confirm Arrival</field>
+            <field name="summary">Confirm candidate arrival and onboarding</field>
+            <field name="res_model">recruitment.deployment</field>
+            <field name="icon">fa-check-circle-o</field>
+            <field name="delay_count">1</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <!-- Activity Types for Retention -->
+        <record id="mail_activity_followup_30days" model="mail.activity.type">
+            <field name="name">30-Day Follow-up</field>
+            <field name="summary">30-day retention check</field>
+            <field name="res_model">recruitment.retention</field>
+            <field name="icon">fa-phone</field>
+            <field name="delay_count">30</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <record id="mail_activity_followup_60days" model="mail.activity.type">
+            <field name="name">60-Day Follow-up</field>
+            <field name="summary">60-day retention check</field>
+            <field name="res_model">recruitment.retention</field>
+            <field name="icon">fa-phone</field>
+            <field name="delay_count">60</field>
+            <field name="delay_unit">days</field>
+        </record>
+
+        <record id="mail_activity_followup_90days" model="mail.activity.type">
+            <field name="name">90-Day Follow-up</field>
+            <field name="summary">90-day retention check</field>
+            <field name="res_model">recruitment.retention</field>
+            <field name="icon">fa-phone</field>
+            <field name="delay_count">90</field>
+            <field name="delay_unit">days</field>
+        </record>
+        
+    </data>
+</odoo>

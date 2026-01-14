@@ -260,9 +260,20 @@ async function main() {
   }
 }
 
-// Auto-start if running directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
+// Auto-start if running directly in Node.js
+try {
+  if (typeof process !== 'undefined' && process.argv && import.meta.url === `file://${process.argv[1]}`) {
+    main();
+  }
+} catch (e) {
+  // Running in Cloudflare Workers or browser, skip auto-start
 }
 
 export { OdooMCPServer, main };
+
+// Default export for Cloudflare Workers
+export default {
+  fetch: async (_request: Request) => {
+    return new Response('Odoo MCP Server is running', { status: 200 });
+  },
+};

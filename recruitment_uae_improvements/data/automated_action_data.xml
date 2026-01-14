@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Automated Action: Send Email on Requisition Approval -->
+        <record id="action_email_requisition_approved" model="base.automation">
+            <field name="name">Recruitment: Email on Requisition Approval</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_job_requisition"/>
+            <field name="trigger">on_write</field>
+            <field name="filter_domain">[('state', '=', 'approved')]</field>
+            <field name="action_server_id" ref="action_server_email_requisition_approved"/>
+        </record>
+
+        <record id="action_server_email_requisition_approved" model="ir.actions.server">
+            <field name="name">Send Approval Email</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_job_requisition"/>
+            <field name="state">email</field>
+            <field name="template_id" ref="email_template_requisition_approved_enhanced"/>
+        </record>
+
+        <!-- Automated Action: Send Email on Application Acceptance -->
+        <record id="action_email_application_accepted" model="base.automation">
+            <field name="name">Recruitment: Email on Application Acceptance</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_application"/>
+            <field name="trigger">on_write</field>
+            <field name="filter_domain">[('state', '=', 'accepted')]</field>
+            <field name="action_server_id" ref="action_server_email_application_accepted"/>
+        </record>
+
+        <record id="action_server_email_application_accepted" model="ir.actions.server">
+            <field name="name">Send Acceptance Email</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_application"/>
+            <field name="state">email</field>
+            <field name="template_id" ref="email_template_application_accepted_enhanced"/>
+        </record>
+
+        <!-- Automated Action: Send Email on Contract Sent -->
+        <record id="action_email_contract_sent" model="base.automation">
+            <field name="name">Recruitment: Email on Contract Sent</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_contract"/>
+            <field name="trigger">on_write</field>
+            <field name="filter_domain">[('state', '=', 'sent')]</field>
+            <field name="action_server_id" ref="action_server_email_contract_sent"/>
+        </record>
+
+        <record id="action_server_email_contract_sent" model="ir.actions.server">
+            <field name="name">Send Contract Email</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_contract"/>
+            <field name="state">email</field>
+            <field name="template_id" ref="email_template_contract_sent_enhanced"/>
+        </record>
+
+        <!-- Automated Action: Send Email on Visa Approval -->
+        <record id="action_email_visa_approved" model="base.automation">
+            <field name="name">Recruitment: Email on Visa Approval</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_deployment"/>
+            <field name="trigger">on_write</field>
+            <field name="filter_domain">[('visa_status', '=', 'approved')]</field>
+            <field name="action_server_id" ref="action_server_email_visa_approved"/>
+        </record>
+
+        <record id="action_server_email_visa_approved" model="ir.actions.server">
+            <field name="name">Send Visa Approval Email</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_deployment"/>
+            <field name="state">email</field>
+            <field name="template_id" ref="email_template_visa_approved_enhanced"/>
+        </record>
+
+        <!-- Automated Action: Auto-subscribe Partners on Create -->
+        <record id="action_auto_subscribe_requisition" model="base.automation">
+            <field name="name">Recruitment: Auto-subscribe Partners to Requisition</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_job_requisition"/>
+            <field name="trigger">on_create</field>
+            <field name="state">code</field>
+            <field name="code">
+if record.partner_id:
+    record.message_subscribe(partner_ids=[record.partner_id.id])
+if record.employee_id and record.employee_id.user_id:
+    record.message_subscribe(partner_ids=[record.employee_id.user_id.partner_id.id])
+            </field>
+        </record>
+
+        <record id="action_auto_subscribe_application" model="base.automation">
+            <field name="name">Recruitment: Auto-subscribe Partners to Application</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_application"/>
+            <field name="trigger">on_create</field>
+            <field name="state">code</field>
+            <field name="code">
+if record.candidate_id and record.candidate_id.partner_id:
+    record.message_subscribe(partner_ids=[record.candidate_id.partner_id.id])
+if record.partner_id:
+    record.message_subscribe(partner_ids=[record.partner_id.id])
+            </field>
+        </record>
+
+        <record id="action_auto_subscribe_contract" model="base.automation">
+            <field name="name">Recruitment: Auto-subscribe Partners to Contract</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_contract"/>
+            <field name="trigger">on_create</field>
+            <field name="state">code</field>
+            <field name="code">
+if record.candidate_id and record.candidate_id.partner_id:
+    record.message_subscribe(partner_ids=[record.candidate_id.partner_id.id])
+if record.partner_id:
+    record.message_subscribe(partner_ids=[record.partner_id.id])
+            </field>
+        </record>
+
+        <record id="action_auto_subscribe_deployment" model="base.automation">
+            <field name="name">Recruitment: Auto-subscribe Partners to Deployment</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_deployment"/>
+            <field name="trigger">on_create</field>
+            <field name="state">code</field>
+            <field name="code">
+if record.candidate_id and record.candidate_id.partner_id:
+    record.message_subscribe(partner_ids=[record.candidate_id.partner_id.id])
+if record.partner_id:
+    record.message_subscribe(partner_ids=[record.partner_id.id])
+            </field>
+        </record>
+        
+    </data>
+</odoo>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Email Template: Job Requisition Approved -->
+        <record id="email_template_requisition_approved_enhanced" model="mail.template">
+            <field name="name">Recruitment: Job Requisition Approved (Enhanced)</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_job_requisition"/>
+            <field name="subject">Job Requisition Approved: ${object.name}</field>
+            <field name="email_from">${(object.company_id.email or user.email)|safe}</field>
+            <field name="email_to">${object.employee_id.work_email}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2 style="color: #28a745;">Job Requisition Approved ✓</h2>
+                    <p>Dear ${object.employee_id.name},</p>
+                    <p>Your job requisition has been approved:</p>
+                    <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Requisition:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Client:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.partner_id.name}</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Job Position:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.job_id.name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Positions:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.expected_employees}</td>
+                        </tr>
+                    </table>
+                    <p><strong>Next Steps:</strong></p>
+                    <ul>
+                        <li>Create application records for ${object.expected_employees} positions</li>
+                        <li>Begin candidate sourcing and screening</li>
+                        <li>Schedule interviews as needed</li>
+                    </ul>
+                    <p style="margin-top: 30px;">
+                        <a href="/web#id=${object.id}&amp;model=recruitment.job.requisition&amp;view_type=form" 
+                           style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+                            View Requisition
+                        </a>
+                    </p>
+                    <p style="margin-top: 30px; color: #6c757d; font-size: 12px;">
+                        This is an automated message from Eiger Marvel HR Recruitment System.
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <!-- Email Template: Application Accepted -->
+        <record id="email_template_application_accepted_enhanced" model="mail.template">
+            <field name="name">Recruitment: Application Accepted (Enhanced)</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_application"/>
+            <field name="subject">Application Accepted: ${object.candidate_id.name}</field>
+            <field name="email_from">${(object.company_id.email or user.email)|safe}</field>
+            <field name="email_to">${object.candidate_id.email}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2 style="color: #28a745;">Congratulations! Application Accepted ✓</h2>
+                    <p>Dear ${object.candidate_id.name},</p>
+                    <p>We are pleased to inform you that your application has been accepted:</p>
+                    <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Position:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.job_id.name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Client:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.partner_id.name or object.job_requisition_id.partner_id.name}</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Expected Salary:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.salary_expected}</td>
+                        </tr>
+                    </table>
+                    <p><strong>Next Steps:</strong></p>
+                    <ul>
+                        <li>Contract will be prepared within 2 business days</li>
+                        <li>Please prepare required documents</li>
+                        <li>Our team will contact you shortly</li>
+                    </ul>
+                    <p style="margin-top: 30px; color: #6c757d; font-size: 12px;">
+                        This is an automated message from Eiger Marvel HR Recruitment System.
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <!-- Email Template: Contract Sent -->
+        <record id="email_template_contract_sent_enhanced" model="mail.template">
+            <field name="name">Recruitment: Contract Sent (Enhanced)</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_contract"/>
+            <field name="subject">Employment Contract for Review: ${object.candidate_id.name}</field>
+            <field name="email_from">${(object.company_id.email or user.email)|safe}</field>
+            <field name="email_to">${object.candidate_id.email}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2 style="color: #007bff;">Employment Contract for Review</h2>
+                    <p>Dear ${object.candidate_id.name},</p>
+                    <p>Please find your employment contract for review:</p>
+                    <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Contract:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Client:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.partner_id.name}</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Salary:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.salary_proposed}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Start Date:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.start_date}</td>
+                        </tr>
+                    </table>
+                    <p><strong>Action Required:</strong></p>
+                    <ul>
+                        <li>Review the contract terms carefully</li>
+                        <li>Contact us with any questions</li>
+                        <li>Sign and return within 5 business days</li>
+                    </ul>
+                    <p style="margin-top: 30px; color: #6c757d; font-size: 12px;">
+                        This is an automated message from Eiger Marvel HR Recruitment System.
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <!-- Email Template: Deployment Confirmed -->
+        <record id="email_template_deployment_confirmed_enhanced" model="mail.template">
+            <field name="name">Recruitment: Deployment Confirmed (Enhanced)</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_deployment"/>
+            <field name="subject">Deployment Confirmed: ${object.candidate_id.name}</field>
+            <field name="email_from">${(object.company_id.email or user.email)|safe}</field>
+            <field name="email_to">${object.candidate_id.email}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2 style="color: #28a745;">Deployment Confirmed ✓</h2>
+                    <p>Dear ${object.candidate_id.name},</p>
+                    <p>Your deployment has been confirmed:</p>
+                    <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Client:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.partner_id.name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Expected Arrival:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.expected_arrival_date}</td>
+                        </tr>
+                        <tr style="background-color: #f8f9fa;">
+                            <td style="padding: 10px; border: 1px solid #dee2e6;"><strong>Flight Details:</strong></td>
+                            <td style="padding: 10px; border: 1px solid #dee2e6;">${object.flight_details or 'To be confirmed'}</td>
+                        </tr>
+                    </table>
+                    <p><strong>Pre-Departure Checklist:</strong></p>
+                    <ul>
+                        <li>Verify passport validity (minimum 6 months)</li>
+                        <li>Complete medical examination</li>
+                        <li>Prepare required documents</li>
+                        <li>Confirm contact details</li>
+                    </ul>
+                    <p>Our team will provide detailed travel instructions soon.</p>
+                    <p style="margin-top: 30px; color: #6c757d; font-size: 12px;">
+                        This is an automated message from Eiger Marvel HR Recruitment System.
+                    </p>
+                </div>
+            </field>
+        </record>
+
+        <!-- Email Template: Visa Approved -->
+        <record id="email_template_visa_approved_enhanced" model="mail.template">
+            <field name="name">Recruitment: Visa Approved (Enhanced)</field>
+            <field name="model_id" ref="recruitment_uae.model_recruitment_deployment"/>
+            <field name="subject">Visa Approved: ${object.candidate_id.name}</field>
+            <field name="email_from">${(object.company_id.email or user.email)|safe}</field>
+            <field name="email_to">${object.candidate_id.email}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; padding: 20px;">
+                    <h2 style="color: #28a745;">Great News! Visa Approved 🎉</h2>
+                    <p>Dear ${object.candidate_id.name},</p>
+                    <p>We are pleased to inform you that your visa has been approved!</p>
+                    <p><strong>Next Steps:</strong></p>
+                    <ul>
+                        <li>Flight booking in progress</li>
+                        <li>Accommodation arrangements underway</li>
+                        <li>Airport pickup will be arranged</li>
+                        <li>Orientation schedule will be shared</li>
+                    </ul>
+                    <p>Expected Arrival Date: <strong>${object.expected_arrival_date}</strong></p>
+                    <p>We look forward to welcoming you!</p>
+                    <p style="margin-top: 30px; color: #6c757d; font-size: 12px;">
+                        This is an automated message from Eiger Marvel HR Recruitment System.
+                    </p>
+                </div>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
