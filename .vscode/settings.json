@@ -1,0 +1,9 @@
+{
+    "github.copilot.chat.agent.autoFix": true,
+    "github.copilot.chat.alternateGeminiModelFPrompt.enabled": true,
+    "github.copilot.chat.alternateGptPrompt.enabled": true,
+    "window.autoDetectColorScheme": true,
+    "chat.agent.maxRequests": 1000,
+    "xml.symbols.enabled": false,
+    "python.languageServer": "None"
+}
