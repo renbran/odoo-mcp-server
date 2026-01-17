@@ -1,0 +1,20 @@
+{
+  "local_instance": {
+    "path": "/var/odoo/scholarixv2",
+    "database": "scholarixv2",
+    "config_file": "/var/odoo/scholarixv2/odoo.conf"
+  },
+  "remote_server": {
+    "url": "https://erp.sgctech.ai",
+    "database": "scholarixv2",
+    "username": "info@scholarixglobal.com",
+    "authenticated": false
+  },
+  "modules": {
+    "required": [
+      "commission_ax",
+      "deal_tracking"
+    ],
+    "status": "syncing"
+  }
+}
