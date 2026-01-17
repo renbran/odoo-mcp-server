@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="view_deal_dashboard_form" model="ir.ui.view">
+      <field name="name">deal.dashboard.form</field>
+      <field name="model">deal.dashboard</field>
+      <field name="arch" type="xml">
+        <form string="Deal Dashboard" class="deal-dashboard">
+          <header>
+            <button name="action_refresh" type="object" string="Refresh" class="btn-primary"/>
+            <button name="action_open_analytics" type="object" string="Open Analytics" class="btn-secondary"/>
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name="period"/>
+                <field name="date_from" invisible="period != 'custom'"/>
+                <field name="date_to" invisible="period != 'custom'"/>
+                <field name="currency_id" invisible="1"/>
+              </group>
+            </group>
+            <separator string="KPIs"/>
+            <div class="o_row deal-kpis">
+              <div class="deal-kpi-card">
+                <span class="label">Deals</span>
+                <span class="value">
+                  <field name="total_deals"/>
+                </span>
+              </div>
+              <div class="deal-kpi-card">
+                <span class="label">Total</span>
+                <span class="value">
+                  <field name="total_amount"/>
+                </span>
+              </div>
+              <div class="deal-kpi-card">
+                <span class="label">Net</span>
+                <span class="value">
+                  <field name="net_amount"/>
+                </span>
+              </div>
+              <div class="deal-kpi-card">
+                <span class="label">Commission</span>
+                <span class="value">
+                  <field name="commission_amount"/>
+                </span>
+              </div>
+              <div class="deal-kpi-card">
+                <span class="label">Avg %</span>
+                <span class="value">
+                  <field name="avg_commission_rate"/>
+                </span>
+              </div>
+            </div>
+            <separator string="Status"/>
+            <div class="o_row deal-status">
+              <div class="status-badge status-draft"><span>Draft</span><span><field name="state_draft"/></span></div>
+              <div class="status-badge status-confirmed"><span>Confirmed</span><span><field name="state_confirmed"/></span></div>
+              <div class="status-badge status-commissioned"><span>Commissioned</span><span><field name="state_commissioned"/></span></div>
+              <div class="status-badge status-billed"><span>Billed</span><span><field name="state_billed"/></span></div>
+            </div>
+            <separator string="Top Customer"/>
+            <group>
+              <field name="top_customer_id"/>
+              <field name="top_customer_amount"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_deal_dashboard" model="ir.actions.act_window">
+      <field name="name">Deal Dashboard</field>
+      <field name="res_model">deal.dashboard</field>
+      <field name="view_mode">form</field>
+      <field name="target">current</field>
+      <field name="context">{"default_period": "this_month"}</field>
+    </record>
+  </data>
+</odoo>

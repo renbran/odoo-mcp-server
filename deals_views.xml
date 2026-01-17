@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View for Deals -->
+        <record id="view_deals_tree" model="ir.ui.view">
+            <field name="name">sale.order.deals.tree</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree string="Deals" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                    <field name="name" string="Deal Reference"/>
+                    <field name="sales_type" widget="badge"/>
+                    <field name="primary_buyer_id"/>
+                    <field name="secondary_buyer_id" optional="hide"/>
+                    <field name="project_id"/>
+                    <field name="unit_reference"/>
+                    <field name="deal_sales_value" sum="Total Sales Value"/>
+                    <field name="deal_commission_rate" widget="percentage"/>
+                    <field name="vat_amount" sum="Total VAT" optional="hide"/>
+                    <field name="total_without_vat" sum="Total w/o VAT"/>
+                    <field name="total_with_vat" sum="Total with VAT"/>
+                    <field name="state" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View for Deals -->
+        <record id="view_deals_form" model="ir.ui.view">
+            <field name="name">sale.order.deals.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <!-- Add Sales Type after partner_id -->
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="sales_type" widget="radio" options="{'horizontal': true}"/>
+                </xpath>
+
+                <!-- Add Deals tab in notebook -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Deals Information" name="deals_info">
+                        <group string="Buyer Information">
+                            <group>
+                                <field name="primary_buyer_id" options="{'no_create': True, 'no_open': True}"/>
+                                <field name="secondary_buyer_id" options="{'no_create': True, 'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="project_id"/>
+                                <field name="unit_reference" placeholder="e.g., Unit 101, Villa A"/>
+                            </group>
+                        </group>
+
+                        <group string="Financial Summary">
+                            <group>
+                                <field name="deal_sales_value" readonly="1"/>
+                                <field name="deal_commission_rate" readonly="1" widget="percentage"/>
+                            </group>
+                            <group>
+                                <field name="total_without_vat" readonly="1" class="oe_subtotal_footer_separator"/>
+                                <field name="vat_amount" readonly="1"/>
+                                <field name="total_with_vat" readonly="1" class="oe_subtotal_footer_separator" style="font-weight: bold;"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Search View for Deals -->
+        <record id="view_deals_search" model="ir.ui.view">
+            <field name="name">sale.order.deals.search</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <search string="Deals Search">
+                    <field name="name" string="Deal Reference"/>
+                    <field name="primary_buyer_id"/>
+                    <field name="secondary_buyer_id"/>
+                    <field name="project_id"/>
+                    <field name="unit_reference"/>
+                    <field name="sales_type"/>
+
+                    <filter string="Primary" name="filter_primary" domain="[('sales_type', '=', 'primary')]"/>
+                    <filter string="Secondary" name="filter_secondary" domain="[('sales_type', '=', 'secondary')]"/>
+                    <filter string="Exclusive" name="filter_exclusive" domain="[('sales_type', '=', 'exclusive')]"/>
+                    <filter string="Rental" name="filter_rental" domain="[('sales_type', '=', 'rental')]"/>
+
+                    <separator/>
+                    <filter string="Draft" name="filter_draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Confirmed" name="filter_confirmed" domain="[('state', 'in', ['sale', 'done'])]"/>
+
+                    <group expand="0" string="Group By">
+                        <filter string="Sales Type" name="group_sales_type" context="{'group_by': 'sales_type'}"/>
+                        <filter string="Project" name="group_project" context="{'group_by': 'project_id'}"/>
+                        <filter string="Primary Buyer" name="group_primary_buyer" context="{'group_by': 'primary_buyer_id'}"/>
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action: All Deals -->
+        <record id="action_all_deals" model="ir.actions.act_window">
+            <field name="name">All Deals</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_deals_tree"/>
+            <field name="search_view_id" ref="view_deals_search"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first Deal!
+                </p>
+                <p>
+                    Track all your real estate deals including Primary, Secondary, Exclusive, and Rental sales.
+                </p>
+            </field>
+        </record>
+
+        <!-- Action: Primary Deals -->
+        <record id="action_primary_deals" model="ir.actions.act_window">
+            <field name="name">Primary Sales</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_deals_tree"/>
+            <field name="search_view_id" ref="view_deals_search"/>
+            <field name="domain">[('sales_type', '=', 'primary')]</field>
+            <field name="context">{'default_sales_type': 'primary', 'search_default_filter_primary': 1}</field>
+        </record>
+
+        <!-- Action: Secondary Deals -->
+        <record id="action_secondary_deals" model="ir.actions.act_window">
+            <field name="name">Secondary Sales</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_deals_tree"/>
+            <field name="search_view_id" ref="view_deals_search"/>
+            <field name="domain">[('sales_type', '=', 'secondary')]</field>
+            <field name="context">{'default_sales_type': 'secondary', 'search_default_filter_secondary': 1}</field>
+        </record>
+
+        <!-- Action: Exclusive Deals -->
+        <record id="action_exclusive_deals" model="ir.actions.act_window">
+            <field name="name">Exclusive Sales</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_deals_tree"/>
+            <field name="search_view_id" ref="view_deals_search"/>
+            <field name="domain">[('sales_type', '=', 'exclusive')]</field>
+            <field name="context">{'default_sales_type': 'exclusive', 'search_default_filter_exclusive': 1}</field>
+        </record>
+
+        <!-- Action: Rental Sales -->
+        <record id="action_rental_deals" model="ir.actions.act_window">
+            <field name="name">Rental Sales</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_deals_tree"/>
+            <field name="search_view_id" ref="view_deals_search"/>
+            <field name="domain">[('sales_type', '=', 'rental')]</field>
+            <field name="context">{'default_sales_type': 'rental', 'search_default_filter_rental': 1}</field>
+        </record>
+
+        <!-- Root Menu: Deals -->
+        <menuitem id="menu_deals_root" name="Deals" sequence="15" web_icon="commission_ax,static/description/icon.png"/>
+
+        <!-- Submenu: All Deals -->
+        <menuitem id="menu_all_deals" name="All Deals" parent="menu_deals_root" action="action_all_deals" sequence="10"/>
+
+        <!-- Submenu: Primary -->
+        <menuitem id="menu_primary_deals" name="Primary" parent="menu_deals_root" action="action_primary_deals" sequence="20"/>
+
+        <!-- Submenu: Secondary -->
+        <menuitem id="menu_secondary_deals" name="Secondary" parent="menu_deals_root" action="action_secondary_deals" sequence="30"/>
+
+        <!-- Submenu: Exclusive -->
+        <menuitem id="menu_exclusive_deals" name="Exclusive" parent="menu_deals_root" action="action_exclusive_deals" sequence="40"/>
+
+        <!-- Submenu: Rental Sales -->
+        <menuitem id="menu_rental_deals" name="Rental Sales" parent="menu_deals_root" action="action_rental_deals" sequence="50"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ===== MAIN MENUS ===== -->
+
+    <!-- Main Deals Menu -->
+    <menuitem id="menu_deals_root" name="Deals" sequence="10" web_icon="deals_management,static/description/icon.png"/>
+
+    <!-- Main Commissions Menu -->
+    <menuitem id="menu_commissions_root" name="Commissions" sequence="30" web_icon="commission_ax,static/description/icon.png"/>
+
+    <!-- ===== DEALS SUBMENUS ===== -->
+
+    <!-- All Deals Submenu -->
+    <menuitem id="menu_all_deals" name="All Deals" parent="menu_deals_root" action="action_all_deals" sequence="1"/>
+
+    <!-- Primary Sales Submenu -->
+    <menuitem id="menu_primary_deals" name="Primary Sales" parent="menu_deals_root" action="action_primary_deals" sequence="2"/>
+
+    <!-- Secondary Sales Submenu -->
+    <menuitem id="menu_secondary_deals" name="Secondary Sales" parent="menu_deals_root" action="action_secondary_deals" sequence="3"/>
+
+    <!-- Exclusive Sales Submenu -->
+    <menuitem id="menu_exclusive_deals" name="Exclusive Sales" parent="menu_deals_root" action="action_exclusive_deals" sequence="4"/>
+
+    <!-- Rental Deals Submenu -->
+    <menuitem id="menu_rental_deals" name="Rental Deals" parent="menu_deals_root" action="action_rental_deals" sequence="5"/>
+
+    <!-- ===== COMMISSIONS SUBMENUS ===== -->
+
+    <!-- All Commissions -->
+    <menuitem id="menu_deals_all_commissions" name="All Commissions" parent="menu_commissions_root" action="action_deals_all_commissions" sequence="1"/>
+
+    <!-- Pending Bills (No Bill Created) -->
+    <menuitem id="menu_deals_pending_bills" name="Pending Bills" parent="menu_commissions_root" action="action_deals_pending_bills" sequence="2"/>
+
+    <!-- Paid Bills (Bill Created) -->
+    <menuitem id="menu_deals_paid_bills" name="Paid Bills" parent="menu_commissions_root" action="action_deals_paid_bills" sequence="3"/>
+
+    <!-- Commission by Partner -->
+    <menuitem id="menu_deals_commission_partner" name="Commission by Partner" parent="menu_commissions_root" action="action_deals_commission_by_partner" sequence="4"/>
+
+    <!-- Vendor Bills -->
+    <menuitem id="menu_deals_vendor_bills" name="Vendor Bills" parent="menu_commissions_root" action="action_deals_vendor_bills" sequence="5"/>
+
+    <!-- Commission Reports -->
+    <menuitem id="menu_deals_commission_report" name="Commission Report" parent="menu_commissions_root" action="action_deals_commission_report" sequence="6"/>
+
+</odoo>

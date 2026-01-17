@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "odoo-production": {
+      "command": "node",
+      "args": ["D:\\01_WORK_PROJECTS\\odoo-mcp-server\\dist\\index.js"],
+      "env": {
+        "ODOO_URL": "https://yourcompany.odoo.com",
+        "ODOO_DB": "production_db",
+        "ODOO_USERNAME": "admin",
+        "ODOO_PASSWORD": "your_password"
+      }
+    },
+    "odoo-local": {
+      "command": "node",
+      "args": ["D:\\01_WORK_PROJECTS\\odoo-mcp-server\\dist\\index.js"],
+      "env": {
+        "ODOO_URL": "http://localhost:8069",
+        "ODOO_DB": "odoo_dev",
+        "ODOO_USERNAME": "admin",
+        "ODOO_PASSWORD": "admin"
+      }
+    },
+    "odoo-multi": {
+      "command": "node",
+      "args": ["D:\\01_WORK_PROJECTS\\odoo-mcp-server\\dist\\index.js"],
+      "env": {
+        "ODOO_INSTANCES": "{\"production\":{\"url\":\"https://prod.odoo.com\",\"db\":\"prod_db\",\"username\":\"admin\",\"password\":\"pass123\"},\"staging\":{\"url\":\"https://staging.odoo.com\",\"db\":\"stage_db\",\"username\":\"admin\",\"password\":\"pass456\"},\"local\":{\"url\":\"http://localhost:8069\",\"db\":\"local_db\",\"username\":\"admin\",\"password\":\"admin\"}}"
+      }
+    }
+  }
+}

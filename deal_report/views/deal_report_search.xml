@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_deal_report_search" model="ir.ui.view">
+            <field name="name">deal.report.search</field>
+            <field name="model">deal.report</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="sale_order_id"/>
+                    <field name="date" filter_domain="[]"/>
+                    <separator/>
+                    <filter string="Status" name="status_group">
+                        <filter name="state_draft" string="Draft" domain="[('state','=','draft')]"/>
+                        <filter name="state_confirmed" string="Confirmed" domain="[('state','=','confirmed')]"/>
+                        <filter name="state_commissioned" string="Commissioned" domain="[('state','=','commissioned')]"/>
+                        <filter name="state_billed" string="Billed" domain="[('state','=','billed')]"/>
+                    </filter>
+                    <separator/>
+                    <filter string="Period" name="period_group">
+                        <filter name="this_month" string="This Month" domain="[('date','&gt;=',(context_today().replace(day=1))),('date','&lt;=',context_today())]"/>
+                        <filter name="last_month" string="Last Month" domain="[('date','&gt;=',((context_today().replace(day=1)) - relativedelta(months=1))),('date','&lt;=',((context_today().replace(day=1)) - relativedelta(days=1)))]"/>
+                        <filter name="this_quarter" string="This Quarter" context="{'group_by':'date:quarter'}"/>
+                        <filter name="this_year" string="This Year" domain="[('date','&gt;=', (context_today().replace(month=1, day=1))), ('date','&lt;=', (context_today().replace(month=12, day=31)))]"/>
+                        <filter name="last_90" string="Last 90 Days" domain="[('date','&gt;=', (context_today() - relativedelta(days=90)))]"/>
+                    </filter>
+                    <separator/>
+                    <filter string="Amount" name="amount_group">
+                        <filter name="high_value" string="High Value (&gt;100k)" domain="[('total_amount','&gt;',100000)]"/>
+                        <filter name="medium_value" string="Medium Value (50k-100k)" domain="[('total_amount','&gt;=',50000),('total_amount','&lt;=',100000)]"/>
+                        <filter name="low_value" string="Low Value (&lt;50k)" domain="[('total_amount','&lt;',50000)]"/>
+                    </filter>
+                    <separator/>
+                    <filter string="Commission" name="commission_group">
+                        <filter name="high_commission" string="High Commission (&gt;5%)" domain="[('commission_rate','&gt;',5.0)]"/>
+                        <filter name="standard_commission" string="Standard (3-5%)" domain="[('commission_rate','&gt;=',3.0),('commission_rate','&lt;=',5.0)]"/>
+                        <filter name="low_commission" string="Low Commission (&lt;3%)" domain="[('commission_rate','&lt;',3.0)]"/>
+                    </filter>
+                    <separator/>
+                    <filter string="Billing" name="billing_group">
+                        <filter name="has_invoices" string="Has Invoices" domain="[('invoice_count','&gt;',0)]"/>
+                        <filter name="no_invoices" string="No Invoices" domain="[('invoice_count','=',0)]"/>
+                        <filter name="auto_post_enabled" string="Auto-Post Enabled" domain="[('auto_post_invoice','=',True)]"/>
+                    </filter>
+                    <group expand="0" string="Group By">
+                        <filter name="group_state" string="State" context="{'group_by':'state'}"/>
+                        <filter name="group_partner" string="Customer" context="{'group_by':'partner_id'}"/>
+                        <filter name="group_date_month" string="Month" context="{'group_by':'date:month'}"/>
+                        <filter name="group_date_quarter" string="Quarter" context="{'group_by':'date:quarter'}"/>
+                        <filter name="group_date_year" string="Year" context="{'group_by':'date:year'}"/>
+                        <filter name="group_salesperson" string="Salesperson" context="{'group_by':'sale_order_id.user_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

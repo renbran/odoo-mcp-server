@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="sale_order_form_view_deal_tracking" model="ir.ui.view">
+            <field name="name">sale.order.form.deal.tracking</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <group string="BROKERAGE DEAL INFORMATION" class="oe_subtotal_footer_separator" style="border-top: 2px solid #8b1538;">
+                        <group>
+                            <field name="buyer_name" readonly="1"/>
+                            <field name="unit_sale_value" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="project_name" readonly="1"/>
+                            <field name="primary_commission_percentage" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="deal_summary_html" widget="html" nolabel="1" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_tree_view_deal_tracking" model="ir.ui.view">
+            <field name="name">sale.order.tree.deal.tracking</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="buyer_name" string="Buyer"/>
+                    <field name="project_name" string="Project"/>
+                    <field name="unit_sale_value" string="Unit Price"/>
+                    <field name="primary_commission_percentage" string="Commission %"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,149 @@
+================================================================================
+                    DEPLOY NOW - QUICK START GUIDE
+================================================================================
+
+RECOMMENDED: Use PowerShell Script (Easiest)
+
+================================================================================
+STEP 1: OPEN POWERSHELL
+================================================================================
+
+Press: Win + R
+Type: powershell
+Press: Enter
+
+Navigate to workspace:
+  cd d:\01_WORK_PROJECTS\odoo-mcp-server
+
+================================================================================
+STEP 2: RUN DEPLOYMENT SCRIPT
+================================================================================
+
+Execute this command:
+
+  powershell -ExecutionPolicy Bypass -File DEPLOY-NOW.ps1
+
+================================================================================
+STEP 3: FOLLOW THE PROMPTS
+================================================================================
+
+When asked:
+  - Server IP: 139.84.163.11 (press Enter to accept default)
+  - Username: root (press Enter to accept default)
+  - Password: [Enter SSH password]
+
+The script will:
+  1. Verify local files exist
+  2. Test SSH connection
+  3. Copy scripts to server
+  4. Execute automated installation
+  5. Monitor the process
+  6. Show completion status
+
+Expected time: 10-15 minutes
+
+================================================================================
+WHAT HAPPENS DURING DEPLOYMENT
+================================================================================
+
+Phase 1 (1 min):   Pre-checks - Validates directory, service, configuration
+Phase 2 (2 min):   Backups - Creates timestamped database & module backups
+Phase 3 (1 min):   Stop Service - Gracefully stops Odoo
+Phase 4 (2 min):   Deploy Files - Copies all 4 Python & XML files
+Phase 5 (1 min):   Configure - Updates manifest and imports
+Phase 6 (1 min):   Verify Files - Confirms all files deployed
+Phase 7 (1 min):   Start Service - Restarts Odoo with new code
+Phase 8 (1 min):   Verify Service - Confirms Odoo started successfully
+Phase 9 (2 min):   Monitor Logs - Checks for errors during startup
+
+TOTAL TIME: ~15 minutes
+
+================================================================================
+AFTER DEPLOYMENT IS COMPLETE
+================================================================================
+
+STEP 1: Upgrade Module in Odoo UI
+  1. Open browser: http://139.84.163.11:8069
+  2. Log in with admin credentials
+  3. Go to: Settings → Apps
+  4. Search: commission_ax
+  5. Click on module card
+  6. Click: Upgrade button
+  7. Wait 2-5 minutes
+
+STEP 2: Verify Deal Fields Appear
+  1. Go to: Sales → Quotations
+  2. Open any sale order
+  3. Look for: "BROKERAGE DEAL INFORMATION" section
+  4. Should show:
+     - Buyer Name
+     - Project Name
+     - Unit Sale Value
+     - Primary Commission %
+     - Deal Summary (colored box)
+
+STEP 3: Run Tests
+  1. Open: TESTING-GUIDE.md
+  2. Follow all 17 test cases
+  3. Document results
+
+================================================================================
+MANUAL DEPLOYMENT (IF SCRIPT DOESN'T WORK)
+================================================================================
+
+Option A: Use SSH Commands Directly
+
+  1. Open PowerShell or Terminal
+  
+  2. Copy script to server:
+     scp deploy-interactive.sh root@139.84.163.11:/tmp/
+     (Enter password when prompted)
+  
+  3. SSH to server:
+     ssh root@139.84.163.11
+     (Enter password)
+  
+  4. Run deployment:
+     cd /var/odoo/scholarixv2
+     bash /tmp/deploy-interactive.sh
+  
+  5. Monitor logs (in another terminal):
+     ssh root@139.84.163.11
+     tail -f /var/log/odoo/odoo-server.log
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+If password doesn't work:
+  - Verify SSH credentials in .env file
+  - Try manual SSH commands above
+  - Contact server admin for password reset
+
+If "sshpass not found":
+  - Install via: choco install sshpass -y
+  - Or use manual SSH commands with interactive password prompt
+
+If installation fails:
+  - Check logs: tail -100 /var/log/odoo/odoo-server.log
+  - Verify files copied: ls -la /var/odoo/scholarixv2/extra-addons/
+  - Check manifest: grep deal_tracking __manifest__.py
+
+If you need to rollback:
+  ssh root@139.84.163.11
+  systemctl stop odoo
+  cp -r backups/commission_ax_YYYYMMDD_HHMMSS/* \
+        extra-addons/odooapps.git-68ee71eda34bc/commission_ax/
+  systemctl start odoo
+
+================================================================================
+READY TO DEPLOY?
+================================================================================
+
+Run this command now:
+
+  powershell -ExecutionPolicy Bypass -File DEPLOY-NOW.ps1
+
+Good luck! 🚀
+
+================================================================================

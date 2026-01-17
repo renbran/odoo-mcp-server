@@ -1,0 +1,136 @@
+COMMISSION_AX MODULE INSTALLATION GUIDE
+========================================
+
+Your connection is now configured for: commission_ax database
+Instance: odoo-commission-ax
+URL: https://erp.sgctech.ai
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+5-STEP MODULE INSTALLATION PROCESS
+
+STEP 1: DISCOVER AVAILABLE MODULES
+─────────────────────────────────
+In Claude, ask:
+  "Get all uninstalled modules in commission_ax database.
+   For each, show: name, version, description, dependencies.
+   Order by importance."
+
+This will show you ALL modules available to install.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 2: ANALYZE MODULE DETAILS
+──────────────────────────────
+Ask Claude:
+  "Analyze the [MODULE_NAME] module in commission_ax:
+   - Purpose and features
+   - All dependencies
+   - Stability rating
+   - Version compatibility
+   - Any known issues"
+
+This checks if the module is safe to install.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 3: VERIFY DEPENDENCIES
+───────────────────────────
+Ask Claude:
+  "For [MODULE_NAME]:
+   1. List all dependencies
+   2. Check which are installed: installed/uninstalled
+   3. Install missing dependencies first if needed
+   4. Verify no circular dependencies"
+
+This ensures all requirements are met.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 4: PERFORM INSTALLATION
+────────────────────────────
+Ask Claude:
+  "Install [MODULE_NAME] in commission_ax:
+   1. Execute button_install on the module
+   2. Monitor installation progress
+   3. Verify state = 'installed'
+   4. Confirm installed_version updated"
+
+This executes the installation safely.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 5: VALIDATE FUNCTIONALITY
+──────────────────────────────
+Ask Claude:
+  "Test [MODULE] installation:
+   1. Check new menus/features visible
+   2. Test core functionality
+   3. Verify data models accessible
+   4. Check for any errors
+   5. Confirm module is working"
+
+This ensures stability and functionality.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CRITICAL SAFETY CHECKS
+─────────────────────
+
+Before installation, ALWAYS verify:
+✓ Module state = 'uninstalled' (not 'broken')
+✓ All dependencies are available
+✓ No circular dependencies
+✓ Compatible with current Odoo version
+✓ Not conflicting with existing modules
+✓ External dependencies available (Python, etc.)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RECOMMENDED MODULES TO EXPLORE
+──────────────────────────────
+
+Core Financial:
+  - account (Accounting)
+  - sale (Sales)
+  - purchase (Purchasing)
+  - stock (Inventory)
+
+Commission-Related (likely):
+  - sale_commission
+  - commission_rules
+  - partner_commission
+
+Integrations:
+  - payment (Payments)
+  - api (REST API)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUICK START NOW
+───────────────
+
+1. Close this file
+2. Go to Claude Desktop
+3. Ask: "What modules are available in commission_ax?"
+4. Follow the 5-step process above
+5. Report back when module is installed!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TROUBLESHOOTING
+───────────────
+
+If installation fails:
+  Ask Claude: "Why did [MODULE] installation fail? 
+               Show the error and how to fix it"
+
+If module state is broken:
+  Ask Claude: "Fix the [MODULE] broken state.
+               Install missing dependencies first"
+
+If no menus appear:
+  Ask Claude: "Check why [MODULE] menus aren't visible.
+               Verify menu records exist in ir.ui.menu"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

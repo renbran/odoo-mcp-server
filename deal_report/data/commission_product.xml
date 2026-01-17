@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Product Template for Commission Service -->
+        <record id="product_commission_template" model="product.template">
+            <field name="name">Deal Commission</field>
+            <field name="type">service</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">False</field>
+            <field name="list_price">0.0</field>
+        </record>
+
+        <!-- Single Variant Product linked to the template -->
+        <record id="product_commission" model="product.product">
+            <field name="product_tmpl_id" ref="product_commission_template"/>
+        </record>
+    </data>
+</odoo>

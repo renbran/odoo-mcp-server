@@ -1,0 +1,154 @@
+╔══════════════════════════════════════════════════════════════╗
+║     COMMISSION_AX - QUICK START COMMAND REFERENCE            ║
+╚══════════════════════════════════════════════════════════════╝
+
+═══════════════════════════════════════════════════════════════
+ STEP 1: COPY TO SERVER
+═══════════════════════════════════════════════════════════════
+
+PowerShell (Windows):
+    scp inspect-backend.py USER@SERVER:/var/odoo/scholarixv2/
+
+Example:
+    scp inspect-backend.py admin@erp.sgctech.ai:/var/odoo/scholarixv2/
+
+═══════════════════════════════════════════════════════════════
+ STEP 2: SSH TO SERVER
+═══════════════════════════════════════════════════════════════
+
+PowerShell (Windows):
+    ssh USER@SERVER
+    cd /var/odoo/scholarixv2
+
+Example:
+    ssh admin@erp.sgctech.ai
+    cd /var/odoo/scholarixv2
+
+═══════════════════════════════════════════════════════════════
+ STEP 3: TEST CONNECTION
+═══════════════════════════════════════════════════════════════
+
+On Server (Bash):
+    python3 inspect-backend.py list
+
+Expected: List of all modules
+
+═══════════════════════════════════════════════════════════════
+ STEP 4: SEARCH COMMISSION MODULES
+═══════════════════════════════════════════════════════════════
+
+On Server (Bash):
+    python3 inspect-backend.py list uninstalled | grep -i commission
+
+Expected: Shows commission-related modules
+
+═══════════════════════════════════════════════════════════════
+ STEP 5: GET MODULE DETAILS
+═══════════════════════════════════════════════════════════════
+
+On Server (Bash):
+    python3 inspect-backend.py info commission_ax
+
+Shows:
+    • Name
+    • State (installed/uninstalled)
+    • Description
+    • Dependencies
+    • Version
+
+═══════════════════════════════════════════════════════════════
+ STEP 6: INSTALL MODULE (if needed)
+═══════════════════════════════════════════════════════════════
+
+On Server (Bash):
+    python3 inspect-backend.py install commission_ax
+
+⚠️  Only if dependencies are met!
+
+═══════════════════════════════════════════════════════════════
+ STEP 7: VERIFY INSTALLATION
+═══════════════════════════════════════════════════════════════
+
+On Server (Bash):
+    python3 inspect-backend.py info commission_ax
+
+Check: State = "installed"
+
+═══════════════════════════════════════════════════════════════
+ STEP 8: CONFIGURE CLAUDE DESKTOP (Optional - for AI help)
+═══════════════════════════════════════════════════════════════
+
+Windows PowerShell:
+    notepad "$env:APPDATA\Claude\claude_desktop_config.json"
+
+Copy content from: claude-config-READY.json
+
+Then restart Claude Desktop
+
+═══════════════════════════════════════════════════════════════
+ TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+Permission denied:
+    sudo python3 inspect-backend.py list
+
+Can't find module:
+    /var/odoo/scholarixv2/venv/bin/python3 inspect-backend.py list
+
+Database connection error:
+    cat /var/odoo/scholarixv2/odoo.conf
+
+═══════════════════════════════════════════════════════════════
+ BACKEND INSPECTOR COMMANDS
+═══════════════════════════════════════════════════════════════
+
+List all modules:
+    python3 inspect-backend.py list
+
+List by state:
+    python3 inspect-backend.py list installed
+    python3 inspect-backend.py list uninstalled
+    python3 inspect-backend.py list "to install"
+
+Get module info:
+    python3 inspect-backend.py info <module_name>
+
+Install module:
+    python3 inspect-backend.py install <module_name>
+
+═══════════════════════════════════════════════════════════════
+ FILES YOU NEED
+═══════════════════════════════════════════════════════════════
+
+Main Tool:
+    ✓ inspect-backend.py              (copy to server)
+
+Documentation:
+    ✓ SYSTEMATIC-DEPLOYMENT-CHECKLIST.md    (step-by-step)
+    ✓ THIS FILE                       (quick reference)
+
+Claude Config:
+    ✓ claude-config-READY.json        (copy to Claude)
+
+═══════════════════════════════════════════════════════════════
+ TWO PATHS AVAILABLE
+═══════════════════════════════════════════════════════════════
+
+Path A: Direct Backend Access
+    ➜ Use inspect-backend.py on server
+    ➜ No Claude/MCP needed
+    ➜ Fastest for simple operations
+    ➜ Good for automation/scripts
+
+Path B: AI-Assisted via Claude
+    ➜ Configure Claude Desktop
+    ➜ Ask Claude in natural language
+    ➜ Claude uses MCP tools
+    ➜ Good for exploration/learning
+
+Both access the same commission_ax database!
+
+╔══════════════════════════════════════════════════════════════╗
+║  YOU ARE HERE: Ready to copy inspect-backend.py to server    ║
+║  NEXT STEP: Run the scp command above (Step 1)               ║
+╚══════════════════════════════════════════════════════════════╝

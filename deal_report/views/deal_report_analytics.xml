@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <!-- Graph View: Bar Chart - Monthly totals and commissions -->
+    <record id="view_deal_report_graph" model="ir.ui.view">
+      <field name="name">deal.report.graph</field>
+      <field name="model">deal.report</field>
+      <field name="arch" type="xml">
+        <graph string="Deal Analytics" type="bar" sample="1">
+          <field name="date" interval="month"/>
+          <field name="total_amount" type="measure"/>
+          <field name="net_amount" type="measure"/>
+          <field name="commission_amount" type="measure"/>
+        </graph>
+      </field>
+    </record>
+
+    <!-- Line Chart View: Trend Analysis -->
+    <record id="view_deal_report_graph_line" model="ir.ui.view">
+      <field name="name">deal.report.graph.line</field>
+      <field name="model">deal.report</field>
+      <field name="arch" type="xml">
+        <graph string="Deal Trends" type="line" sample="1">
+          <field name="date" interval="month"/>
+          <field name="total_amount" type="measure"/>
+          <field name="commission_amount" type="measure"/>
+        </graph>
+      </field>
+    </record>
+
+    <!-- Pie Chart View: Distribution by State -->
+    <record id="view_deal_report_graph_pie" model="ir.ui.view">
+      <field name="name">deal.report.graph.pie</field>
+      <field name="model">deal.report</field>
+      <field name="arch" type="xml">
+        <graph string="Deal Distribution" type="pie" sample="1">
+          <field name="state"/>
+          <field name="total_amount" type="measure"/>
+        </graph>
+      </field>
+    </record>
+
+    <!-- Pivot View: Breakdown by customer and state -->
+    <record id="view_deal_report_pivot" model="ir.ui.view">
+      <field name="name">deal.report.pivot</field>
+      <field name="model">deal.report</field>
+      <field name="arch" type="xml">
+        <pivot string="Deal Pivot">
+          <field name="date" interval="month"/>
+          <field name="partner_id" type="col"/>
+          <field name="state" type="row"/>
+          <field name="total_amount" type="measure"/>
+          <field name="net_amount" type="measure"/>
+          <field name="commission_amount" type="measure"/>
+        </pivot>
+      </field>
+    </record>
+
+    <!-- Kanban View: Compact KPI cards -->
+    <record id="view_deal_report_kanban" model="ir.ui.view">
+      <field name="name">deal.report.kanban</field>
+      <field name="model">deal.report</field>
+      <field name="arch" type="xml">
+        <kanban class="deal-report-kanban" default_group_by="state">
+          <field name="name"/>
+          <field name="date"/>
+          <field name="partner_id"/>
+          <field name="total_amount"/>
+          <field name="net_amount"/>
+          <field name="commission_amount"/>
+          <field name="state"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="deal-card o_kanban_record">
+                <div class="deal-card__header">
+                  <span class="deal-card__title" t-esc="record.name.value"/>
+                  <span class="deal-card__date" t-esc="record.date.value"/>
+                </div>
+                <div class="deal-card__body">
+                  <span t-attf-class="deal-card__state status-#{record.state.raw_value}">
+                    <t t-esc="record.state.value"/>
+                  </span>
+                  <div class="deal-kpi">
+                    <span class="deal-kpi__label">Total</span>
+                    <span class="deal-kpi__value" t-esc="record.total_amount.value"/>
+                  </div>
+                  <div class="deal-kpi">
+                    <span class="deal-kpi__label">Net</span>
+                    <span class="deal-kpi__value" t-esc="record.net_amount.value"/>
+                  </div>
+                  <div class="deal-kpi">
+                    <span class="deal-kpi__label">Commission</span>
+                    <span class="deal-kpi__value" t-esc="record.commission_amount.value"/>
+                  </div>
+                </div>
+                <div class="deal-card__footer">
+                  <span class="deal-card__partner" t-esc="record.partner_id.value"/>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- Analytics Action: Multi-Chart Dashboard -->
+    <record id="action_deal_report_analytics" model="ir.actions.act_window">
+      <field name="name">Deal Analytics</field>
+      <field name="res_model">deal.report</field>
+      <field name="view_mode">graph,pivot,kanban,tree</field>
+      <field name="context">{"search_default_state_confirmed": 1}</field>
+    </record>
+
+    <!-- Trend Analysis Action: Line Chart Focus -->
+    <record id="action_deal_report_trends" model="ir.actions.act_window">
+      <field name="name">Deal Trends</field>
+      <field name="res_model">deal.report</field>
+      <field name="view_mode">graph,tree</field>
+      <field name="context">{"graph_mode": "line"}</field>
+      <field name="views" eval="[(ref('view_deal_report_graph_line'), 'graph'), (ref('view_deal_report_tree'), 'tree')]"/>
+    </record>
+
+    <!-- Distribution Action: Pie Chart Focus -->
+    <record id="action_deal_report_distribution" model="ir.actions.act_window">
+      <field name="name">Deal Distribution</field>
+      <field name="res_model">deal.report</field>
+      <field name="view_mode">graph,tree</field>
+      <field name="context">{"graph_mode": "pie"}</field>
+      <field name="views" eval="[(ref('view_deal_report_graph_pie'), 'graph'), (ref('view_deal_report_tree'), 'tree')]"/>
+    </record>
+  </data>
+</odoo>

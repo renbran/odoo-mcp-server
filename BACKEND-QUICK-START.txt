@@ -1,0 +1,84 @@
+BACKEND MODULE INSPECTOR - COMMISSION_AX
+=========================================
+
+[INFO] You now have direct Odoo backend access!
+
+Server Details:
+- Root: /var/odoo/scholarixv2
+- Source: /var/odoo/scholarixv2/src
+- Logs: /var/odoo/scholarixv2/logs
+- Config: /var/odoo/scholarixv2/odoo.conf
+- Python: /var/odoo/scholarixv2/venv/bin/python3
+
+Database: commission_ax (Scholarix Global)
+
+QUICK COMMANDS
+==============
+
+1. List all modules:
+   python3 inspect-backend.py list
+
+2. List uninstalled modules:
+   python3 inspect-backend.py list uninstalled
+
+3. List installed modules:
+   python3 inspect-backend.py list installed
+
+4. Get module info:
+   python3 inspect-backend.py info account
+   python3 inspect-backend.py info sale
+
+5. Install a module:
+   python3 inspect-backend.py install account_reports
+   python3 inspect-backend.py install sale_management
+
+RECOMMENDED WORKFLOW
+====================
+
+Step 1: Explore available modules
+  python3 inspect-backend.py list uninstalled | head -20
+
+Step 2: Check module details
+  python3 inspect-backend.py info module_name
+
+Step 3: Install if ready
+  python3 inspect-backend.py install module_name
+
+Step 4: Verify
+  python3 inspect-backend.py info module_name
+  (State should now show "installed")
+
+DIRECT ODOO ACCESS
+==================
+
+For advanced operations, use Odoo shell directly:
+
+cd /var/odoo/scholarixv2
+sudo -u odoo venv/bin/python3 src/odoo-bin -c odoo.conf -d commission_ax --no-http
+
+SAFETY GUIDELINES
+=================
+
+1. Always check dependencies before installing
+2. Install modules in dependency order
+3. Test after installation
+4. Keep logs available for troubleshooting
+5. Backup important data before large operations
+
+FILE LOCATION
+=============
+
+Tool: d:\01_WORK_PROJECTS\odoo-mcp-server\inspect-backend.py
+
+Run from Windows via WSL or SSH to the server.
+Or copy to server and run locally.
+
+NEXT STEPS
+==========
+
+1. Run "python3 inspect-backend.py list uninstalled" to see what's available
+2. Choose modules to install based on commission_ax needs
+3. Install and verify each module
+4. Document the final configuration
+
+Questions? Check logs at: /var/odoo/scholarixv2/logs

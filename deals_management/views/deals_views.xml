@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Enhanced Tree View with all fields -->
+    <record id="view_order_deals_tree" model="ir.ui.view">
+        <field name="name">sale.order.deals.tree</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <tree string="Deals" decoration-info="state == 'draft'" decoration-success="state == 'sale'" decoration-muted="state == 'cancel'">
+                <field name="name" string="Deal #"/>
+                <field name="sales_type" widget="badge" decoration-primary="sales_type == 'primary'" decoration-success="sales_type == 'exclusive'" decoration-info="sales_type == 'secondary'" decoration-warning="sales_type == 'rental'"/>
+                <field name="booking_date"/>
+                <field name="estimated_invoice_date"/>
+                <field name="primary_buyer_id"/>
+                <field name="secondary_buyer_id" optional="hide"/>
+                <field name="project_id"/>
+                <field name="unit_reference"/>
+                <field name="deal_sales_value" sum="Total Sales Value"/>
+                <field name="deal_commission_rate" optional="show"/>
+                <field name="vat_amount" sum="Total VAT" optional="hide"/>
+                <field name="total_without_vat" sum="Total w/o VAT"/>
+                <field name="total_with_vat" sum="Total with VAT"/>
+                <field name="kyc_document_count" optional="show"/>
+                <field name="booking_form_count" optional="show"/>
+                <field name="passport_count" optional="show"/>
+                <field name="state" widget="badge" decoration-success="state == 'sale'" decoration-info="state == 'draft'"/>
+                <field name="user_id" optional="hide"/>
+                <field name="date_order" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Enhanced Form View with Smart Buttons and Documents -->
+    <record id="view_order_deals_form" model="ir.ui.view">
+        <field name="name">sale.order.deals.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Add Sales Type after partner -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="sales_type" widget="radio" options="{'horizontal': true}"/>
+            </xpath>
+
+            <!-- Add Smart Buttons -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <!-- Invoices Smart Button -->
+                <button name="action_view_invoices" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="invoice_count == 0">
+                    <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                </button>
+
+                <!-- Commissions Smart Button -->
+                <button name="action_view_commissions" type="object" class="oe_stat_button" icon="fa-dollar" invisible="commission_count == 0">
+                    <field name="commission_count" widget="statinfo" string="Commissions"/>
+                </button>
+
+                <!-- Bills Smart Button -->
+                <button name="action_view_bills" type="object" class="oe_stat_button" icon="fa-file-text-o" invisible="bill_count == 0">
+                    <field name="bill_count" widget="statinfo" string="Bills"/>
+                </button>
+
+                <!-- KYC Documents Smart Button -->
+                <button name="action_view_kyc_documents" type="object" class="oe_stat_button" icon="fa-files-o">
+                    <field name="kyc_document_count" widget="statinfo" string="KYC Docs"/>
+                </button>
+
+                <!-- Booking Forms Smart Button -->
+                <button name="action_view_booking_forms" type="object" class="oe_stat_button" icon="fa-book">
+                    <field name="booking_form_count" widget="statinfo" string="Booking/SPA"/>
+                </button>
+
+                <!-- Passports Smart Button -->
+                <button name="action_view_passports" type="object" class="oe_stat_button" icon="fa-id-card-o">
+                    <field name="passport_count" widget="statinfo" string="Passports"/>
+                </button>
+            </xpath>
+
+            <!-- Add Deals Information Page in Notebook -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Deals Information" name="deals_info">
+                    <group>
+                        <group string="Buyer Information">
+                            <field name="primary_buyer_id" options="{'no_create': True}"/>
+                            <field name="secondary_buyer_id" options="{'no_create': True}"/>
+                        </group>
+                        <group string="Property Information">
+                            <field name="project_id"/>
+                            <field name="unit_reference"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Important Dates">
+                            <field name="booking_date"/>
+                            <field name="estimated_invoice_date"/>
+                        </group>
+                        <group string="Financial Details">
+                            <field name="deal_sales_value" widget="monetary"/>
+                            <field name="deal_commission_rate"/>
+                            <field name="total_without_vat" widget="monetary"/>
+                            <field name="vat_amount" widget="monetary"/>
+                            <field name="total_with_vat" widget="monetary"/>
+                        </group>
+                    </group>
+
+                    <separator string="KYC Documents"/>
+                    <field name="kyc_document_ids" widget="many2many_binary" nolabel="1" context="{'default_res_model': 'sale.order', 'default_res_id': id}">
+                        <tree>
+                            <field name="name"/>
+                            <field name="create_date"/>
+                            <field name="file_size" widget="integer"/>
+                        </tree>
+                    </field>
+
+                    <separator string="Booking Forms / Sales &amp; Purchase Agreement"/>
+                    <field name="booking_form_ids" widget="many2many_binary" nolabel="1" context="{'default_res_model': 'sale.order', 'default_res_id': id}">
+                        <tree>
+                            <field name="name"/>
+                            <field name="create_date"/>
+                            <field name="file_size" widget="integer"/>
+                        </tree>
+                    </field>
+
+                    <separator string="Passport Copies"/>
+                    <field name="passport_ids" widget="many2many_binary" nolabel="1" context="{'default_res_model': 'sale.order', 'default_res_id': id}">
+                        <tree>
+                            <field name="name"/>
+                            <field name="create_date"/>
+                            <field name="file_size" widget="integer"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Enhanced Search View -->
+    <record id="view_order_deals_search" model="ir.ui.view">
+        <field name="name">sale.order.deals.search</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <search string="Search Deals">
+                <field name="name" string="Deal Number"/>
+                <field name="primary_buyer_id" string="Primary Buyer"/>
+                <field name="secondary_buyer_id" string="Secondary Buyer"/>
+                <field name="project_id" string="Project"/>
+                <field name="unit_reference" string="Unit"/>
+                <field name="booking_date"/>
+                <field name="estimated_invoice_date"/>
+
+                <filter string="Primary Sales" name="filter_primary" domain="[('sales_type', '=', 'primary')]"/>
+                <filter string="Secondary Sales" name="filter_secondary" domain="[('sales_type', '=', 'secondary')]"/>
+                <filter string="Exclusive Sales" name="filter_exclusive" domain="[('sales_type', '=', 'exclusive')]"/>
+                <filter string="Rental" name="filter_rental" domain="[('sales_type', '=', 'rental')]"/>
+
+                <separator/>
+                <filter string="Booked This Month" name="filter_booked_month" domain="[('booking_date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Invoice Due This Month" name="filter_invoice_month" domain="[('estimated_invoice_date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+
+                <group expand="0" string="Group By">
+                    <filter string="Sales Type" name="group_sales_type" context="{'group_by': 'sales_type'}"/>
+                    <filter string="Project" name="group_project" context="{'group_by': 'project_id'}"/>
+                    <filter string="Primary Buyer" name="group_primary_buyer" context="{'group_by': 'primary_buyer_id'}"/>
+                    <filter string="Booking Month" name="group_booking_month" context="{'group_by': 'booking_date:month'}"/>
+                    <filter string="State" name="group_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_all_deals" model="ir.actions.act_window">
+        <field name="name">All Deals</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_id" ref="view_order_deals_tree"/>
+        <field name="search_view_id" ref="view_order_deals_search"/>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first deal!
+            </p>
+        </field>
+    </record>
+
+    <record id="action_primary_deals" model="ir.actions.act_window">
+        <field name="name">Primary Sales</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_id" ref="view_order_deals_tree"/>
+        <field name="search_view_id" ref="view_order_deals_search"/>
+        <field name="domain">[('sales_type', '=', 'primary')]</field>
+        <field name="context">{'default_sales_type': 'primary', 'search_default_filter_primary': 1}</field>
+    </record>
+
+    <record id="action_secondary_deals" model="ir.actions.act_window">
+        <field name="name">Secondary Sales</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_id" ref="view_order_deals_tree"/>
+        <field name="search_view_id" ref="view_order_deals_search"/>
+        <field name="domain">[('sales_type', '=', 'secondary')]</field>
+        <field name="context">{'default_sales_type': 'secondary', 'search_default_filter_secondary': 1}</field>
+    </record>
+
+    <record id="action_exclusive_deals" model="ir.actions.act_window">
+        <field name="name">Exclusive Sales</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_id" ref="view_order_deals_tree"/>
+        <field name="search_view_id" ref="view_order_deals_search"/>
+        <field name="domain">[('sales_type', '=', 'exclusive')]</field>
+        <field name="context">{'default_sales_type': 'exclusive', 'search_default_filter_exclusive': 1}</field>
+    </record>
+
+    <record id="action_rental_deals" model="ir.actions.act_window">
+        <field name="name">Rental Deals</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_id" ref="view_order_deals_tree"/>
+        <field name="search_view_id" ref="view_order_deals_search"/>
+        <field name="domain">[('sales_type', '=', 'rental')]</field>
+        <field name="context">{'default_sales_type': 'rental', 'search_default_filter_rental': 1}</field>
+    </record>
+
+    <!-- Commission Actions - MUST be before menu references -->
+    <record id="action_deals_all_commissions" model="ir.actions.act_window">
+        <field name="name">All Commissions</field>
+        <field name="res_model">commission.line</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="search_view_id" ref="commission_ax.view_commission_line_search"/>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="action_deals_pending_bills" model="ir.actions.act_window">
+        <field name="name">Pending Bills</field>
+        <field name="res_model">commission.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="commission_ax.view_commission_line_search"/>
+        <field name="domain">[('bill_id', '=', False)]</field>
+        <field name="context">{'search_default_filter_pending': 1}</field>
+    </record>
+
+    <record id="action_deals_paid_bills" model="ir.actions.act_window">
+        <field name="name">Paid Bills</field>
+        <field name="res_model">commission.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="commission_ax.view_commission_line_search"/>
+        <field name="domain">[('bill_id', '!=', False)]</field>
+        <field name="context">{'search_default_filter_paid': 1}</field>
+    </record>
+
+    <record id="action_deals_commission_by_partner" model="ir.actions.act_window">
+        <field name="name">Commission by Partner</field>
+        <field name="res_model">commission.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="commission_ax.view_commission_line_search"/>
+        <field name="context">{'group_by': 'partner_id'}</field>
+    </record>
+
+    <record id="action_deals_vendor_bills" model="ir.actions.act_window">
+        <field name="name">Vendor Bills</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('move_type', '=', 'in_invoice')]</field>
+        <field name="context">{'search_default_in_invoice': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                All vendor bills created from commissions!
+            </p>
+        </field>
+    </record>
+
+    <record id="action_deals_commission_report" model="ir.actions.act_window">
+        <field name="name">Commission Report</field>
+        <field name="res_model">commission.line</field>
+        <field name="view_mode">graph,pivot,tree</field>
+        <field name="view_id" ref="commission_ax.view_commission_line_graph"/>
+    </record>
+
+</odoo>

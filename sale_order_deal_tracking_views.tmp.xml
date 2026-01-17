@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="sale_order_form_view_deal_tracking" model="ir.ui.view">
+            <field name="name">sale.order.form.deal.tracking</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <div class="row mt-3 mb-3" style="background: #f8f9fa; padding: 10px; border-radius: 5px;">
+                        <div class="col-md-12"><h5 style="color: #8b1538; font-weight: bold;">BROKERAGE DEAL INFORMATION</h5></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><field name="buyer_name" readonly="1"/></div>
+                        <div class="col-md-6"><field name="project_name" readonly="1"/></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><field name="unit_sale_value" readonly="1"/></div>
+                        <div class="col-md-6"><field name="primary_commission_percentage" readonly="1"/></div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12"><field name="deal_summary_html" widget="html" nolabel="1" readonly="1"/></div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_tree_view_deal_tracking" model="ir.ui.view">
+            <field name="name">sale.order.tree.deal.tracking</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="buyer_name" string="Buyer"/>
+                    <field name="project_name" string="Project"/>
+                    <field name="unit_sale_value" string="Unit Price"/>
+                    <field name="primary_commission_percentage" string="Commission %"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

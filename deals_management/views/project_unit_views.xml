@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- This file is intentionally minimal - it can be used for future project/unit customizations -->
+    <!-- Currently, deals management focuses on deal and commission tracking -->
+    <!-- Projects and units can be accessed through standard Odoo menus if needed -->
+
+</odoo>

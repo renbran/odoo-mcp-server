@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15
+    container_name: odoo17_postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    networks:
+      - odoo-network
+    restart: unless-stopped
+
+  # Odoo 17
+  odoo:
+    image: odoo:17.0
+    container_name: odoo17_app
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+      - "8072:8072"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      # Mount your custom modules
+      - ./deal_report:/mnt/extra-addons/deal_report
+      - ./deals_management:/mnt/extra-addons/deals_management
+      # Odoo data persistence
+      - odoo-web-data:/var/lib/odoo
+      # Configuration file
+      - ./odoo.conf:/etc/odoo/odoo.conf
+    networks:
+      - odoo-network
+    restart: unless-stopped
+    command: --
+      --dev=reload
+      --log-level=debug
+
+networks:
+  odoo-network:
+    driver: bridge
+
+volumes:
+  odoo-db-data:
+  odoo-web-data:

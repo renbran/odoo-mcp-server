@@ -1,0 +1,229 @@
+FILES REFERENCE - Commission_AX Backend Setup
+===============================================
+
+BACKEND TOOLS (Main Files)
+==========================
+
+📌 inspect-backend.py (6.5 KB)
+   RECOMMENDED - Direct Python tool for module inspection/installation
+   Commands: list, list [state], info, install
+   Usage: python3 inspect-backend.py list
+
+📄 inspect-backend.ts (2.6 KB)
+   TypeScript version (reference only)
+   Compiles to dist/
+
+📄 inspect-backend-node.ts (13.8 KB)
+   Node.js version (reference only)
+   Uses MCP client libraries
+
+📄 inspect-modules.ps1 (4.6 KB)
+   PowerShell helper for Windows users
+   Legacy reference
+
+📄 INSTALL-COMMISSION-AX-MODULES.ps1 (3.0 KB)
+   PowerShell installation script
+   Legacy reference
+
+
+DOCUMENTATION (Read These First)
+================================
+
+⭐ 00-INDEX.md (7.0 KB)
+   MASTER REFERENCE - Start here
+   Complete overview, all access methods, troubleshooting
+
+⭐ BACKEND-QUICK-START.txt (2.2 KB)
+   QUICK REFERENCE - Fast commands and usage
+   Perfect for copying commands
+
+📖 BACKEND-INSPECTOR-GUIDE.md (2.5 KB)
+   DETAILED GUIDE - Full documentation
+
+📖 BACKEND-SETUP-COMPLETE.md (3.3 KB)
+   SETUP SUMMARY - What was created and why
+
+📖 TOOLING-ARCHITECTURE.txt (11 KB)
+   ARCHITECTURE OVERVIEW - Three access methods compared
+
+📖 README.md (Various KB)
+   FULL PROJECT DOCS - Complete MCP server documentation
+
+📖 QUICK-REFERENCE.md (Various KB)
+   COMMAND REFERENCE - All available commands
+
+
+CONFIGURATION FILES
+===================
+
+⚙️  .env (1.0 KB) - ACTIVE
+   Current Odoo connection (commission_ax)
+   URL, Database, Username, Password
+
+⚙️  .env.example
+   Template for .env
+
+⚙️  package.json
+   MCP server dependencies (node, TypeScript tools)
+
+⚙️  tsconfig.json
+   TypeScript compilation config
+
+⚙️  odoo.conf (SERVER - /var/odoo/scholarixv2/)
+   Server-side Odoo configuration
+
+
+COMMISSION_AX SPECIFIC DOCS
+===========================
+
+📋 COMMISSION-AX-MODULES.md (600+ lines)
+   Complete module catalog and installation guide
+   Detailed technical reference
+
+📋 COMMISSION-AX-CHECKLIST.md
+   Safety verification checklist
+   Pre-installation checks
+
+📋 COMMISSION-AX-INSTALL-STEPS.txt
+   5-step installation process
+   Simple step-by-step guide
+
+📋 START-HERE-COMMISSION-AX.md
+   Quick start for commission_ax database
+
+
+MCP SERVER FILES
+================
+
+📦 src/
+   └── index.ts (280 lines) - Server entry point, request handling
+   └── odoo-client.ts (527 lines) - XML-RPC client, retry logic
+   └── tools.ts (559 lines) - 11 MCP tool definitions
+   └── types.ts (130 lines) - TypeScript interfaces
+
+📦 dist/ (Compiled output, ready to use)
+   └── *.js - JavaScript versions
+   └── *.d.ts - TypeScript definitions
+   └── *.map - Source maps
+
+
+HELPER SCRIPTS
+==============
+
+🔧 start.ps1 - PowerShell startup helper
+🔧 START-SCHOLARIX.ps1 - Scholarix database helper
+🔧 inspect-modules.ps1 - Module inspection helper
+
+
+LEGACY/REFERENCE FILES
+======================
+
+📚 SCHOLARIX-TESTING.md - Scholarix v2 documentation
+📚 SETUP-GUIDE.md - Original setup guide
+📚 00-START-HERE.txt - Original quick start
+📚 claude-config-example.json - MCP config template
+📚 claude-config-YOUR-SETUP.json - Configured MCP settings
+
+
+QUICK COMMAND REFERENCE
+=======================
+
+List all modules:
+  python3 inspect-backend.py list
+
+List available (uninstalled):
+  python3 inspect-backend.py list uninstalled
+
+Get module info:
+  python3 inspect-backend.py info account
+
+Install module:
+  python3 inspect-backend.py install account
+
+Alternative - Direct Odoo shell:
+  cd /var/odoo/scholarixv2
+  sudo -u odoo venv/bin/python3 src/odoo-bin -c odoo.conf -d commission_ax --no-http
+
+
+FILE LOCATIONS ON SERVER
+========================
+
+Source Code:     /var/odoo/scholarixv2/src
+Logs:           /var/odoo/scholarixv2/logs
+Config:         /var/odoo/scholarixv2/odoo.conf
+Python:         /var/odoo/scholarixv2/venv/bin/python3
+Database:       commission_ax
+
+
+HOW TO USE THIS FILE
+====================
+
+1. Start with: 00-INDEX.md
+2. For quick commands: BACKEND-QUICK-START.txt
+3. For troubleshooting: BACKEND-INSPECTOR-GUIDE.md
+4. For architecture: TOOLING-ARCHITECTURE.txt
+5. For implementation: inspect-backend.py
+
+
+FILE SIZE SUMMARY
+=================
+
+Total Documentation: ~50 KB
+Main Tool: 6.5 KB (Python)
+Node/TypeScript: ~20 KB (reference only)
+Compiled Output (dist/): ~200 KB (ready to use)
+
+
+RECOMMENDED READING ORDER
+=========================
+
+1st: 00-INDEX.md - Understand what you have
+2nd: BACKEND-QUICK-START.txt - Learn the commands
+3rd: inspect-backend.py - Review the code (optional)
+4th: TOOLING-ARCHITECTURE.txt - Understand your options
+
+
+WHAT YOU NEED
+=============
+
+Essential:
+  ✓ inspect-backend.py
+  ✓ 00-INDEX.md or BACKEND-QUICK-START.txt
+
+Optional:
+  ✓ Other documentation for reference
+  ✓ MCP server tools (if using Claude)
+  ✓ Helper scripts (if using Windows/PowerShell)
+
+
+THIS IS NOT EVERYTHING
+======================
+
+The full odoo-mcp-server project includes:
+  ✓ 11 Odoo MCP tools
+  ✓ TypeScript source code
+  ✓ Complete node_modules
+  ✓ Build configuration
+  ✓ Multiple helper scripts
+
+But for direct backend access, you only need:
+  ✓ inspect-backend.py
+  ✓ 00-INDEX.md (for reference)
+
+
+YOUR CURRENT SETUP
+==================
+
+Database:    commission_ax (Scholarix Global)
+Server:      /var/odoo/scholarixv2
+Tool:        inspect-backend.py
+Docs:        00-INDEX.md
+
+Status: READY TO USE
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Start by reading: 00-INDEX.md
+Then use: python3 inspect-backend.py list
+
+═══════════════════════════════════════════════════════════════════════════════

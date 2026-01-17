@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_deal_root" name="Deals" parent="sales_team.menu_sale_root" sequence="50"/>
+        <menuitem id="menu_deal_report" name="Deal Reports" parent="menu_deal_root" action="deal_report.action_deal_report"/>
+        <menuitem id="menu_deal_dashboard" name="Deal Dashboard" parent="menu_deal_root" action="deal_report.action_deal_dashboard" sequence="55"/>
+        <menuitem id="menu_deal_analytics" name="Analytics" parent="menu_deal_root" sequence="60">
+            <menuitem id="menu_deal_analytics_overview" name="Overview" parent="menu_deal_analytics" action="deal_report.action_deal_report_analytics" sequence="61"/>
+            <menuitem id="menu_deal_analytics_trends" name="Trends" parent="menu_deal_analytics" action="deal_report.action_deal_report_trends" sequence="62"/>
+            <menuitem id="menu_deal_analytics_distribution" name="Distribution" parent="menu_deal_analytics" action="deal_report.action_deal_report_distribution" sequence="63"/>
+        </menuitem>
+    </data>
+</odoo>

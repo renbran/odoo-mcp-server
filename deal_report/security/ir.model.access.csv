@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_deal_report_user,access.deal.report.user,model_deal_report,base.group_user,1,1,1,1
+access_deal_commission_line_user,access.deal.commission.line.user,model_deal_commission_line,base.group_user,1,1,1,1
+access_deal_bill_line_user,access.deal.bill.line.user,model_deal_bill_line,base.group_user,1,1,1,1
+access_deal_dashboard_user,access.deal.dashboard.user,model_deal_dashboard,base.group_user,1,1,1,1

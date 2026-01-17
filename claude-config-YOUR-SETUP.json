@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "odoo-commission-ax": {
+      "command": "node",
+      "args": ["D:\\01_WORK_PROJECTS\\odoo-mcp-server\\dist\\index.js"],
+      "env": {
+        "ODOO_URL": "https://erp.sgctech.ai",
+        "ODOO_DB": "commission_ax",
+        "ODOO_USERNAME": "info@scholarixglobal.com",
+        "ODOO_PASSWORD": "123456"
+      }
+    }
+  }
+}
