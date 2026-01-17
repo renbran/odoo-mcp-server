@@ -1,0 +1,19 @@
+{
+  "timestamp": "20260117_203129",
+  "deployment_status": "COMPLETED_WITH_WARNINGS",
+  "remote_host": "erp.sgctech.ai",
+  "database": "scholarixv2",
+  "module_name": "deals_management",
+  "errors": [
+    "SSH connection failed: ssh: connect to host erp.sgctech.ai port 22: Connection timed out\n",
+    "Step failed: SSH Connection",
+    "Module upload failed",
+    "Step failed: Upload Module",
+    "Module structure incomplete",
+    "Step failed: Verify Structure",
+    "Step failed: Check Odoo Service",
+    "Failed to restart Odoo: ssh: connect to host erp.sgctech.ai port 22: Connection timed out\n",
+    "Step failed: Restart Odoo"
+  ],
+  "log_entries": 39
+}

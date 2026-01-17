@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
   <data>
-    <!-- Graph View: Bar Chart - Monthly totals and commissions -->
     <record id="view_deal_report_graph" model="ir.ui.view">
       <field name="name">deal.report.graph</field>
       <field name="model">deal.report</field>
@@ -14,8 +13,6 @@
         </graph>
       </field>
     </record>
-
-    <!-- Line Chart View: Trend Analysis -->
     <record id="view_deal_report_graph_line" model="ir.ui.view">
       <field name="name">deal.report.graph.line</field>
       <field name="model">deal.report</field>
@@ -27,8 +24,6 @@
         </graph>
       </field>
     </record>
-
-    <!-- Pie Chart View: Distribution by State -->
     <record id="view_deal_report_graph_pie" model="ir.ui.view">
       <field name="name">deal.report.graph.pie</field>
       <field name="model">deal.report</field>
@@ -39,8 +34,6 @@
         </graph>
       </field>
     </record>
-
-    <!-- Pivot View: Breakdown by customer and state -->
     <record id="view_deal_report_pivot" model="ir.ui.view">
       <field name="name">deal.report.pivot</field>
       <field name="model">deal.report</field>
@@ -55,8 +48,6 @@
         </pivot>
       </field>
     </record>
-
-    <!-- Kanban View: Compact KPI cards -->
     <record id="view_deal_report_kanban" model="ir.ui.view">
       <field name="name">deal.report.kanban</field>
       <field name="model">deal.report</field>
@@ -102,16 +93,12 @@
         </kanban>
       </field>
     </record>
-
-    <!-- Analytics Action: Multi-Chart Dashboard -->
     <record id="action_deal_report_analytics" model="ir.actions.act_window">
       <field name="name">Deal Analytics</field>
       <field name="res_model">deal.report</field>
       <field name="view_mode">graph,pivot,kanban,tree</field>
       <field name="context">{"search_default_state_confirmed": 1}</field>
     </record>
-
-    <!-- Trend Analysis Action: Line Chart Focus -->
     <record id="action_deal_report_trends" model="ir.actions.act_window">
       <field name="name">Deal Trends</field>
       <field name="res_model">deal.report</field>
@@ -119,8 +106,6 @@
       <field name="context">{"graph_mode": "line"}</field>
       <field name="views" eval="[(ref('view_deal_report_graph_line'), 'graph'), (ref('view_deal_report_tree'), 'tree')]"/>
     </record>
-
-    <!-- Distribution Action: Pie Chart Focus -->
     <record id="action_deal_report_distribution" model="ir.actions.act_window">
       <field name="name">Deal Distribution</field>
       <field name="res_model">deal.report</field>

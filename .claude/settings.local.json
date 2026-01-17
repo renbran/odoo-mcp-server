@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ssh root@65.20.72.53 \"find /var/odoo/eigermarvel/extra-addons -type d -name ''uae_recruitment_mgmt'' 2>/dev/null\")",
+      "Bash(ssh root@65.20.72.53:*)",
+      "Bash(ssh root@65.20.72.53\"sed -i ''s/<field name=\"\"phone\"\"\\\\/>/<field name=\"\"partner_mobile\"\"\\\\/>/g'' /var/odoo/eigermarvel/extra-addons/new-apps.git-691aab1cc3a84/uae_recruitment_mgmt/views/recruitment_candidate_views.xml\")",
+      "Bash(scp:*)"
+    ]
+  }
+}

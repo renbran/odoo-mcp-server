@@ -1,0 +1,278 @@
+{
+  "timestamp": "20260117_201349",
+  "module_name": "deals_management",
+  "validation_results": {
+    "passed": 47,
+    "failed": 2,
+    "warnings": 4,
+    "total": 53
+  },
+  "status": "FAIL",
+  "checks": [
+    {
+      "name": "File: __init__.py",
+      "status": "PASS",
+      "message": "Python package init"
+    },
+    {
+      "name": "File: __manifest__.py",
+      "status": "PASS",
+      "message": "Module metadata"
+    },
+    {
+      "name": "File: models/__init__.py",
+      "status": "PASS",
+      "message": "Models package init"
+    },
+    {
+      "name": "File: models/sale_order_deals.py",
+      "status": "PASS",
+      "message": "Main model extension"
+    },
+    {
+      "name": "File: security/ir.model.access.csv",
+      "status": "PASS",
+      "message": "Access control rules"
+    },
+    {
+      "name": "File: views/deals_views.xml",
+      "status": "PASS",
+      "message": "Deal views and actions"
+    },
+    {
+      "name": "File: views/deals_menu.xml",
+      "status": "PASS",
+      "message": "Menu structure"
+    },
+    {
+      "name": "File: views/commission_views.xml",
+      "status": "PASS",
+      "message": "Commission views"
+    },
+    {
+      "name": "File: views/commission_line_views.xml",
+      "status": "PASS",
+      "message": "Bill integration views"
+    },
+    {
+      "name": "File: views/project_unit_views.xml",
+      "status": "PASS",
+      "message": "Project views"
+    },
+    {
+      "name": "Manifest: 'name'",
+      "status": "PASS",
+      "message": "Module name"
+    },
+    {
+      "name": "Manifest: 'version'",
+      "status": "PASS",
+      "message": "Version number"
+    },
+    {
+      "name": "Manifest: 'category'",
+      "status": "PASS",
+      "message": "Category classification"
+    },
+    {
+      "name": "Manifest: 'author'",
+      "status": "PASS",
+      "message": "Author information"
+    },
+    {
+      "name": "Manifest: 'depends'",
+      "status": "PASS",
+      "message": "Dependencies list"
+    },
+    {
+      "name": "Manifest: 'data'",
+      "status": "PASS",
+      "message": "Data files list"
+    },
+    {
+      "name": "Manifest: 'installable'",
+      "status": "PASS",
+      "message": "Installable flag"
+    },
+    {
+      "name": "Manifest: 'application'",
+      "status": "PASS",
+      "message": "Application flag"
+    },
+    {
+      "name": "Dependencies: sale and commission_ax",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Class definition",
+      "status": "PASS",
+      "message": "SaleOrderDeals class found"
+    },
+    {
+      "name": "Model inheritance",
+      "status": "PASS",
+      "message": "Extends sale.order"
+    },
+    {
+      "name": "Field: Sales type field",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Field: Buyer name field",
+      "status": "FAIL",
+      "message": "Field definition not found"
+    },
+    {
+      "name": "Field: Buyer email field",
+      "status": "FAIL",
+      "message": "Field definition not found"
+    },
+    {
+      "name": "Field: Deal sales value field",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Field: Commission count field",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Field: Bill count field",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Computed fields",
+      "status": "PASS",
+      "message": "@api.depends decorators found"
+    },
+    {
+      "name": "Action: Invoice view action",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Action: Commission view action",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Action: Bill view action",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Action definitions: 11 found",
+      "status": "PASS",
+      "message": "Actions: all_deals, primary_deals, secondary_deals..."
+    },
+    {
+      "name": "View type: tree",
+      "status": "WARN",
+      "message": "tree view not found"
+    },
+    {
+      "name": "View type: form",
+      "status": "WARN",
+      "message": "form view not found"
+    },
+    {
+      "name": "View type: search",
+      "status": "WARN",
+      "message": "search view not found"
+    },
+    {
+      "name": "Menu items: 13 defined",
+      "status": "PASS",
+      "message": "Including: Deals, Commissions"
+    },
+    {
+      "name": "Menu actions: 11 references",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "ACL header format",
+      "status": "PASS",
+      "message": "Standard CSV format"
+    },
+    {
+      "name": "Sale order rules",
+      "status": "PASS",
+      "message": "Access rules defined"
+    },
+    {
+      "name": "Syntax: models/sale_order_deals.py",
+      "status": "PASS",
+      "message": "Valid Python syntax"
+    },
+    {
+      "name": "Syntax: __init__.py",
+      "status": "PASS",
+      "message": "Valid Python syntax"
+    },
+    {
+      "name": "Syntax: models/__init__.py",
+      "status": "PASS",
+      "message": "Valid Python syntax"
+    },
+    {
+      "name": "XML: deals_views.xml",
+      "status": "PASS",
+      "message": "Valid XML structure"
+    },
+    {
+      "name": "XML: deals_menu.xml",
+      "status": "PASS",
+      "message": "Valid XML structure"
+    },
+    {
+      "name": "XML: commission_views.xml",
+      "status": "PASS",
+      "message": "Valid XML structure"
+    },
+    {
+      "name": "XML: commission_line_views.xml",
+      "status": "PASS",
+      "message": "Valid XML structure"
+    },
+    {
+      "name": "XML: project_unit_views.xml",
+      "status": "PASS",
+      "message": "Valid XML structure"
+    },
+    {
+      "name": "Data loading: security first",
+      "status": "WARN",
+      "message": "Security should load first, got views/deals_views.xml"
+    },
+    {
+      "name": "Data files: 4 defined",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Compliance: Avoid @api.one",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Compliance: No manual commits",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Compliance: Proper imports",
+      "status": "PASS",
+      "message": ""
+    },
+    {
+      "name": "Compliance: Uses @api.depends",
+      "status": "PASS",
+      "message": ""
+    }
+  ]
+}

@@ -55,11 +55,11 @@ class SaleOrderDeals(models.Model):
         currency_field='currency_id'
     )
     
-    # Commission Rate (from existing primary_commission_percentage)
+    # Commission Rate (percentage)
     deal_commission_rate = fields.Float(
         string='Commission Rate (%)',
-        compute='_compute_deal_commission_rate',
-        store=True
+        default=0.0,
+        help='Commission percentage for this deal'
     )
     
     # VAT and Total calculations
@@ -132,15 +132,10 @@ class SaleOrderDeals(models.Model):
         compute='_compute_bill_count'
     )
     
-    @api.depends('amount_untaxed', 'unit_sale_value')
+    @api.depends('amount_untaxed')
     def _compute_deal_sales_value(self):
         for record in self:
-            record.deal_sales_value = record.unit_sale_value or record.amount_untaxed
-    
-    @api.depends('primary_commission_percentage')
-    def _compute_deal_commission_rate(self):
-        for record in self:
-            record.deal_commission_rate = record.primary_commission_percentage
+            record.deal_sales_value = record.amount_untaxed
     
     @api.depends('amount_untaxed', 'amount_tax', 'amount_total')
     def _compute_vat_totals(self):
@@ -156,6 +151,7 @@ class SaleOrderDeals(models.Model):
             record.booking_form_count = len(record.booking_form_ids)
             record.passport_count = len(record.passport_ids)
     
+    @api.depends('id')
     def _compute_commission_count(self):
         for record in self:
             # Count commission lines related to this deal
@@ -163,6 +159,7 @@ class SaleOrderDeals(models.Model):
                 ('sale_order_id', '=', record.id)
             ])
     
+    @api.depends('id')
     def _compute_bill_count(self):
         for record in self:
             # Count vendor bills related to this deal's commissions

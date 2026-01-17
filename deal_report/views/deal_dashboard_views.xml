@@ -68,7 +68,6 @@
         </form>
       </field>
     </record>
-
     <record id="action_deal_dashboard" model="ir.actions.act_window">
       <field name="name">Deal Dashboard</field>
       <field name="res_model">deal.dashboard</field>

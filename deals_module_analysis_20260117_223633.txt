@@ -1,0 +1,59 @@
+======================================================================
+DEALS MANAGEMENT MODULE - REMOTE ANALYSIS REPORT
+======================================================================
+
+Generated: 2026-01-17 22:36:33
+Server: https://erp.sgctech.ai
+Database: scholarixv2
+
+SUMMARY
+======================================================================
+Module State: uninstalled
+Version: False
+Dependencies: 4/4 installed
+Model Fields: 2 found
+Menu Items: 0 created
+Action Windows: 0 defined
+Views: 0 created
+
+
+WARNINGS
+======================================================================
+- Field 'sales_type' not found on sale.order model
+- Field 'buyer_email' not found on sale.order model
+- Field 'buyer_phone' not found on sale.order model
+- Field 'buyer_address' not found on sale.order model
+- Field 'co_buyer_name' not found on sale.order model
+- Field 'co_buyer_email' not found on sale.order model
+- Field 'reference_person_name' not found on sale.order model
+- Field 'primary_buyer_id' not found on sale.order model
+- Field 'secondary_buyer_id' not found on sale.order model
+- Field 'unit_reference' not found on sale.order model
+- Field 'booking_date' not found on sale.order model
+- Field 'estimated_invoice_date' not found on sale.order model
+- Field 'deal_sales_value' not found on sale.order model
+- Field 'deal_commission_rate' not found on sale.order model
+- Field 'vat_amount' not found on sale.order model
+- Field 'total_without_vat' not found on sale.order model
+- Field 'total_with_vat' not found on sale.order model
+- Field 'commission_count' not found on sale.order model
+- Field 'bill_count' not found on sale.order model
+- Field 'kyc_document_count' not found on sale.order model
+- Field 'booking_form_count' not found on sale.order model
+- Field 'passport_count' not found on sale.order model
+- No menu items found
+- No action windows found
+- No views found
+
+RECOMMENDATIONS
+======================================================================
+- Install the module
+- Verify all model fields are properly defined
+- Verify all menu items are created
+- Verify all action windows are defined
+- Create additional views if needed
+
+PRODUCTION READINESS
+======================================================================
+Score: 5/10 (50%)
+Status: Needs Work
