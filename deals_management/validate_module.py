@@ -4,6 +4,7 @@ Validate deals_management module structure and configuration
 Run this before deploying to ensure module integrity
 """
 
+import ast
 import os
 import sys
 import re
@@ -151,7 +152,6 @@ class ModuleValidator:
                 continue
                 
             try:
-                import ast
                 with open(full_path, 'r', encoding='utf-8') as f:
                     content = f.read()
                 ast.parse(content, py_file)
@@ -180,12 +180,14 @@ class ModuleValidator:
             with open(full_path, 'r', encoding='utf-8') as f:
                 content = f.read()
                 
-            # Basic checks
-            if content.count('<odoo>') != content.count('</odoo>'):
-                self.log_error(f"Unbalanced <odoo> tags in {xml_file}")
-            elif content.count('<record') != content.count('</record>'):
-                self.log_error(f"Unbalanced <record> tags in {xml_file}")
-            else:
+            # Check for basic XML structure using regex
+            # Look for opening/closing odoo tags
+            odoo_open = len(re.findall(r'<odoo\s*>', content))
+            odoo_close = len(re.findall(r'</odoo>', content))
+            
+            if odoo_open != 1 or odoo_close != 1:
+                self.log_error(f"Invalid <odoo> tag structure in {xml_file}")
+            elif odoo_open == odoo_close == 1:
                 self.log_info(f"XML structure looks OK: {xml_file}")
     
     def run_validation(self):

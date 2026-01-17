@@ -58,10 +58,14 @@ ssh "${REMOTE_USER}@${REMOTE_HOST}" << EOF
 set -e
 
 echo "Creating backup of existing module..."
-if [ -d ${REMOTE_ADDONS_PATH}/${MODULE_NAME} ]; then
-    sudo tar -czf ${BACKUP_DIR}/deals_management_backup_${TIMESTAMP}.tar.gz \
-        ${REMOTE_ADDONS_PATH}/${MODULE_NAME}
-    echo "Backup created successfully"
+if [ -d "${REMOTE_ADDONS_PATH}/${MODULE_NAME}" ]; then
+    if sudo tar -czf "${BACKUP_DIR}/${MODULE_NAME}_backup_${TIMESTAMP}.tar.gz" \
+        "${REMOTE_ADDONS_PATH}/${MODULE_NAME}"; then
+        echo "Backup created successfully"
+    else
+        echo "ERROR: Failed to create backup"
+        exit 1
+    fi
 else
     echo "No existing module to backup"
 fi
@@ -74,8 +78,8 @@ cd ${REMOTE_ADDONS_PATH}
 sudo tar -xzf /tmp/${PACKAGE_NAME}
 
 echo "Setting permissions..."
-sudo chown -R odoo:odoo ${MODULE_NAME}
-sudo chmod -R 755 ${MODULE_NAME}
+sudo chown -R odoo:odoo "${MODULE_NAME}"
+sudo chmod -R 755 "${MODULE_NAME}"
 
 echo "Validating deployed module..."
 python3 ${MODULE_NAME}/validate_module.py ${MODULE_NAME}/
