@@ -28,21 +28,21 @@
     <!-- ===== COMMISSIONS SUBMENUS ===== -->
 
     <!-- All Commissions -->
-    <menuitem id="menu_deals_all_commissions" name="All Commissions" parent="menu_commissions_root" action="action_deals_all_commissions" sequence="1"/>
+    <menuitem id="menu_deals_all_commissions" name="All Commissions" parent="menu_commissions_root" action="deals_management.action_deals_all_commissions" sequence="1"/>
 
     <!-- Pending Bills (No Bill Created) -->
-    <menuitem id="menu_deals_pending_bills" name="Pending Bills" parent="menu_commissions_root" action="action_deals_pending_bills" sequence="2"/>
+    <menuitem id="menu_deals_pending_bills" name="Pending Bills" parent="menu_commissions_root" action="deals_management.action_deals_pending_bills" sequence="2"/>
 
     <!-- Paid Bills (Bill Created) -->
-    <menuitem id="menu_deals_paid_bills" name="Paid Bills" parent="menu_commissions_root" action="action_deals_paid_bills" sequence="3"/>
+    <menuitem id="menu_deals_paid_bills" name="Paid Bills" parent="menu_commissions_root" action="deals_management.action_deals_paid_bills" sequence="3"/>
 
     <!-- Commission by Partner -->
-    <menuitem id="menu_deals_commission_partner" name="Commission by Partner" parent="menu_commissions_root" action="action_deals_commission_by_partner" sequence="4"/>
+    <menuitem id="menu_deals_commission_partner" name="Commission by Partner" parent="menu_commissions_root" action="deals_management.action_deals_commission_by_partner" sequence="4"/>
 
     <!-- Vendor Bills -->
-    <menuitem id="menu_deals_vendor_bills" name="Vendor Bills" parent="menu_commissions_root" action="action_deals_vendor_bills" sequence="5"/>
+    <menuitem id="menu_deals_vendor_bills" name="Vendor Bills" parent="menu_commissions_root" action="deals_management.action_deals_vendor_bills" sequence="5"/>
 
     <!-- Commission Reports -->
-    <menuitem id="menu_deals_commission_report" name="Commission Report" parent="menu_commissions_root" action="action_deals_commission_report" sequence="6"/>
+    <menuitem id="menu_deals_commission_report" name="Commission Report" parent="menu_commissions_root" action="deals_management.action_deals_commission_report" sequence="6"/>
 
 </odoo>
