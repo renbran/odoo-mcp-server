@@ -9,10 +9,10 @@ echo "Deals Management - scholarixv2 Deploy"
 echo "========================================"
 echo ""
 
-# Configuration
-REMOTE_HOST="erp.sgctech.ai"
-REMOTE_USER="odoo"
-REMOTE_ADDONS_PATH="/var/odoo/scholarixv2/extra-addons/odooapps.git-68ee71eda34bc"
+# Configuration - can be overridden with environment variables
+REMOTE_HOST="${SCHOLARIXV2_HOST:-erp.sgctech.ai}"
+REMOTE_USER="${SCHOLARIXV2_USER:-odoo}"
+REMOTE_ADDONS_PATH="${SCHOLARIXV2_ADDONS_PATH:-/var/odoo/scholarixv2/extra-addons/odooapps.git-68ee71eda34bc}"
 MODULE_NAME="deals_management"
 BACKUP_DIR="/var/odoo/backups"
 
@@ -58,8 +58,13 @@ ssh "${REMOTE_USER}@${REMOTE_HOST}" << EOF
 set -e
 
 echo "Creating backup of existing module..."
-sudo tar -czf ${BACKUP_DIR}/deals_management_backup_${TIMESTAMP}.tar.gz \
-    ${REMOTE_ADDONS_PATH}/${MODULE_NAME} 2>/dev/null || echo "No existing module to backup"
+if [ -d ${REMOTE_ADDONS_PATH}/${MODULE_NAME} ]; then
+    sudo tar -czf ${BACKUP_DIR}/deals_management_backup_${TIMESTAMP}.tar.gz \
+        ${REMOTE_ADDONS_PATH}/${MODULE_NAME}
+    echo "Backup created successfully"
+else
+    echo "No existing module to backup"
+fi
 
 echo "Removing old module..."
 sudo rm -rf ${REMOTE_ADDONS_PATH}/${MODULE_NAME}

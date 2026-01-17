@@ -58,7 +58,7 @@ class ModuleValidator:
             self.log_error("__manifest__.py not found")
             return
             
-        with open(manifest_path, 'r') as f:
+        with open(manifest_path, 'r', encoding='utf-8') as f:
             content = f.read()
             
         # Check required keys
@@ -89,7 +89,7 @@ class ModuleValidator:
             self.log_error("deals_menu.xml not found")
             return
             
-        with open(menu_path, 'r') as f:
+        with open(menu_path, 'r', encoding='utf-8') as f:
             content = f.read()
             
         # Find all action references in menuitem tags
@@ -120,10 +120,10 @@ class ModuleValidator:
             self.log_error("Required XML files not found")
             return
             
-        with open(menu_path, 'r') as f:
+        with open(menu_path, 'r', encoding='utf-8') as f:
             menu_content = f.read()
         
-        with open(views_path, 'r') as f:
+        with open(views_path, 'r', encoding='utf-8') as f:
             views_content = f.read()
             
         # Find all action references
@@ -151,9 +151,10 @@ class ModuleValidator:
                 continue
                 
             try:
-                with open(full_path, 'r') as f:
+                import ast
+                with open(full_path, 'r', encoding='utf-8') as f:
                     content = f.read()
-                compile(content, py_file, 'exec')
+                ast.parse(content, py_file)
                 self.log_info(f"Python syntax OK: {py_file}")
             except SyntaxError as e:
                 self.log_error(f"Syntax error in {py_file}: {e}")
@@ -176,7 +177,7 @@ class ModuleValidator:
                 self.log_warning(f"XML file not found: {xml_file}")
                 continue
                 
-            with open(full_path, 'r') as f:
+            with open(full_path, 'r', encoding='utf-8') as f:
                 content = f.read()
                 
             # Basic checks
