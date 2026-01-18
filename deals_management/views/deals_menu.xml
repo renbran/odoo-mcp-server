@@ -11,19 +11,19 @@
     <!-- ===== DEALS SUBMENUS ===== -->
 
     <!-- All Deals Submenu -->
-    <menuitem id="menu_all_deals" name="All Deals" parent="menu_deals_root" action="action_all_deals" sequence="1"/>
+    <menuitem id="menu_all_deals" name="All Deals" parent="menu_deals_root" action="deals_management.action_all_deals" sequence="1"/>
 
     <!-- Primary Sales Submenu -->
-    <menuitem id="menu_primary_deals" name="Primary Sales" parent="menu_deals_root" action="action_primary_deals" sequence="2"/>
+    <menuitem id="menu_primary_deals" name="Primary Sales" parent="menu_deals_root" action="deals_management.action_primary_deals" sequence="2"/>
 
     <!-- Secondary Sales Submenu -->
-    <menuitem id="menu_secondary_deals" name="Secondary Sales" parent="menu_deals_root" action="action_secondary_deals" sequence="3"/>
+    <menuitem id="menu_secondary_deals" name="Secondary Sales" parent="menu_deals_root" action="deals_management.action_secondary_deals" sequence="3"/>
 
     <!-- Exclusive Sales Submenu -->
-    <menuitem id="menu_exclusive_deals" name="Exclusive Sales" parent="menu_deals_root" action="action_exclusive_deals" sequence="4"/>
+    <menuitem id="menu_exclusive_deals" name="Exclusive Sales" parent="menu_deals_root" action="deals_management.action_exclusive_deals" sequence="4"/>
 
     <!-- Rental Deals Submenu -->
-    <menuitem id="menu_rental_deals" name="Rental Deals" parent="menu_deals_root" action="action_rental_deals" sequence="5"/>
+    <menuitem id="menu_rental_deals" name="Rental Deals" parent="menu_deals_root" action="deals_management.action_rental_deals" sequence="5"/>
 
     <!-- ===== COMMISSIONS SUBMENUS ===== -->
 
