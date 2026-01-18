@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Window Actions -->
+  <record id="action_deal_management" model="ir.actions.act_window">
+    <field name="name">Deals</field>
+    <field name="res_model">deal.management</field>
+    <field name="view_mode">tree,form,kanban,pivot</field>
+    <field name="search_view_id" ref="view_deal_management_search"/>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        No deals found. Let's create your first deal!
+      </p>
+      <p>
+        Create and track sales deals through your pipeline with real-time collaboration.
+      </p>
+    </field>
+  </record>
+
+  <record id="action_deal_management_pipeline" model="ir.actions.act_window">
+    <field name="name">Pipeline</field>
+    <field name="res_model">deal.management</field>
+    <field name="view_mode">kanban,form</field>
+    <field name="search_view_id" ref="view_deal_management_search"/>
+    <field name="context">{'group_by': 'stage_id'}</field>
+  </record>
+
+  <record id="action_deal_stage" model="ir.actions.act_window">
+    <field name="name">Stages</field>
+    <field name="res_model">deal.stage</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="view_deal_stage_search"/>
+  </record>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_deal_management_user,deal.management.user,model_deal_management,sales_team.group_sale_salesman,1,1,1,0
+access_deal_management_manager,deal.management.manager,model_deal_management,sales_team.group_sale_manager,1,1,1,1
+access_deal_line_user,deal.line.user,model_deal_line,sales_team.group_sale_salesman,1,1,1,0
+access_deal_line_manager,deal.line.manager,model_deal_line,sales_team.group_sale_manager,1,1,1,1
+access_deal_stage_user,deal.stage.user,model_deal_stage,sales_team.group_sale_salesman,1,0,0,0
+access_deal_stage_manager,deal.stage.manager,model_deal_stage,sales_team.group_sale_manager,1,1,1,1

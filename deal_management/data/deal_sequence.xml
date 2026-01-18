@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <record id="seq_deal_reference" model="ir.sequence">
+      <field name="name">Deal Reference</field>
+      <field name="code">deal.management</field>
+      <field name="prefix">DEAL/%(year)s/</field>
+      <field name="padding">5</field>
+      <field name="number_next_actual">1</field>
+    </record>
+  </data>
+</odoo>

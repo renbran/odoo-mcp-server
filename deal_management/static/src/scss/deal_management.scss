@@ -1,0 +1,97 @@
+// -*- coding: utf-8 -*-
+// Deal Management SCSS Styling
+
+.o_deal_management {
+  &__card {
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &__amount {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #137752;
+  }
+
+  &__status {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+
+  &__status--draft {
+    background-color: #f5f5f5;
+    color: #666;
+  }
+
+  &__status--qualification {
+    background-color: #cce5ff;
+    color: #004687;
+  }
+
+  &__status--proposal {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  &__status--negotiation {
+    background-color: #d1ecf1;
+    color: #0c5460;
+  }
+
+  &__status--won {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  &__status--lost {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  &__pipeline {
+    &-column {
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      padding: 1rem;
+      min-height: 500px;
+    }
+  }
+
+  &__commission {
+    font-weight: 500;
+    color: #ff6b6b;
+  }
+
+  &__partner {
+    font-weight: 500;
+    color: #333;
+  }
+}
+
+// Kanban view adjustments
+.o_kanban_view .o_kanban_record.oe_kanban_card {
+  &.o_deal_management {
+    &__card {
+      padding: 1rem;
+    }
+  }
+}
+
+// Form view button styling
+.o_form_view.o_deal_management {
+  .oe_button_box button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+}

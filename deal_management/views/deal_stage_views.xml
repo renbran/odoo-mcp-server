@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Deal Stage Form View -->
+  <record id="view_deal_stage_form" model="ir.ui.view">
+    <field name="name">deal.stage.form</field>
+    <field name="model">deal.stage</field>
+    <field name="arch" type="xml">
+      <form string="Deal Stage">
+        <group>
+          <field name="name" required="1"/>
+          <field name="sequence"/>
+          <field name="color" widget="color"/>
+          <field name="is_won"/>
+          <field name="is_lost"/>
+          <field name="description"/>
+        </group>
+      </form>
+    </field>
+  </record>
+
+  <!-- Deal Stage Tree View -->
+  <record id="view_deal_stage_tree" model="ir.ui.view">
+    <field name="name">deal.stage.tree</field>
+    <field name="model">deal.stage</field>
+    <field name="arch" type="xml">
+      <tree string="Deal Stages" editable="bottom" default_order="sequence">
+        <field name="sequence" widget="handle"/>
+        <field name="name"/>
+        <field name="is_won" widget="boolean"/>
+        <field name="is_lost" widget="boolean"/>
+        <field name="color"/>
+      </tree>
+    </field>
+  </record>
+</odoo>

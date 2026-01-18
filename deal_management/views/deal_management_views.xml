@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Deal Management Form View -->
+  <record id="view_deal_management_form" model="ir.ui.view">
+    <field name="name">deal.management.form</field>
+    <field name="model">deal.management</field>
+    <field name="arch" type="xml">
+      <form string="Deal">
+        <header>
+          <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" states="draft"/>
+          <button name="action_move_proposal" string="Move to Proposal" type="object" states="qualification"/>
+          <button name="action_move_negotiation" string="Move to Negotiation" type="object" states="proposal"/>
+          <button name="action_won" string="Mark as Won" type="object" class="oe_highlight" states="negotiation"/>
+          <button name="action_lost" string="Mark as Lost" type="object" states="negotiation,proposal,qualification"/>
+          <button name="action_reset" string="Reset to Draft" type="object" states="lost,cancelled"/>
+          <button name="action_cancel" string="Cancel" type="object" states="draft,qualification,proposal,negotiation"/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,qualification,proposal,negotiation,won,lost,cancelled"/>
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="%(action_account_moves_all)d" type="action" class="oe_stat_button" icon="fa-file-text-o" attrs="{'invisible': [('invoice_ids', '=', [])]}">
+              <field string="Invoices" name="invoice_ids" widget="statinfo" options="{'classes': 'o_stat_value'}"/>
+            </button>
+            <button name="action_view_lines" type="object" class="oe_stat_button" icon="fa-list">
+              <field string="Lines" name="line_ids" widget="statinfo" options="{'classes': 'o_stat_value'}"/>
+            </button>
+          </div>
+          <div class="oe_title">
+            <h1>
+              <field name="name" placeholder="Deal Title"/>
+            </h1>
+          </div>
+          <group>
+            <group>
+              <field name="reference" readonly="1"/>
+              <field name="code" placeholder="e.g., PROJ-001"/>
+              <field name="partner_id" required="1"/>
+              <field name="company_id" groups="base.group_multi_company"/>
+            </group>
+            <group>
+              <field name="date_created" readonly="1"/>
+              <field name="date_won" readonly="1"/>
+              <field name="date_lost" readonly="1"/>
+              <field name="color" widget="color"/>
+            </group>
+          </group>
+          <group string="Financial">
+            <group>
+              <field name="amount_total" required="1" widget="monetary"/>
+              <field name="commission_rate" widget="percentage"/>
+            </group>
+            <group>
+              <field name="commission_amount" widget="monetary"/>
+              <field name="stage_id" readonly="1"/>
+            </group>
+          </group>
+          <group string="Notes">
+            <field name="notes" nolabel="1" placeholder="Add additional notes about this deal..."/>
+          </group>
+          <notebook>
+            <page string="Line Items" name="lines">
+              <field name="line_ids" nolabel="1">
+                <tree editable="bottom" string="Deal Lines">
+                  <field name="product_id"/>
+                  <field name="description"/>
+                  <field name="quantity"/>
+                  <field name="unit_price" widget="monetary"/>
+                  <field name="amount_total" widget="monetary" readonly="1"/>
+                </tree>
+              </field>
+            </page>
+            <page string="Information" name="information">
+              <group>
+                <field name="create_date" readonly="1"/>
+                <field name="create_uid" readonly="1"/>
+                <field name="write_date" readonly="1"/>
+                <field name="write_uid" readonly="1"/>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter">
+          <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+          <field name="activity_ids" widget="mail_activity"/>
+          <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <!-- Deal Management Tree View -->
+  <record id="view_deal_management_tree" model="ir.ui.view">
+    <field name="name">deal.management.tree</field>
+    <field name="model">deal.management</field>
+    <field name="arch" type="xml">
+      <tree string="Deals" default_order="date_created desc">
+        <field name="reference"/>
+        <field name="code"/>
+        <field name="name"/>
+        <field name="partner_id"/>
+        <field name="amount_total" sum="Total Amount" widget="monetary"/>
+        <field name="commission_amount" sum="Total Commission" widget="monetary"/>
+        <field name="stage_id"/>
+        <field name="state" widget="badge"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Deal Management Kanban View -->
+  <record id="view_deal_management_kanban" model="ir.ui.view">
+    <field name="name">deal.management.kanban</field>
+    <field name="model">deal.management</field>
+    <field name="arch" type="xml">
+      <kanban string="Deals Pipeline" default_group_by="stage_id" records_draggable="true">
+        <field name="reference"/>
+        <field name="name"/>
+        <field name="partner_id"/>
+        <field name="amount_total"/>
+        <field name="color"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_card" style="border-left: 3px solid; border-color: #{'000000' if not card.color else '%06x' % card.color};">
+              <div class="oe_kanban_content">
+                <div class="oe_kanban_title">
+                  <strong><field name="reference"/></strong> - <field name="name"/>
+                </div>
+                <div class="oe_kanban_text_left">
+                  Partner: <field name="partner_id" widget="many2one"/>
+                  <br/>Amount: <field name="amount_total" widget="monetary"/>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <!-- Deal Management Pivot View -->
+  <record id="view_deal_management_pivot" model="ir.ui.view">
+    <field name="name">deal.management.pivot</field>
+    <field name="model">deal.management</field>
+    <field name="arch" type="xml">
+      <pivot string="Deals Analysis" default_order="date_created">
+        <field name="stage_id" type="row"/>
+        <field name="partner_id" type="col"/>
+        <field name="amount_total" type="measure" widget="monetary"/>
+        <field name="commission_amount" type="measure" widget="monetary"/>
+      </pivot>
+    </field>
+  </record>
+</odoo>

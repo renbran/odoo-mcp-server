@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Deal Management Menu -->
+  <menuitem id="menu_deal_management_root" name="Deals" sequence="10" parent="sale.menu_sale_root" groups="sales_team.group_sale_salesman"/>
+
+  <menuitem id="menu_deal_management_all" name="All Deals" sequence="10" parent="menu_deal_management_root" action="action_deal_management"/>
+
+  <menuitem id="menu_deal_management_pipeline" name="Pipeline" sequence="20" parent="menu_deal_management_root" action="action_deal_management_pipeline"/>
+
+  <menuitem id="menu_deal_stage" name="Stages" sequence="100" parent="menu_deal_management_root" action="action_deal_stage" groups="sales_team.group_sale_manager"/>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Deal Management Search View -->
+  <record id="view_deal_management_search" model="ir.ui.view">
+    <field name="name">deal.management.search</field>
+    <field name="model">deal.management</field>
+    <field name="arch" type="xml">
+      <search string="Search Deals">
+        <field name="reference" string="Reference"/>
+        <field name="code" string="Code"/>
+        <field name="name" string="Deal Name"/>
+        <field name="partner_id" string="Partner"/>
+        <separator/>
+        <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+        <filter name="qualification" string="Qualification" domain="[('state', '=', 'qualification')]"/>
+        <filter name="proposal" string="Proposal" domain="[('state', '=', 'proposal')]"/>
+        <filter name="negotiation" string="Negotiation" domain="[('state', '=', 'negotiation')]"/>
+        <filter name="won" string="Won" domain="[('state', '=', 'won')]"/>
+        <filter name="lost" string="Lost" domain="[('state', '=', 'lost')]"/>
+        <separator/>
+        <filter name="my_deals" string="My Deals" domain="[('create_uid', '=', uid)]"/>
+        <separator/>
+        <group expand="0" string="Group By">
+          <filter name="group_by_stage" string="Stage" context="{'group_by': 'stage_id'}"/>
+          <filter name="group_by_partner" string="Partner" context="{'group_by': 'partner_id'}"/>
+          <filter name="group_by_state" string="State" context="{'group_by': 'state'}"/>
+          <filter name="group_by_date" string="Creation Date" context="{'group_by': 'date_created:month'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <!-- Deal Stage Search View -->
+  <record id="view_deal_stage_search" model="ir.ui.view">
+    <field name="name">deal.stage.search</field>
+    <field name="model">deal.stage</field>
+    <field name="arch" type="xml">
+      <search string="Search Stages">
+        <field name="name" string="Stage Name"/>
+        <separator/>
+        <filter name="won_stages" string="Won Stages" domain="[('is_won', '=', True)]"/>
+        <filter name="lost_stages" string="Lost Stages" domain="[('is_lost', '=', True)]"/>
+      </search>
+    </field>
+  </record>
+</odoo>
