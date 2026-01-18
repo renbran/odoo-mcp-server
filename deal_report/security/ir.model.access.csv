@@ -1,5 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_deal_report_user,access.deal.report.user,model_deal_report,base.group_user,1,1,1,1
-access_deal_commission_line_user,access.deal.commission.line.user,model_deal_commission_line,base.group_user,1,1,1,1
-access_deal_bill_line_user,access.deal.bill.line.user,model_deal_bill_line,base.group_user,1,1,1,1
-access_deal_dashboard_user,access.deal.dashboard.user,model_deal_dashboard,base.group_user,1,1,1,1
+access_deal_report_user,deal.report.user,model_deal_report,sales_team.group_sale_salesman,1,1,1,0
+access_deal_report_manager,deal.report.manager,model_deal_report,sales_team.group_sale_manager,1,1,1,1
+access_deal_commission_line_user,deal.commission.line.user,model_deal_commission_line,sales_team.group_sale_salesman,1,1,1,0
+access_deal_commission_line_manager,deal.commission.line.manager,model_deal_commission_line,sales_team.group_sale_manager,1,1,1,1
+access_deal_bill_line_user,deal.bill.line.user,model_deal_bill_line,sales_team.group_sale_salesman,1,0,0,0
+access_deal_bill_line_manager,deal.bill.line.manager,model_deal_bill_line,sales_team.group_sale_manager,1,1,1,1
+access_deal_bill_line_accountant,deal.bill.line.accountant,model_deal_bill_line,account.group_account_invoice,1,1,1,0

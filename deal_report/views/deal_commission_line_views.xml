@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="deal_commission_line_tree_view" model="ir.ui.view">
+      <field name="name">deal.commission.line.tree</field>
+      <field name="model">deal.commission.line</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="deal_id"/>
+          <field name="commission_partner_id"/>
+          <field name="commission_type"/>
+          <field name="role"/>
+          <field name="commission_category"/>
+          <field name="calculation_method"/>
+          <field name="calculation_base"/>
+          <field name="commission_rate"/>
+          <field name="commission_amount"/>
+          <field name="state"/>
+          <field name="bill_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="deal_commission_line_form_view" model="ir.ui.view">
+      <field name="name">deal.commission.line.form</field>
+      <field name="model">deal.commission.line</field>
+      <field name="arch" type="xml">
+        <form string="Commission Line">
+          <group>
+            <field name="deal_id" readonly="1"/>
+            <field name="commission_partner_id"/>
+            <field name="commission_type"/>
+            <field name="commission_category"/>
+            <field name="role"/>
+          </group>
+          <group>
+            <field name="calculation_method"/>
+            <field name="calculation_base"/>
+            <field name="commission_rate"/>
+            <field name="commission_amount"/>
+            <field name="state"/>
+            <field name="bill_id"/>
+            <field name="bill_line_id"/>
+          </group>
+        </form>
+      </field>
+    </record>
+  </data>
+</odoo>

@@ -306,21 +306,26 @@ class CommissionLine(models.Model):
         }
     
     def _get_commission_expense_account(self):
-        """Get the commission expense account"""
-        # Try to find commission expense account or use default expense account
+        """Get the commission expense account for the current company."""
+        company = self.env.company
+
         account = self.env['account.account'].search([
-            ('code', '=like', '6%'),
-            ('name', 'ilike', 'commission')
-        ], limit=1)
-        
+            ('company_id', '=', company.id),
+            ('deprecated', '=', False),
+            ('account_type', '=', 'expense'),
+            ('name', 'ilike', 'commission'),
+        ], limit=1, order='code')
+
         if not account:
             account = self.env['account.account'].search([
-                ('account_type', '=', 'expense')
-            ], limit=1)
-        
+                ('company_id', '=', company.id),
+                ('deprecated', '=', False),
+                ('account_type', '=', 'expense'),
+            ], limit=1, order='code')
+
         if not account:
-            raise UserError(_('Please configure a commission expense account.'))
-        
+            raise UserError(_('Please configure an expense account for commissions in company %s.') % company.display_name)
+
         return account
     
     def action_view_bill(self):
@@ -337,3 +342,15 @@ class CommissionLine(models.Model):
             'view_mode': 'form',
             'target': 'current',
         }
+
+
+class SaleOrderDealsConstraints(models.Model):
+    _inherit = 'sale.order'
+
+    @api.constrains('deal_commission_rate')
+    def _check_deal_commission_rate(self):
+        for record in self:
+            if record.deal_commission_rate < 0:
+                raise UserError(_('Commission rate cannot be negative.'))
+            if record.deal_commission_rate > 100:
+                raise UserError(_('Commission rate cannot exceed 100%.'))

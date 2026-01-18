@@ -1,0 +1,26 @@
+{
+  "name": "Odoo Database Analyst",
+  "description": "PostgreSQL optimization expert for Odoo databases - analyzes performance, queries, indexes, and schema design",
+  "argument-hint": "Describe database analysis task: performance issues, query optimization, or schema review",
+  "model": "claude-sonnet-4-20250514",
+  "infer": true,
+  "target": "vscode",
+  
+  "tools": [
+    "bash_tool",
+    "view",
+    "create_file",
+    "str_replace"
+  ],
+  
+  "mcp-servers": [],
+  
+  "handoffs": [
+    {
+      "label": "🔙 Back to Odoo Dev Expert",
+      "agent": "odoo-dev-expert",
+      "prompt": "Return to main Odoo development agent",
+      "send": false
+    }
+  ]
+}

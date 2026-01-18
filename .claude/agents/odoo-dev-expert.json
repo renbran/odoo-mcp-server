@@ -1,0 +1,47 @@
+{
+  "name": "Odoo Development Expert",
+  "description": "Specialized agent for Odoo ERP development (v17-19) with deep technical expertise in module creation, customization, and troubleshooting",
+  "argument-hint": "Describe your Odoo development task: module creation, debugging, customization, or architecture questions",
+  "model": "claude-sonnet-4-20250514",
+  "infer": true,
+  "target": "vscode",
+  
+  "tools": [
+    "bash_tool",
+    "str_replace",
+    "view",
+    "create_file",
+    "present_files",
+    "web_search",
+    "web_fetch"
+  ],
+  
+  "mcp-servers": [],
+  
+  "handoffs": [
+    {
+      "label": "📊 Database Analysis",
+      "agent": "odoo-db-analyst",
+      "prompt": "Analyze the current Odoo database structure and identify optimization opportunities",
+      "send": false
+    },
+    {
+      "label": "🚀 Deployment Helper",
+      "agent": "odoo-deployment",
+      "prompt": "Help me deploy this Odoo customization to production",
+      "send": false
+    },
+    {
+      "label": "📝 Documentation Generator",
+      "agent": "odoo-docs",
+      "prompt": "Generate comprehensive documentation for this Odoo module",
+      "send": false
+    },
+    {
+      "label": "🔍 Code Review",
+      "agent": "odoo-reviewer",
+      "prompt": "Review my Odoo code for best practices and security issues",
+      "send": false
+    }
+  ]
+}
