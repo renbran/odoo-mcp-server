@@ -39,6 +39,62 @@ export declare const tools: ({
         model: string;
         instance: string;
     }>;
+} | {
+    name: string;
+    description: string;
+    inputSchema: z.ZodObject<{
+        instance: z.ZodString;
+        removeTestData: z.ZodOptional<z.ZodBoolean>;
+        removeInactivRecords: z.ZodOptional<z.ZodBoolean>;
+        cleanupDrafts: z.ZodOptional<z.ZodBoolean>;
+        archiveOldRecords: z.ZodOptional<z.ZodBoolean>;
+        optimizeDatabase: z.ZodOptional<z.ZodBoolean>;
+        daysThreshold: z.ZodOptional<z.ZodNumber>;
+        dryRun: z.ZodOptional<z.ZodBoolean>;
+    }, "strip", z.ZodTypeAny, {
+        instance: string;
+        removeTestData?: boolean | undefined;
+        removeInactivRecords?: boolean | undefined;
+        cleanupDrafts?: boolean | undefined;
+        archiveOldRecords?: boolean | undefined;
+        optimizeDatabase?: boolean | undefined;
+        daysThreshold?: number | undefined;
+        dryRun?: boolean | undefined;
+    }, {
+        instance: string;
+        removeTestData?: boolean | undefined;
+        removeInactivRecords?: boolean | undefined;
+        cleanupDrafts?: boolean | undefined;
+        archiveOldRecords?: boolean | undefined;
+        optimizeDatabase?: boolean | undefined;
+        daysThreshold?: number | undefined;
+        dryRun?: boolean | undefined;
+    }>;
+} | {
+    name: string;
+    description: string;
+    inputSchema: z.ZodObject<{
+        instance: z.ZodString;
+        dryRun: z.ZodOptional<z.ZodBoolean>;
+        keepCompanyDefaults: z.ZodOptional<z.ZodBoolean>;
+        keepUserAccounts: z.ZodOptional<z.ZodBoolean>;
+        keepMenus: z.ZodOptional<z.ZodBoolean>;
+        keepGroups: z.ZodOptional<z.ZodBoolean>;
+    }, "strip", z.ZodTypeAny, {
+        instance: string;
+        dryRun?: boolean | undefined;
+        keepCompanyDefaults?: boolean | undefined;
+        keepUserAccounts?: boolean | undefined;
+        keepMenus?: boolean | undefined;
+        keepGroups?: boolean | undefined;
+    }, {
+        instance: string;
+        dryRun?: boolean | undefined;
+        keepCompanyDefaults?: boolean | undefined;
+        keepUserAccounts?: boolean | undefined;
+        keepMenus?: boolean | undefined;
+        keepGroups?: boolean | undefined;
+    }>;
 })[];
 /**
  * Tool execution handlers
@@ -58,6 +114,8 @@ export declare class OdooTools {
     private handleWorkflowAction;
     private handleGenerateReport;
     private handleGetModelMetadata;
+    private handleDatabaseCleanup;
+    private handleDeepCleanup;
 }
 /**
  * Context-aware helper prompts for AI
