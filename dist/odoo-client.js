@@ -369,14 +369,13 @@ export class OdooClient {
      * Execute method on Odoo object
      */
     async execute(method, model, args, context, kwargs) {
-        // Build standard execute_kw parameters: [db, uid, password, model, method, args, kwargs]
         const params = [
             this.config.db,
             this.connection.uid,
             this.config.password,
             model,
             method,
-            Array.isArray(args) ? args : [],
+            ...args,
         ];
         if (context || kwargs) {
             const options = {};
