@@ -70,6 +70,8 @@
     'data': [
         # Views and UI
         'views/views_retention_followup.xml',
+        # Reports
+        'report/report_invoice_with_deals.xml',
     ],
     
     'demo': [

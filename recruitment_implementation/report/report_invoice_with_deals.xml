@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Report Definition: Invoice with Deal Information -->
+        <report
+            id="account_report_invoice_with_deals"
+            model="account.move"
+            string="Invoice with Deal Information"
+            report_type="qweb-pdf"
+            name="scholarix_recruitment.report_invoice_with_deals"
+            file="scholarix_recruitment.report_invoice_with_deals"
+            attachment_use="True"
+            attachment="(object.state in ('posted', 'sent')) and
+                object.name.replace('/', '_')+'.pdf' or ''"
+        />
+
+        <!-- Template: Invoice Report with Deals -->
+        <template id="report_invoice_with_deals">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <!-- Header Section -->
+                            <div class="row mb-5">
+                                <div class="col-8">
+                                    <h1 class="mb-0">
+                                        <t t-if="doc.move_type == 'out_invoice'">
+                                            <span>INVOICE</span>
+                                        </t>
+                                        <t t-elif="doc.move_type == 'out_refund'">
+                                            <span>CREDIT NOTE</span>
+                                        </t>
+                                        <t t-elif="doc.move_type == 'in_invoice'">
+                                            <span>BILL</span>
+                                        </t>
+                                        <t t-elif="doc.move_type == 'in_refund'">
+                                            <span>VENDOR CREDIT NOTE</span>
+                                        </t>
+                                    </h1>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <h3 t-field="doc.name" class="mt-0"/>
+                                    <p class="mt-1" t-if="doc.invoice_date">
+                                        <span>Date: </span>
+                                        <t t-field="doc.invoice_date"/>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Deal Information Panel (if sales-related) -->
+                            <t t-if="doc.move_type in ('out_invoice', 'out_refund')">
+                                <div class="row mb-4" t-if="doc.sale_order_id or doc.buyer_name or
+                                    doc.project_name or doc.commission_percentage">
+                                    <div class="col-12">
+                                        <div style="background: #f8f9fa; padding: 15px; 
+                                            border-radius: 5px; border-left: 4px solid #8b1538;">
+                                            <h6 style="color: #8b1538; margin: 0 0 12px 0; 
+                                                font-weight: 600;">
+                                                DEAL INFORMATION
+                                            </h6>
+                                            <table style="width: 100%; border-collapse: collapse; 
+                                                font-size: 12px;">
+                                                <tr>
+                                                    <td style="padding: 6px; font-weight: bold; 
+                                                        width: 30%;">Buyer Name:</td>
+                                                    <td style="padding: 6px; color: #333;">
+                                                        <t t-if="doc.buyer_name">
+                                                            <t t-field="doc.buyer_name"/>
+                                                        </t>
+                                                        <t t-else>
+                                                            <t t-field="doc.partner_id.name"/>
+                                                        </t>
+                                                    </td>
+                                                    <td style="padding: 6px; font-weight: bold; 
+                                                        width: 30%; padding-left: 20px;">
+                                                        Project:
+                                                    </td>
+                                                    <td style="padding: 6px; color: #333;">
+                                                        <t t-if="doc.project_name">
+                                                            <t t-field="doc.project_name"/>
+                                                        </t>
+                                                        <t t-else>—</t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 6px; font-weight: bold;">
+                                                        Unit Sale Value:
+                                                    </td>
+                                                    <td style="padding: 6px; text-align: right;">
+                                                        <t t-if="doc.unit_sale_value">
+                                                            <span t-field="doc.unit_sale_value"
+                                                                t-options="{'widget': 'monetary',
+                                                                'display_currency': 
+                                                                doc.currency_id}"/>
+                                                        </t>
+                                                        <t t-else>—</t>
+                                                    </td>
+                                                    <td style="padding: 6px; font-weight: bold;
+                                                        padding-left: 20px;">
+                                                        Commission %:
+                                                    </td>
+                                                    <td style="padding: 6px; color: #8b1538; 
+                                                        font-weight: bold; text-align: right;">
+                                                        <t t-if="doc.commission_percentage">
+                                                            <t t-field="doc.commission_percentage"
+                                                                t-options="{'widget': 'float',
+                                                                'decimal_precision': 2}"/>%
+                                                        </t>
+                                                        <t t-else>—</t>
+                                                    </td>
+                                                </tr>
+                                                <tr t-if="doc.sale_order_id">
+                                                    <td style="padding: 6px; font-weight: bold;">
+                                                        Sales Order:
+                                                    </td>
+                                                    <td colspan="3" style="padding: 6px; 
+                                                        color: #333;">
+                                                        <t t-field="doc.sale_order_id.name"/>
+                                                        <span t-if="doc.sale_order_id.amount_total">
+                                                            - Total: <span t-field=
+                                                            "doc.sale_order_id.amount_total"
+                                                            t-options="{'widget': 'monetary',
+                                                            'display_currency': 
+                                                            doc.currency_id}"/>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <!-- Party Information -->
+                            <div class="row mb-3">
+                                <div class="col-5">
+                                    <h6>Bill To:</h6>
+                                    <div t-field="doc.partner_id" t-options=
+                                        "{'widget': 'contact',
+                                        'fields': ['address', 'phone'],
+                                        'no_marker': True}"/>
+                                </div>
+                                <div class="col-5">
+                                    <h6>Bill From:</h6>
+                                    <div t-field="doc.company_id.partner_id" 
+                                        t-options="{'widget': 'contact',
+                                        'fields': ['address', 'phone'],
+                                        'no_marker': True}"/>
+                                </div>
+                            </div>
+
+                            <!-- Invoice Details -->
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <p t-if="doc.invoice_date">
+                                        <strong>Invoice Date:</strong> 
+                                        <t t-field="doc.invoice_date"/>
+                                    </p>
+                                    <p t-if="doc.invoice_date_due">
+                                        <strong>Due Date:</strong> 
+                                        <t t-field="doc.invoice_date_due"/>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p t-if="doc.invoice_origin">
+                                        <strong>Order Reference:</strong> 
+                                        <t t-field="doc.invoice_origin"/>
+                                    </p>
+                                    <p t-if="doc.ref">
+                                        <strong>Your Reference:</strong> 
+                                        <t t-field="doc.ref"/>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+                                    <p t-if="doc.invoice_user_id">
+                                        <strong>Sales Person:</strong> 
+                                        <t t-field="doc.invoice_user_id.name"/>
+                                    </p>
+                                    <p t-if="doc.team_id">
+                                        <strong>Sales Team:</strong> 
+                                        <t t-field="doc.team_id.name"/>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Invoice Lines Table -->
+                            <table class="table table-sm mt-5 mb-3">
+                                <thead style="background-color: #f8f9fa;">
+                                    <tr>
+                                        <th style="width: 50%;">Description</th>
+                                        <th style="width: 10%; text-align: right;">Quantity</th>
+                                        <th style="width: 15%; text-align: right;">Unit Price</th>
+                                        <th style="width: 25%; text-align: right;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc.invoice_line_ids" t-as="line">
+                                        <td>
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-field="line.quantity"/>
+                                            <span t-field="line.product_uom_id.name" 
+                                                class="ms-1"/>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-field="line.price_unit" 
+                                                t-options="{'widget': 'monetary',
+                                                'display_currency': doc.currency_id}"/>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-field="line.price_subtotal" 
+                                                t-options="{'widget': 'monetary',
+                                                'display_currency': doc.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Totals Section -->
+                            <div class="row">
+                                <div class="col-7 offset-5 mb-3">
+                                    <table class="table table-sm">
+                                        <tr style="border-top: 1px solid #ddd;">
+                                            <td style="padding-top: 10px;">
+                                                <strong>Subtotal:</strong>
+                                            </td>
+                                            <td style="padding-top: 10px; text-align: right;">
+                                                <strong>
+                                                    <span t-field="doc.amount_untaxed" 
+                                                        t-options="{'widget': 'monetary',
+                                                        'display_currency': doc.currency_id}"/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <tr t-foreach="doc.tax_totals.get('groups_by_subtotal', {}).get(
+                                            'Untaxed Amount', [])" t-as="tax_line">
+                                            <td>
+                                                <span t-field="tax_line.tax_group_name"/>:
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <span t-field="tax_line.formatted_tax_group_amount"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="border-top: 2px solid #8b1538; 
+                                            border-bottom: 2px solid #8b1538;">
+                                            <td style="padding: 10px 0;">
+                                                <strong style="color: #8b1538;">TOTAL:</strong>
+                                            </td>
+                                            <td style="padding: 10px 0; text-align: right;">
+                                                <strong style="color: #8b1538; font-size: 16px;">
+                                                    <span t-field="doc.amount_total" 
+                                                        t-options="{'widget': 'monetary',
+                                                        'display_currency': doc.currency_id}"/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Notes Section -->
+                            <div t-if="doc.narration" class="mt-5 pt-3 
+                                border-top border-dark">
+                                <h6>Notes:</h6>
+                                <p t-field="doc.narration"/>
+                            </div>
+
+                            <!-- Footer -->
+                            <div class="mt-5 pt-3 border-top border-secondary 
+                                text-center text-muted">
+                                <p class="mb-1">
+                                    <small>
+                                        <t t-if="doc.company_id.phone">
+                                            Phone: <t t-field="doc.company_id.phone"/>
+                                        </t>
+                                    </small>
+                                </p>
+                                <p class="mb-0">
+                                    <small>
+                                        <t t-if="doc.company_id.email">
+                                            Email: <t t-field="doc.company_id.email"/>
+                                        </t>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
