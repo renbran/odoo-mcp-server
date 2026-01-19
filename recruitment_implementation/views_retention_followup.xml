@@ -9,9 +9,7 @@
         <field name="name">recruitment.retention.tree</field>
         <field name="model">recruitment.retention</field>
         <field name="arch" type="xml">
-            <tree string="Placements Retention" 
-                  decoration-danger="risk_level == 'critical'" 
-                  decoration-warning="risk_level == 'high'">
+            <tree string="Placements Retention" decoration-danger="risk_level == 'critical'" decoration-warning="risk_level == 'high'">
                 <field name="name"/>
                 <field name="candidate_id"/>
                 <field name="partner_id"/>
@@ -33,23 +31,13 @@
             <form string="Placement Retention">
                 <!-- Status Bar -->
                 <header>
-                    <button name="action_activate" string="🚀 Activate" 
-                            type="object" class="oe_highlight" 
-                            states="draft"/>
-                    <button name="action_mark_upfront_paid" string="✓ Upfront Paid" 
-                            type="object" states="active"/>
-                    <button name="action_release_retention" string="📤 Release" 
-                            type="object" class="oe_highlight" 
-                            states="active"/>
-                    <button name="action_mark_retention_paid" string="💳 Retention Paid" 
-                            type="object" class="oe_highlight" 
-                            states="released"/>
-                    <button name="action_forfeit_retention" string="⚠️ Forfeit" 
-                            type="object" states="active,released"/>
-                    <button name="action_cancel" string="❌ Cancel" 
-                            type="object" states="draft,active,released"/>
-                    <field name="state" widget="statusbar" 
-                           statusbar_visible="draft,active,released,completed,forfeited"/>
+                    <button name="action_activate" string="🚀 Activate" type="object" class="oe_highlight" states="draft"/>
+                    <button name="action_mark_upfront_paid" string="✓ Upfront Paid" type="object" states="active"/>
+                    <button name="action_release_retention" string="📤 Release" type="object" class="oe_highlight" states="active"/>
+                    <button name="action_mark_retention_paid" string="💳 Retention Paid" type="object" class="oe_highlight" states="released"/>
+                    <button name="action_forfeit_retention" string="⚠️ Forfeit" type="object" states="active,released"/>
+                    <button name="action_cancel" string="❌ Cancel" type="object" states="draft,active,released"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,released,completed,forfeited"/>
                 </header>
 
                 <sheet>
@@ -57,18 +45,12 @@
                     <div class="oe_title">
                         <h1 class="d-flex align-items-baseline" style="gap: 12px;">
                             <field name="name" readonly="1" class="me-2"/>
-                            <field name="risk_level" widget="badge" 
-                                   attrs="{'invisible': [('state', '=', 'draft')]}"
-                                   class="badge badge-danger" 
-                                   decoration-danger="risk_level == 'critical'"
-                                   decoration-warning="risk_level == 'high'"
-                                   decoration-info="risk_level in ['low', 'medium']"/>
+                            <field name="risk_level" widget="badge" attrs="{'invisible': [('state', '=', 'draft')]}" class="badge badge-danger" decoration-danger="risk_level == 'critical'" decoration-warning="risk_level == 'high'" decoration-info="risk_level in ['low', 'medium']"/>
                         </h1>
                     </div>
 
                     <!-- Critical Risk Alert -->
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" 
-                         attrs="{'invisible': [('risk_level', '!=', 'critical')]}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" attrs="{'invisible': [('risk_level', '!=', 'critical')]}">
                         <strong class="me-2">⚠️ CRITICAL RISK</strong>
                         Retention at high risk of forfeiture!
                         <div class="mt-2">
@@ -77,8 +59,7 @@
                     </div>
 
                     <!-- High Risk Alert -->
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" 
-                         attrs="{'invisible': [('risk_level', '!=', 'high')]}">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" attrs="{'invisible': [('risk_level', '!=', 'high')]}">
                         <strong class="me-2">⚠️ HIGH RISK</strong>
                         Close monitoring required
                     </div>
@@ -134,31 +115,29 @@
                         <!-- Upfront Payment -->
                         <group col="12" style="background: #f8f9fa; padding: 12px; border-radius: 4px; margin-bottom: 12px;">
                             <h5 class="mb-3">Upfront Payment (
-                                <field name="upfront_percentage" readonly="1" nolabel="1" 
-                                       style="display:inline; width: auto;"/>%)</h5>
+                                <field name="upfront_percentage" readonly="1" nolabel="1" style="display:inline; width: auto;"/>
+%)</h5>
                             <group col="6">
                                 <field name="upfront_amount" readonly="1"/>
                                 <field name="upfront_paid" widget="boolean_toggle"/>
                             </group>
                             <group col="6">
-                                <field name="upfront_payment_date" 
-                                       attrs="{'invisible': [('upfront_paid', '=', False)]}"/>
+                                <field name="upfront_payment_date" attrs="{'invisible': [('upfront_paid', '=', False)]}"/>
                             </group>
                         </group>
 
                         <!-- Retention Payment -->
                         <group col="12" style="background: #fff8e1; padding: 12px; border-radius: 4px;">
                             <h5 class="mb-3">Retention Payment (
-                                <field name="retention_percentage" readonly="1" nolabel="1"
-                                       style="display:inline; width: auto;"/>%)</h5>
+                                <field name="retention_percentage" readonly="1" nolabel="1" style="display:inline; width: auto;"/>
+%)</h5>
                             <group col="6">
                                 <field name="retention_amount" readonly="1"/>
                                 <field name="retention_status"/>
                             </group>
                             <group col="6">
                                 <field name="retention_paid" widget="boolean_toggle"/>
-                                <field name="retention_payment_date" 
-                                       attrs="{'invisible': [('retention_paid', '=', False)]}"/>
+                                <field name="retention_payment_date" attrs="{'invisible': [('retention_paid', '=', False)]}"/>
                             </group>
                         </group>
                     </group>
@@ -187,8 +166,7 @@
                         <group col="6">
                             <field name="has_replacement_guarantee"/>
                         </group>
-                        <group col="12" 
-                               attrs="{'invisible': [('replacement_count', '=', 0)]}">
+                        <group col="12" attrs="{'invisible': [('replacement_count', '=', 0)]}">
                             <field name="replacement_count"/>
                         </group>
                     </group>
@@ -196,8 +174,7 @@
                     <!-- ============================================================ -->
                     <!-- SECTION 6: Forfeiture Details (Conditional) -->
                     <!-- ============================================================ -->
-                    <group string="⛔ Forfeiture Details" name="forfeiture"
-                           attrs="{'invisible': [('state', '!=', 'forfeited')]}">
+                    <group string="⛔ Forfeiture Details" name="forfeiture" attrs="{'invisible': [('state', '!=', 'forfeited')]}">
                         <group col="6">
                             <field name="forfeiture_reason"/>
                             <field name="forfeiture_date"/>
@@ -253,7 +230,8 @@
                             </div>
                             <div class="oe_kanban_footer">
                                 Release in: 
-                                <field name="days_until_release"/> days
+                                <field name="days_until_release"/>
+ days
                                 <br/>
                                 Status: 
                                 <field name="candidate_status"/>
@@ -298,9 +276,7 @@
         <field name="name">recruitment.followup.tree</field>
         <field name="model">recruitment.followup</field>
         <field name="arch" type="xml">
-            <tree string="Follow-Ups" 
-                  decoration-danger="retention_at_risk"
-                  decoration-warning="days_overdue > 0">
+            <tree string="Follow-Ups" decoration-danger="retention_at_risk" decoration-warning="days_overdue > 0">
                 <field name="name"/>
                 <field name="candidate_id"/>
                 <field name="followup_type"/>
@@ -322,47 +298,35 @@
             <form string="Post-Placement Follow-Up">
                 <!-- Action Buttons -->
                 <header>
-                    <button name="action_start" string="▶️ Start Follow-Up" 
-                            type="object" class="oe_highlight" 
-                            states="scheduled"/>
-                    <button name="action_complete" string="✓ Complete Follow-Up" 
-                            type="object" class="oe_highlight" 
-                            states="in_progress"/>
-                    <button name="action_escalate_to_management" 
-                            string="🔔 Escalate" 
-                            type="object" states="scheduled,in_progress"/>
-                    <button name="action_schedule_next_followup" 
-                            string="📅 Schedule Next" 
-                            type="object" states="completed"/>
-                    <button name="action_cancel" string="✕ Cancel" 
-                            type="object" states="scheduled,in_progress"/>
-                    <field name="state" widget="statusbar" 
-                           statusbar_visible="scheduled,in_progress,completed,cancelled"/>
+                    <button name="action_start" string="▶️ Start Follow-Up" type="object" class="oe_highlight" states="scheduled"/>
+                    <button name="action_complete" string="✓ Complete Follow-Up" type="object" class="oe_highlight" states="in_progress"/>
+                    <button name="action_escalate_to_management" string="🔔 Escalate" type="object" states="scheduled,in_progress"/>
+                    <button name="action_schedule_next_followup" string="📅 Schedule Next" type="object" states="completed"/>
+                    <button name="action_cancel" string="✕ Cancel" type="object" states="scheduled,in_progress"/>
+                    <field name="state" widget="statusbar" statusbar_visible="scheduled,in_progress,completed,cancelled"/>
                 </header>
 
                 <sheet>
                     <!-- Critical Alert: Retention at Risk -->
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert" 
-                         attrs="{'invisible': [('retention_at_risk', '=', False)]}">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" attrs="{'invisible': [('retention_at_risk', '=', False)]}">
                         <strong class="me-2">⚠️ RETENTION AT RISK</strong>
                         Issues detected that may impact retention amount!
-                        <br/><small>Immediate follow-up and escalation recommended.</small>
+                        <br/>
+                        <small>Immediate follow-up and escalation recommended.</small>
                     </div>
 
                     <!-- Overdue Alert -->
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" 
-                         attrs="{'invisible': [('days_overdue', '&lt;=', 0)]}">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" attrs="{'invisible': [('days_overdue', '&lt;=', 0)]}">
                         <strong class="me-2">⏰ OVERDUE</strong>
-                        This follow-up is <field name="days_overdue" readonly="1" nolabel="1" 
-                               style="display:inline; width:auto;"/> days overdue!
+                        This follow-up is <field name="days_overdue" readonly="1" nolabel="1" style="display:inline; width:auto;"/>
+ days overdue!
                     </div>
 
                     <!-- Title Section -->
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1" class="me-3"/>
-                            <field name="followup_type" widget="badge" readonly="1"
-                                   class="badge badge-info"/>
+                            <field name="followup_type" widget="badge" readonly="1" class="badge badge-info"/>
                         </h1>
                     </div>
 
@@ -405,8 +369,7 @@
                             <field name="days_overdue" readonly="1"/>
                         </group>
                         <group col="6">
-                            <field name="completed_date" 
-                                   attrs="{'invisible': [('state', 'in', ['scheduled', 'in_progress'])]}"/>
+                            <field name="completed_date" attrs="{'invisible': [('state', 'in', ['scheduled', 'in_progress'])]}"/>
                             <field name="state" readonly="1"/>
                         </group>
                     </group>
@@ -417,8 +380,7 @@
                     <group string="👤 Candidate Status at Follow-Up" name="status">
                         <group col="6">
                             <label string="Is candidate still working?" class="fw-bold"/>
-                            <field name="candidate_working" widget="boolean_toggle" nolabel="1"
-                                   style="margin-bottom: 12px;"/>
+                            <field name="candidate_working" widget="boolean_toggle" nolabel="1" style="margin-bottom: 12px;"/>
                         </group>
                         <group col="6">
                             <field name="candidate_location"/>
@@ -438,17 +400,14 @@
                             <div attrs="{'invisible': [('issue_reported', '=', False)]}">
                                 <group col="12">
                                     <group col="6">
-                                        <field name="issue_severity" 
-                                               attrs="{'invisible': [('issue_reported', '=', False)]}"/>
+                                        <field name="issue_severity" attrs="{'invisible': [('issue_reported', '=', False)]}"/>
                                     </group>
                                     <group col="6">
-                                        <field name="issue_category" 
-                                               attrs="{'invisible': [('issue_reported', '=', False)]}"/>
+                                        <field name="issue_category" attrs="{'invisible': [('issue_reported', '=', False)]}"/>
                                     </group>
                                 </group>
                                 <group col="12">
-                                    <field name="issue_description" 
-                                           nolabel="1" colspan="2"/>
+                                    <field name="issue_description" nolabel="1" colspan="2"/>
                                 </group>
                             </div>
                         </div>
@@ -489,8 +448,7 @@
                                 </group>
                                 <group col="12">
                                     <label class="form-label fw-bold">Action Details</label>
-                                    <field name="next_action_notes" nolabel="1" 
-                                           placeholder="Describe what action is needed and why..."/>
+                                    <field name="next_action_notes" nolabel="1" placeholder="Describe what action is needed and why..."/>
                                 </group>
                             </div>
                         </div>
@@ -505,8 +463,7 @@
                             <field name="retention_at_risk" readonly="1" widget="boolean_toggle" nolabel="1"/>
                         </group>
                         <group col="6">
-                            <field name="retention_id" readonly="1" 
-                                   attrs="{'invisible': [('retention_id', '=', False)]}"/>
+                            <field name="retention_id" readonly="1" attrs="{'invisible': [('retention_id', '=', False)]}"/>
                         </group>
                     </group>
                 </sheet>
@@ -526,8 +483,7 @@
         <field name="name">recruitment.followup.calendar</field>
         <field name="model">recruitment.followup</field>
         <field name="arch" type="xml">
-            <calendar string="Follow-Up Schedule" date_start="scheduled_date" 
-                      color="followup_type">
+            <calendar string="Follow-Up Schedule" date_start="scheduled_date" color="followup_type">
                 <field name="candidate_id"/>
                 <field name="followup_type"/>
                 <field name="state"/>
@@ -584,52 +540,22 @@
     <!-- ================================================================== -->
 
     <!-- Parent menu item -->
-    <menuitem id="menu_recruitment_retention_parent" 
-              name="Retention Management" 
-              parent="menu_recruitment_management"
-              sequence="50"/>
+    <menuitem id="menu_recruitment_retention_parent" name="Retention Management" parent="menu_recruitment_management" sequence="50"/>
 
     <!-- Retention submenu -->
-    <menuitem id="menu_recruitment_retention" 
-              name="Placements Retention" 
-              parent="menu_recruitment_retention_parent"
-              action="action_recruitment_retention_all"
-              sequence="10"/>
+    <menuitem id="menu_recruitment_retention" name="Placements Retention" parent="menu_recruitment_retention_parent" action="action_recruitment_retention_all" sequence="10"/>
 
-    <menuitem id="menu_recruitment_retention_active" 
-              name="Active Retentions" 
-              parent="menu_recruitment_retention_parent"
-              action="action_recruitment_retention_active"
-              sequence="20"/>
+    <menuitem id="menu_recruitment_retention_active" name="Active Retentions" parent="menu_recruitment_retention_parent" action="action_recruitment_retention_active" sequence="20"/>
 
-    <menuitem id="menu_recruitment_retention_atrisk" 
-              name="At-Risk Retentions" 
-              parent="menu_recruitment_retention_parent"
-              action="action_recruitment_retention_atrisk"
-              sequence="30"/>
+    <menuitem id="menu_recruitment_retention_atrisk" name="At-Risk Retentions" parent="menu_recruitment_retention_parent" action="action_recruitment_retention_atrisk" sequence="30"/>
 
     <!-- Follow-up submenu -->
-    <menuitem id="menu_recruitment_followup_parent" 
-              name="Follow-Up Management" 
-              parent="menu_recruitment_management"
-              sequence="60"/>
+    <menuitem id="menu_recruitment_followup_parent" name="Follow-Up Management" parent="menu_recruitment_management" sequence="60"/>
 
-    <menuitem id="menu_recruitment_followup" 
-              name="All Follow-Ups" 
-              parent="menu_recruitment_followup_parent"
-              action="action_recruitment_followup_all"
-              sequence="10"/>
+    <menuitem id="menu_recruitment_followup" name="All Follow-Ups" parent="menu_recruitment_followup_parent" action="action_recruitment_followup_all" sequence="10"/>
 
-    <menuitem id="menu_recruitment_followup_scheduled" 
-              name="Scheduled Follow-Ups" 
-              parent="menu_recruitment_followup_parent"
-              action="action_recruitment_followup_scheduled"
-              sequence="20"/>
+    <menuitem id="menu_recruitment_followup_scheduled" name="Scheduled Follow-Ups" parent="menu_recruitment_followup_parent" action="action_recruitment_followup_scheduled" sequence="20"/>
 
-    <menuitem id="menu_recruitment_followup_overdue" 
-              name="Overdue Follow-Ups" 
-              parent="menu_recruitment_followup_parent"
-              action="action_recruitment_followup_overdue"
-              sequence="30"/>
+    <menuitem id="menu_recruitment_followup_overdue" name="Overdue Follow-Ups" parent="menu_recruitment_followup_parent" action="action_recruitment_followup_overdue" sequence="30"/>
 
 </odoo>

@@ -266,6 +266,7 @@ async function main() {
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // Auto-start if running directly in Node.js
 try {
   if (typeof process !== 'undefined' && process.argv && import.meta.url === `file://${process.argv[1]}`) {
@@ -277,12 +278,17 @@ try {
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 // Auto-start when running from CLI
 main().catch((error) => {
   console.error('Unhandled error:', error);
   process.exit(1);
 });
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
