@@ -3,11 +3,14 @@
  * Production-grade MCP server for Odoo 17-19
  * Supports multiple instances, comprehensive operations, and Cloudflare Workers deployment
  */
+import dotenv from 'dotenv';
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { CallToolRequestSchema, ListToolsRequestSchema, ListPromptsRequestSchema, GetPromptRequestSchema, } from '@modelcontextprotocol/sdk/types.js';
 import { OdooClient } from './odoo-client.js';
 import { OdooTools, tools, contextPrompts } from './tools.js';
+// Load environment variables from .env file
+dotenv.config();
 /**
  * Parse Odoo instance configurations from environment
  */
@@ -202,15 +205,11 @@ async function main() {
         process.exit(1);
     }
 }
-// Auto-start if running directly in Node.js
-try {
-    if (typeof process !== 'undefined' && process.argv && import.meta.url === `file://${process.argv[1]}`) {
-        main();
-    }
-}
-catch (e) {
-    // Running in Cloudflare Workers or browser, skip auto-start
-}
+// Auto-start when running from CLI
+main().catch((error) => {
+    console.error('Unhandled error:', error);
+    process.exit(1);
+});
 export { OdooMCPServer, main };
 // Default export for Cloudflare Workers
 export default {

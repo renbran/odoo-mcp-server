@@ -65,6 +65,7 @@
         'mail',              # Chatter and messaging
         'hr',                # HR functionality
         'base',              # Basic Odoo features
+        'account',           # Accounting module for payment reports
     ],
     
     'data': [
@@ -72,6 +73,7 @@
         'views/views_retention_followup.xml',
         # Reports
         'report/report_invoice_with_deals.xml',
+        'views/report_payment_voucher_views.xml',
     ],
     
     'demo': [
@@ -87,6 +89,11 @@
     'post_init_hook': None,
     'pre_init_hook': None,
     'post_load': None,
+    
+    # External dependencies
+    'external_dependencies': {
+        'python': ['num2words', 'qrcode'],
+    },
     
     # Version compatibility
     'support': 'support@sgtechai.com',

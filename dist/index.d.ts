@@ -43,7 +43,7 @@ declare class OdooMCPServer {
 declare function main(): Promise<void>;
 export { OdooMCPServer, main };
 declare const _default: {
-    fetch: (_request: Request) => Promise<Response>;
+    fetch: (_request: Request) => Promise<import("undici-types").Response>;
 };
 export default _default;
 //# sourceMappingURL=index.d.ts.map

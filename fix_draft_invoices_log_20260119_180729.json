@@ -1,0 +1,120 @@
+{
+  "timestamp": "2026-01-19 18:07:25",
+  "database": "osusproperties",
+  "user": "salescompliance@osusproperties.com",
+  "operation": "Fix Draft Invoices Marked as Invoiced",
+  "orders_processed": [
+    {
+      "order_id": 14065,
+      "order_name": "PS/07/4352",
+      "current_status": "invoiced",
+      "new_status": "to invoice",
+      "reason": "Has only draft (unvalidated) invoices",
+      "draft_invoices": [
+        {
+          "name": "/",
+          "state": "draft"
+        }
+      ],
+      "update_result": "success"
+    },
+    {
+      "order_id": 14942,
+      "order_name": "PS/10/4525",
+      "current_status": "invoiced",
+      "new_status": "to invoice",
+      "reason": "Has only draft (unvalidated) invoices",
+      "draft_invoices": [
+        {
+          "name": "/",
+          "state": "draft"
+        }
+      ],
+      "update_result": "success"
+    },
+    {
+      "order_id": 14932,
+      "order_name": "PS/10/4518",
+      "current_status": "invoiced",
+      "new_status": "to invoice",
+      "reason": "Has only draft (unvalidated) invoices",
+      "draft_invoices": [
+        {
+          "name": "/",
+          "state": "draft"
+        }
+      ],
+      "update_result": "success"
+    },
+    {
+      "order_id": 14064,
+      "order_name": "S01817",
+      "current_status": "invoiced",
+      "new_status": "to invoice",
+      "reason": "Has only draft (unvalidated) invoices",
+      "draft_invoices": [
+        {
+          "name": "/",
+          "state": "draft"
+        }
+      ],
+      "update_result": "success"
+    },
+    {
+      "order_id": 13533,
+      "order_name": "4254",
+      "current_status": "invoiced",
+      "new_status": "to invoice",
+      "reason": "Has only draft (unvalidated) invoices",
+      "draft_invoices": [
+        {
+          "name": "/",
+          "state": "draft"
+        }
+      ],
+      "update_result": "success"
+    },
+    {
+      "order_id": 13857,
+      "order_name": "6996",
+      "current_status": "invoiced",
+      "new_status": "to invoice",
+      "reason": "Has only draft (unvalidated) invoices",
+      "draft_invoices": [
+        {
+          "name": "/",
+          "state": "draft"
+        }
+      ],
+      "update_result": "success"
+    },
+    {
+      "order_id": 13518,
+      "order_name": "4239",
+      "current_status": "invoiced",
+      "new_status": "to invoice",
+      "reason": "Has only draft (unvalidated) invoices",
+      "draft_invoices": [
+        {
+          "name": "/",
+          "state": "draft"
+        }
+      ],
+      "update_result": "success"
+    },
+    {
+      "order_id": 13833,
+      "order_name": "6982",
+      "current_status": "invoiced",
+      "new_status": "to invoice",
+      "reason": "Has only draft (unvalidated) invoices",
+      "draft_invoices": [
+        {
+          "name": false,
+          "state": "draft"
+        }
+      ],
+      "update_result": "success"
+    }
+  ]
+}

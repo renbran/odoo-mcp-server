@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-01-19T17:56:20.908461",
+  "database": "osusproperties",
+  "user": "salescompliance@osusproperties.com",
+  "total_orders": 4,
+  "orders": [
+    {
+      "order_id": 14959,
+      "order_name": "S01883",
+      "current_status": "upsell",
+      "order_value": 2777.63,
+      "invoice_value": 69440.7,
+      "difference": 66663.06999999999,
+      "posted_invoice_count": 1,
+      "invoices": [
+        {
+          "name": "INV/2025/00459",
+          "state": "posted",
+          "type": "out_invoice",
+          "amount": 69440.7
+        }
+      ]
+    },
+    {
+      "order_id": 14067,
+      "order_name": "PS/07/4353",
+      "current_status": "upsell",
+      "order_value": 23139.75,
+      "invoice_value": 57849.38,
+      "difference": 34709.63,
+      "posted_invoice_count": 1,
+      "invoices": [
+        {
+          "name": "INV/2025/00442",
+          "state": "posted",
+          "type": "out_invoice",
+          "amount": 57849.38
+        }
+      ]
+    },
+    {
+      "order_id": 14921,
+      "order_name": "ES/10/7661",
+      "current_status": "upsell",
+      "order_value": 42525.0,
+      "invoice_value": 49612.5,
+      "difference": 7087.5,
+      "posted_invoice_count": 1,
+      "invoices": [
+        {
+          "name": "INV/2025/00428",
+          "state": "posted",
+          "type": "out_invoice",
+          "amount": 49612.5
+        }
+      ]
+    },
+    {
+      "order_id": 14920,
+      "order_name": "ES/10/7660",
+      "current_status": "upsell",
+      "order_value": 61387.2,
+      "invoice_value": 81849.6,
+      "difference": 20462.40000000001,
+      "posted_invoice_count": 1,
+      "invoices": [
+        {
+          "name": "INV/2025/00421",
+          "state": "posted",
+          "type": "out_invoice",
+          "amount": 81849.6
+        }
+      ]
+    }
+  ],
+  "update_results": {
+    "updated": 4,
+    "failed": 0,
+    "timestamp": "2026-01-19T17:56:29.504494"
+  }
+}

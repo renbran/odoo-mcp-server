@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Enhanced Sale Order Form View -->
+    <record id="view_order_form_invoice_tags" model="ir.ui.view">
+        <field name="name">sale.order.form.invoice.tags</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add Invoice Status Widget in Header -->
+            <xpath expr="//header" position="inside">
+                <widget name="web_ribbon" 
+                        text="DRAFT INVOICE WARNING" 
+                        bg_color="bg-danger"
+                        invisible="not has_draft_invoice_warning"/>
+                <widget name="web_ribbon" 
+                        text="NEEDS ATTENTION" 
+                        bg_color="bg-warning"
+                        invisible="not needs_invoice_attention"/>
+                <widget name="web_ribbon" 
+                        text="UPSELL" 
+                        bg_color="bg-info"
+                        invisible="invoice_type_tag != 'upsell'"/>
+            </xpath>
+            
+            <!-- Add Invoice Progress Group after partner_id -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <group name="invoice_progress" string="Invoice Progress" 
+                       invisible="state not in ['sale', 'done']">
+                    <group>
+                        <field name="invoice_type_tag" widget="badge" 
+                               decoration-success="invoice_type_tag == 'fully_invoiced'"
+                               decoration-warning="invoice_type_tag in ['partial', 'draft_only']"
+                               decoration-danger="invoice_type_tag == 'not_started'"
+                               decoration-info="invoice_type_tag == 'upsell'"/>
+                        <field name="invoicing_percentage" widget="progressbar"/>
+                        <field name="has_draft_invoice_warning" invisible="1"/>
+                        <field name="needs_invoice_attention" invisible="1"/>
+                    </group>
+                    <group>
+                        <label for="posted_invoice_count" string="Invoice Breakdown"/>
+                        <div class="o_row">
+                            <field name="posted_invoice_count" class="oe_inline"/>
+                            <span class="oe_inline"> Posted</span>
+                            <span class="oe_inline mx-2">|</span>
+                            <field name="draft_invoice_count" class="oe_inline"/>
+                            <span class="oe_inline"> Draft</span>
+                            <span class="oe_inline mx-2" 
+                                  invisible="cancelled_invoice_count == 0">|</span>
+                            <field name="cancelled_invoice_count" class="oe_inline"
+                                   invisible="cancelled_invoice_count == 0"/>
+                            <span class="oe_inline" 
+                                  invisible="cancelled_invoice_count == 0"> Cancelled</span>
+                        </div>
+                    </group>
+                </group>
+            </xpath>
+            
+            <!-- Add Amount Details after amount_total -->
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="total_invoiced_amount" 
+                       widget="monetary"
+                       string="Total Invoiced (Posted)"
+                       invisible="state not in ['sale', 'done']"/>
+                <field name="remaining_to_invoice" 
+                       widget="monetary"
+                       string="Remaining to Invoice"
+                       invisible="state not in ['sale', 'done'] or remaining_to_invoice == 0"
+                       decoration-warning="remaining_to_invoice > 0"/>
+                <field name="upsell_amount" 
+                       widget="monetary"
+                       string="Upsell Amount"
+                       invisible="upsell_amount == 0"
+                       decoration-info="upsell_amount > 0"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <!-- Enhanced Sale Order Tree View -->
+    <record id="view_order_tree_invoice_tags" model="ir.ui.view">
+        <field name="name">sale.order.tree.invoice.tags</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add Invoice Type Tag column -->
+            <xpath expr="//field[@name='invoice_status']" position="after">
+                <field name="invoice_type_tag" optional="show"
+                       decoration-success="invoice_type_tag == 'fully_invoiced'"
+                       decoration-warning="invoice_type_tag in ['partial', 'draft_only']"
+                       decoration-danger="invoice_type_tag == 'not_started'"
+                       decoration-info="invoice_type_tag == 'upsell'"/>
+                <field name="invoicing_percentage" optional="show" widget="progressbar"/>
+                <field name="needs_invoice_attention" optional="show" widget="boolean_toggle"
+                       decoration-danger="needs_invoice_attention == True"/>
+            </xpath>
+            
+            <!-- Add invoice counts -->
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="posted_invoice_count" optional="hide" sum="Total Posted"/>
+                <field name="draft_invoice_count" optional="hide" sum="Total Draft"/>
+                <field name="total_invoiced_amount" optional="hide" sum="Total Invoiced"/>
+                <field name="remaining_to_invoice" optional="hide" sum="Total Remaining"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <!-- Custom Filters and Search -->
+    <record id="view_sales_order_filter_invoice_tags" model="ir.ui.view">
+        <field name="name">sale.order.search.invoice.tags</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add Invoice Type Filters -->
+            <xpath expr="//filter[@name='my_quotation']" position="after">
+                <separator/>
+                <filter name="needs_attention" string="Needs Attention"
+                        domain="[('needs_invoice_attention', '=', True)]"
+                        help="Orders with invoicing issues"/>
+                <filter name="has_draft_invoices" string="Has Draft Invoices"
+                        domain="[('has_draft_invoice_warning', '=', True)]"
+                        help="Orders with draft invoices"/>
+                <filter name="partial_invoicing" string="Partial Invoicing"
+                        domain="[('invoice_type_tag', '=', 'partial')]"
+                        help="Orders with partial invoicing"/>
+                <filter name="upsell_orders" string="Upsell Orders"
+                        domain="[('invoice_type_tag', '=', 'upsell')]"
+                        help="Orders with upsell invoices"/>
+                <filter name="draft_only" string="Draft Only"
+                        domain="[('invoice_type_tag', '=', 'draft_only')]"
+                        help="Orders with only draft invoices"/>
+            </xpath>
+            
+            <!-- Add Group By -->
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter name="group_invoice_type" string="Invoice Type"
+                        context="{'group_by': 'invoice_type_tag'}"/>
+            </xpath>
+            
+            <!-- Add Search Fields -->
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="invoice_type_tag"/>
+                <field name="invoicing_percentage"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <!-- Menu Actions with Filters -->
+    <record id="action_orders_needs_attention" model="ir.actions.act_window">
+        <field name="name">Orders Needing Attention</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', 'in', ['sale', 'done']), ('needs_invoice_attention', '=', True)]</field>
+        <field name="context">{'search_default_needs_attention': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No orders need attention!
+            </p>
+            <p>
+                This view shows orders with invoicing issues that need your attention.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_orders_partial_invoicing" model="ir.actions.act_window">
+        <field name="name">Partial Invoicing</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', 'in', ['sale', 'done']), ('invoice_type_tag', '=', 'partial')]</field>
+        <field name="context">{'search_default_partial_invoicing': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No partial invoicing orders!
+            </p>
+            <p>
+                This view shows orders with partial invoicing in progress.
+            </p>
+        </field>
+    </record>
+
+    <!-- Add Menu Items -->
+    <menuitem id="menu_orders_needs_attention"
+              name="Needs Attention"
+              parent="sale.sale_order_menu"
+              action="action_orders_needs_attention"
+              sequence="15"/>
+
+    <menuitem id="menu_orders_partial_invoicing"
+              name="Partial Invoicing"
+              parent="sale.sale_order_menu"
+              action="action_orders_partial_invoicing"
+              sequence="16"/>
+
+</odoo>

@@ -1,0 +1,256 @@
+<odoo>
+    <record id="action_report_osus_invoice_document_adcb" model="ir.actions.report">
+        <field name="name">Tax Invoice (ADCB)</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">invoice_report_for_realestate.report_osus_invoice_document_adcb</field>
+        <field name="report_file">invoice_report_for_realestate.report_osus_invoice_document_adcb</field>
+        <field name="print_report_name">'Invoice - %s' % (object.name)</field>
+    </record>
+
+    <template id="report_osus_invoice_document_adcb" name="OSUS Invoice ADCB">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="o" t-value="doc.with_context(lang=lang)"/>
+                <t t-set="format_uk_date"
+                   t-value="lambda d: d.strftime('%d/%m/%Y') if d else ''"/>
+                <t t-set="format_number"
+                   t-value="lambda v: '{:,.2f}'.format(float(v)) if v else '0.00'"/>
+                <t t-set="buyer_display"
+                   t-value="o.buyer_name or (o.sale_order_id.primary_buyer_id.name if o.sale_order_id else '') or o.partner_id.name"/>
+                <t t-set="project_display"
+                   t-value="o.project_name or (o.sale_order_id.project_name if o.sale_order_id else '') or (o.sale_order_id.project_id.name if o.sale_order_id and o.sale_order_id.project_id else '')"/>
+                <t t-set="unit_display"
+                   t-value="o.sold_property_id.name or o.tenancy_property_id.name or (o.sale_order_id.unit_reference if o.sale_order_id else '')"/>
+                <t t-set="booking_display"
+                   t-value="o.sale_order_id.booking_date or o.invoice_date"/>
+                <t t-set="unit_price_value"
+                   t-value="o.unit_sale_value or (o.sale_order_id.unit_sale_value if o.sale_order_id else 0.0)"/>
+
+                <div class="page"
+                     style="font-family: 'Arial', 'Helvetica', sans-serif; font-size: 13px; line-height: 1.4; color: #000; background-color: #ffffff; margin: 0; padding: 0;">
+
+                    <div style="background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%); padding: 20px 40px; border-bottom: 3px solid #800020; margin-bottom: 20px;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 30%; vertical-align: middle;">
+                                    <t t-if="o.company_id.logo">
+                                        <img t-att-src="image_data_uri(o.company_id.logo)"
+                                             style="max-width: 120px; height: auto;" alt="Company Logo"/>
+                                    </t>
+                                    <t t-else="">
+                                        <img src="https://osusproperties.com/images/osus.png"
+                                             alt="OSUS Properties" style="max-width: 120px; height: auto;"/>
+                                    </t>
+                                </td>
+                                <td style="width: 70%; vertical-align: top; text-align: right;">
+                                    <div style="color: #333; font-size: 12px; line-height: 1.5;">
+                                        <div style="font-weight: bold; font-size: 13px; margin-bottom: 3px;">OSUS REAL ESTATE BROKERAGE LLC</div>
+                                        <div>Single Business Tower 29th Floor</div>
+                                        <div>Business Bay Dubai</div>
+                                        <div>United Arab Emirates</div>
+                                        <div style="font-weight: bold; margin-top: 4px;">TRN: 100236589600003</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="padding: 0 40px;">
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                            <tr>
+                                <td style="width: 20%; vertical-align: top;">
+                                    <t t-if="o.qr_in_report and o.qr_image">
+                                        <div style="text-align: left;">
+                                            <div style="border: 2px solid #000; display: inline-block; padding: 5px;">
+                                                <img t-att-src="image_data_uri(o.qr_image)" style="width: 120px; height: 120px; display: block;"/>
+                                            </div>
+                                            <div style="font-size: 10px; color: #800020; margin-top: 5px; font-weight: bold; text-align: center; max-width: 130px;">
+                                                Scan to view invoice<br/>or make payment
+                                            </div>
+                                        </div>
+                                    </t>
+                                </td>
+                                <td style="width: 80%; vertical-align: top; text-align: right;">
+                                    <div style="display: inline-block; text-align: right;">
+                                        <h3 style="color: #800020; font-weight: bold; font-size: 15px; margin: 0 0 10px 0; text-decoration: underline;">CUSTOMER DETAILS</h3>
+                                        <div style="color: #000; font-size: 13px; line-height: 1.6; text-align: right;">
+                                            <div style="font-weight: bold; margin-bottom: 3px;">
+                                                <span t-esc="buyer_display"/>
+                                            </div>
+                                            <div style="margin-bottom: 2px;" t-field="o.partner_id.street"/>
+                                            <t t-if="o.partner_id.street2">
+                                                <div style="margin-bottom: 2px;" t-field="o.partner_id.street2"/>
+                                            </t>
+                                            <div style="margin-bottom: 2px;">
+                                                <span t-field="o.partner_id.city"/>
+                                            </div>
+                                            <div style="margin-bottom: 2px;" t-field="o.partner_id.country_id.name"/>
+                                            <div style="font-weight: bold; margin-top: 3px;" t-if="o.partner_id.vat">
+                                                <strong>VAT: <span t-field="o.partner_id.vat"/></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div style="text-align: center; margin: 25px 0;">
+                            <h1 style="color: #800020; font-size: 28px; font-weight: bold; margin: 0; letter-spacing: 1px;">
+                                TAX INVOICE <span t-field="o.name" style="color: #800020;"/>
+                            </h1>
+                        </div>
+
+                        <table style="width: 100%; margin-bottom: 20px; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 33%; text-align: left; font-size: 13px;">
+                                    <strong style="color: #800020;">Invoice Date:</strong>
+                                    <span style="color: #000;" t-out="format_uk_date(o.invoice_date)"/>
+                                </td>
+                                <td style="width: 34%; text-align: center; font-size: 13px;">
+                                    <strong style="color: #800020;">Due Date:</strong>
+                                    <span style="color: #000;" t-out="format_uk_date(o.invoice_date_due or o.date)"/>
+                                </td>
+                                <td style="width: 33%; text-align: right; font-size: 13px;">
+                                    <strong style="color: #800020;">Booking Date:</strong>
+                                    <span style="color: #000;" t-out="format_uk_date(booking_display)"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 3px solid #800020;">
+                            <thead>
+                                <tr style="background-color: #800020; color: white;">
+                                    <th style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; font-weight: bold; text-align: center;">BUYER</th>
+                                    <th style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; font-weight: bold; text-align: center;">PROJECT</th>
+                                    <th style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; font-weight: bold; text-align: center;">UNIT</th>
+                                    <th style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; font-weight: bold; text-align: center;">RATE</th>
+                                    <th style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; font-weight: bold; text-align: center;">UNIT PRICE</th>
+                                    <th style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; font-weight: bold; text-align: center;">VAT</th>
+                                    <th style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; font-weight: bold; text-align: center;">VAT AMOUNT</th>
+                                    <th style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; font-weight: bold; text-align: center;">AMOUNT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: white;">
+                                    <td style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; text-align: left; vertical-align: middle;">
+                                        <span t-esc="buyer_display"/>
+                                    </td>
+                                    <td style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; text-align: left; vertical-align: middle;">
+                                        <span t-esc="project_display"/>
+                                    </td>
+                                    <td style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; text-align: left; vertical-align: middle;">
+                                        <span t-esc="unit_display"/>
+                                    </td>
+                                    <td style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; text-align: right; vertical-align: middle;">
+                                        <t t-if="o.invoice_line_ids">
+                                            <span t-esc="format_number(o.invoice_line_ids[0].quantity * 100)"/>%
+                                        </t>
+                                        <t t-else="">0.00%</t>
+                                    </td>
+                                    <td style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; text-align: right; vertical-align: middle;">
+                                        <span t-esc="format_number(unit_price_value)"/> AED
+                                    </td>
+                                    <td style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; text-align: center; vertical-align: middle;">5%</td>
+                                    <td style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; text-align: right; vertical-align: middle;">
+                                        <span t-esc="format_number(o.amount_tax)"/> AED
+                                    </td>
+                                    <td style="padding: 12px 10px; border: 2px solid #800020; font-size: 13px; text-align: right; vertical-align: middle; font-weight: bold;">
+                                        <span t-esc="format_number(o.amount_total)"/> AED
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table style="width: 45%; margin-left: auto; margin-bottom: 20px; border-collapse: collapse; border: 3px solid #800020;">
+                            <tr style="background-color: #800020; color: white;">
+                                <td style="padding: 10px 15px; border: 2px solid #ffffff; font-size: 13px; font-weight: bold; text-align: left;">UNTAXED AMOUNT</td>
+                                <td style="padding: 10px 15px; border: 2px solid #ffffff; font-size: 13px; text-align: right; font-weight: bold;">
+                                    <span t-esc="format_number(o.amount_untaxed)"/> AED
+                                </td>
+                            </tr>
+                            <tr style="background-color: #800020; color: white;">
+                                <td style="padding: 10px 15px; border: 2px solid #ffffff; font-size: 13px; font-weight: bold; text-align: left;">VAT (5%)</td>
+                                <td style="padding: 10px 15px; border: 2px solid #ffffff; font-size: 13px; text-align: right; font-weight: bold;">
+                                    <span t-esc="format_number(o.amount_tax)"/> AED
+                                </td>
+                            </tr>
+                            <tr style="background-color: #000000; color: white;">
+                                <td style="padding: 10px 15px; border: 2px solid #ffffff; font-size: 13px; font-weight: bold; text-align: left;">TOTAL DUE AMOUNT</td>
+                                <td style="padding: 10px 15px; border: 2px solid #ffffff; font-size: 14px; text-align: right; font-weight: bold;">
+                                    <span t-esc="format_number(o.amount_total)"/> AED
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div style="margin-bottom: 20px; font-size: 13px;">
+                            <strong style="color: #800020;">Amount in Words (Total):</strong>
+                            <span t-field="o.amount_total_words" style="font-style: italic; color: #000;"/>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <h3 style="color: #800020; font-size: 16px; font-weight: bold; margin: 0 0 10px 0;">Payment Instructions</h3>
+                            <p style="color: #000; font-size: 13px; margin-bottom: 10px;">Please pay to this Account Details in Cheque or Bank Transfer</p>
+                            <table style="width: 100%; border-collapse: collapse; border: 3px solid #800020;">
+                                <tr style="background-color: #f8f9fa;">
+                                    <td style="width: 25%; color: #000; font-weight: bold; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Bank Name</td>
+                                    <td style="color: #000; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Abu Dhabi Commercial Bank (ADCB)</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #000; font-weight: bold; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Account Name</td>
+                                    <td style="color: #000; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">OSUS Real Estate Brokerage LLC</td>
+                                </tr>
+                                <tr style="background-color: #f8f9fa;">
+                                    <td style="color: #000; font-weight: bold; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Account Number</td>
+                                    <td style="color: #000; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">14041417820001</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #000; font-weight: bold; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">IBAN</td>
+                                    <td style="color: #000; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">AE350030014041417820001</td>
+                                </tr>
+                                <tr style="background-color: #f8f9fa;">
+                                    <td style="color: #000; font-weight: bold; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Swift Code</td>
+                                    <td style="color: #000; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">ADCBAEAA</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #000; font-weight: bold; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Branch</td>
+                                    <td style="color: #000; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Business Bay</td>
+                                </tr>
+                                <tr style="background-color: #f8f9fa;">
+                                    <td style="color: #000; font-weight: bold; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Account Type</td>
+                                    <td style="color: #000; padding: 10px 15px; border: 2px solid #800020; font-size: 13px;">Current Account - AED</td>
+                                </tr>
+                            </table>
+                            <p style="color: #000; margin-top: 8px; font-size: 11px; font-style: italic;">Please include your reference number when making the payment</p>
+                        </div>
+                    </div>
+
+                    <div style="background-color: #f5f5f5; border-top: 3px solid #800020; padding: 15px 40px; margin-top: 30px;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 33%; vertical-align: middle; font-size: 12px;">
+                                    <div style="margin-bottom: 3px;">
+                                        <strong style="color: #800020;">Phone:</strong> <span style="color: #000;">+971 4 336 4500</span>
+                                    </div>
+                                    <div>
+                                        <strong style="color: #800020;">Email:</strong> <span style="color: #000;">info@osusproperties.com</span>
+                                    </div>
+                                </td>
+                                <td style="width: 34%; text-align: center; vertical-align: middle; font-size: 12px;">
+                                    <div>
+                                        <strong style="color: #800020; text-decoration: none;">www.osusproperties.com</strong>
+                                    </div>
+                                </td>
+                                <td style="width: 33%; text-align: right; vertical-align: middle;">
+                                    <div style="color: #000; font-size: 11px;">
+                                        This is a computer generated document. No signature or stamp required.
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

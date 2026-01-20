@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Dashboard record to have a singleton -->
+    <!-- Create singleton record using model defaults (avoid unsafe datetime eval in data) -->
+    <record id="osus_sales_invoicing_dashboard_record" model="osus.sales.invoicing.dashboard">
+        <field name="name">Sales &amp; Invoicing Dashboard</field>
+    </record>
+
+    <!-- Form view with enhanced dashboard -->
+    <record id="view_osus_sales_invoicing_dashboard_form" model="ir.ui.view">
+        <field name="name">osus.sales.invoicing.dashboard.form</field>
+        <field name="model">osus.sales.invoicing.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Sales &amp; Invoicing Dashboard" create="false" delete="false" class="o_sales_dashboard">
+                <field name="name" invisible="1"/>
+                <field name="company_currency_id" invisible="1"/>
+                <header>
+                    <button name="action_refresh_dashboard" string="Refresh Dashboard" type="object" class="btn-primary" icon="fa-refresh"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><i class="fa fa-dashboard"/> Sales &amp; Invoicing Dashboard</h1>
+                        <p class="text-muted">Real-time insights into your sales pipeline and collection performance</p>
+                        <p class="text-info" style="font-size: 12px;">💡 Filters update automatically - just change values below</p>
+                    </div>
+
+                    <group string="📊 Filters &amp; Booking Date Range">
+                        <group>
+                            <field name="booking_date_from" widget="daterange" options="{'related_end_date': 'booking_date_to'}" required="1" class="o_dashboard_filter" string="Booking Date From"/>
+                            <field name="booking_date_to" widget="daterange" options="{'related_start_date': 'booking_date_from'}" required="1" class="o_dashboard_filter" string="Booking Date To"/>
+                            <field name="invoice_status_filter" widget="radio" options="{'horizontal': true}" class="o_dashboard_filter"/>
+                        </group>
+                        <group>
+                            <field name="sales_order_type_ids" widget="many2many_tags" placeholder="All Order Types" options="{'no_create': True}" class="o_dashboard_filter"/>
+                            <field name="agent_partner_id" string="Salesperson" placeholder="All Salespersons" options="{'no_create': True, 'no_open': True}" domain="[('is_company', '=', False)]" class="o_dashboard_filter"/>
+                            <field name="partner_id" string="Customer" placeholder="All Customers" options="{'no_create': True, 'no_open': True}" class="o_dashboard_filter"/>
+                            <field name="payment_status_filter" widget="radio" options="{'horizontal': true}" class="o_dashboard_filter"/>
+                            <field name="include_unbooked_deals" class="o_dashboard_filter" help="Include deals/orders that don't have a booking date yet"/>
+                            <field name="unbooked_deals_count" readonly="1" nolabel="1"/>
+                        </group>
+                    </group>
+
+                    <separator string="💰 KPI Scorecards"/>
+
+                    <!-- Primary KPIs (Large Cards) - All Clickable -->
+                    <div class="row mt-4">
+                        <!-- Total Booked Sales -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="o_dashboard_kpi_card o_clickable_card" style="cursor: pointer;" t-on-click="() => this.env.model.root.data.action_open_booked_sales()">
+                                <div class="o_kpi_header">
+                                    <span class="o_kpi_icon">📊</span>
+                                    <span class="o_kpi_label">Total Booked Sales</span>
+                                </div>
+                                <div class="o_kpi_value">
+                                    <field name="total_booked_sales" widget="monetary" nolabel="1" class="o_kpi_amount"/>
+                                </div>
+                                <div class="o_kpi_footer">
+                                    <button type="object" name="action_open_booked_sales" string="View Details" class="btn btn-sm btn-primary" icon="fa-list-ul"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total Invoiced -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="o_dashboard_kpi_card success o_clickable_card" style="cursor: pointer;">
+                                <div class="o_kpi_header">
+                                    <span class="o_kpi_icon">📋</span>
+                                    <span class="o_kpi_label">Total Invoiced</span>
+                                </div>
+                                <div class="o_kpi_value">
+                                    <field name="total_invoiced_amount" widget="monetary" nolabel="1" class="o_kpi_amount"/>
+                                </div>
+                                <div class="o_kpi_footer">
+                                    <button type="object" name="action_open_posted_invoices" string="View Details" class="btn btn-sm btn-success" icon="fa-list-ul"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Amount to Collect (Outstanding) -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="o_dashboard_kpi_card warning o_clickable_card" style="cursor: pointer;">
+                                <div class="o_kpi_header">
+                                    <span class="o_kpi_icon">⏳</span>
+                                    <span class="o_kpi_label">Outstanding</span>
+                                </div>
+                                <div class="o_kpi_value">
+                                    <field name="amount_to_collect" widget="monetary" nolabel="1" class="o_kpi_amount"/>
+                                </div>
+                                <div class="o_kpi_footer">
+                                    <button type="object" name="action_open_unpaid_invoices" string="View Details" class="btn btn-sm btn-warning" icon="fa-list-ul"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Amount Collected -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="o_dashboard_kpi_card info o_clickable_card" style="cursor: pointer;">
+                                <div class="o_kpi_header">
+                                    <span class="o_kpi_icon">✓</span>
+                                    <span class="o_kpi_label">Collected</span>
+                                </div>
+                                <div class="o_kpi_value">
+                                    <field name="amount_collected" widget="monetary" nolabel="1" class="o_kpi_amount"/>
+                                </div>
+                                <div class="o_kpi_footer">
+                                    <button type="object" name="action_open_collected_invoices" string="View Details" class="btn btn-sm btn-info" icon="fa-list-ul"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Secondary KPIs (Pending & Counts) - All Clickable -->
+                    <div class="row mt-3">
+                        <!-- Pending to Invoice -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="o_dashboard_kpi_card secondary o_clickable_card" style="cursor: pointer;">
+                                <div class="o_kpi_header">
+                                    <span class="o_kpi_icon">⏱</span>
+                                    <span class="o_kpi_label">Pending to Invoice</span>
+                                </div>
+                                <div class="o_kpi_value">
+                                    <field name="total_pending_amount" widget="monetary" nolabel="1" class="o_kpi_amount"/>
+                                </div>
+                                <div class="o_kpi_footer">
+                                    <button type="object" name="action_open_pending_to_invoice" string="View Details" class="btn btn-sm btn-secondary" icon="fa-list-ul"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Commission Due -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="o_dashboard_kpi_card secondary o_clickable_card" style="cursor: pointer;">
+                                <div class="o_kpi_header">
+                                    <span class="o_kpi_icon">💰</span>
+                                    <span class="o_kpi_label">Commission Due</span>
+                                </div>
+                                <div class="o_kpi_value">
+                                    <field name="commission_due" widget="monetary" nolabel="1" class="o_kpi_amount"/>
+                                </div>
+                                <div class="o_kpi_footer">
+                                    <button type="object" name="action_open_commission_lines" string="View Details" class="btn btn-sm btn-secondary" icon="fa-list-ul"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Posted Invoices Count -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="o_dashboard_kpi_card count o_clickable_card" style="cursor: pointer;">
+                                <div class="o_kpi_header">
+                                    <span class="o_kpi_icon">📑</span>
+                                    <span class="o_kpi_label">Posted Invoices</span>
+                                </div>
+                                <div class="o_kpi_value">
+                                    <field name="posted_invoice_count" nolabel="1" class="o_kpi_count"/>
+                                </div>
+                                <div class="o_kpi_footer">
+                                    <button type="object" name="action_open_posted_invoices" string="View Details" class="btn btn-sm btn-light" icon="fa-list-ul"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Unpaid Count -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="o_dashboard_kpi_card danger o_clickable_card" style="cursor: pointer;">
+                                <div class="o_kpi_header">
+                                    <span class="o_kpi_icon">⚠</span>
+                                    <span class="o_kpi_label">Unpaid Invoices</span>
+                                </div>
+                                <div class="o_kpi_value">
+                                    <field name="unpaid_invoice_count" nolabel="1" class="o_kpi_count"/>
+                                </div>
+                                <div class="o_kpi_footer">
+                                    <button type="object" name="action_open_unpaid_invoices" string="View Details" class="btn btn-sm btn-danger" icon="fa-list-ul"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <separator string="📈 Visual Analytics"/>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="o_osus_chart_card">
+                                <div class="o_osus_chart_title"><i class="fa fa-filter"/> Sales → Invoice → Collection Flow</div>
+                                <field name="chart_sales_funnel" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'line', 'title': ''}"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="o_osus_chart_card">
+                                <div class="o_osus_chart_title"><i class="fa fa-line-chart"/> Monthly Booking Trend</div>
+                                <field name="chart_booking_trend" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'line', 'title': ''}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="o_osus_chart_card">
+                                <div class="o_osus_chart_title"><i class="fa fa-pie-chart"/> Sales by Order Type</div>
+                                <field name="chart_sales_by_type" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'doughnut', 'title': ''}"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="o_osus_chart_card">
+                                <div class="o_osus_chart_title"><i class="fa fa-credit-card"/> Invoice Payment Status</div>
+                                <field name="chart_payment_state" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'doughnut', 'title': ''}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="o_osus_chart_card">
+                                <div class="o_osus_chart_title"><i class="fa fa-users"/> Top 10 Customers by Outstanding</div>
+                                <field name="chart_top_customers" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'polarArea', 'title': ''}"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="o_osus_chart_card">
+                                <div class="o_osus_chart_title"><i class="fa fa-user-circle"/> Agent Commission Performance</div>
+                                <field name="chart_agent_performance" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'radar', 'title': ''}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <separator string="📋 Detailed Analysis Tables"/>
+
+                    <notebook>
+                        <page string="🏆 Top 5 Agents by Sales Value" name="agent_top_sales">
+                            <div class="alert alert-success" role="alert"><i class="fa fa-star"/> Ranking of agents by total booked sales value</div>
+                            <field name="table_agent_top_sales_value_html" widget="html" nolabel="1"/>
+                        </page>
+                        <page string="📊 Top 5 Agents by Order Count" name="agent_top_count">
+                            <div class="alert alert-info" role="alert"><i class="fa fa-list"/> Ranking of agents by number of orders closed</div>
+                            <field name="table_agent_top_order_count_html" widget="html" nolabel="1"/>
+                        </page>
+                        <page string="💵 Top 5 Agents by Commission Revenue" name="agent_top_revenue">
+                            <div class="alert alert-warning" role="alert"><i class="fa fa-credit-card"/> Ranking of agents by paid commissions and revenue</div>
+                            <field name="table_agent_top_revenue_html" widget="html" nolabel="1"/>
+                        </page>
+
+                        <page string="Order Type Analysis" name="order_types">
+                            <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"/> Breakdown of sales performance by order type</div>
+                            <field name="table_order_type_html" widget="html" nolabel="1"/>
+                        </page>
+                        <page string="Agent Commissions" name="commissions">
+                            <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"/> Commission tracking for internal agents</div>
+                            <field name="table_agent_commission_html" widget="html" nolabel="1"/>
+                        </page>
+                        <page string="Detailed Orders" name="orders">
+                            <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"/> Last 50 orders matching current filters</div>
+                            <field name="table_detailed_orders_html" widget="html" nolabel="1"/>
+                        </page>
+                        <page string="Invoice Aging" name="aging">
+                            <div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-triangle"/> Overdue invoice analysis by aging bucket</div>
+                            <field name="table_invoice_aging_html" widget="html" nolabel="1"/>
+                        </page>
+                    </notebook>
+
+                    <separator string="📥 Export Data to CSV"/>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <button type="object" name="action_export_order_types_csv" class="btn btn-secondary btn-block" icon="fa-download"><span>Export Order Types</span></button>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <button type="object" name="action_export_agent_commissions_csv" class="btn btn-secondary btn-block" icon="fa-download"><span>Export Commissions</span></button>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <button type="object" name="action_export_detailed_orders_csv" class="btn btn-secondary btn-block" icon="fa-download"><span>Export Orders</span></button>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <button type="object" name="action_export_invoice_aging_csv" class="btn btn-secondary btn-block" icon="fa-download"><span>Export Aging Report</span></button>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban view for C-level quick glance with chart shortcuts -->
+    <record id="view_osus_sales_invoicing_dashboard_kanban" model="ir.ui.view">
+        <field name="name">osus.sales.invoicing.dashboard.kanban</field>
+        <field name="model">osus.sales.invoicing.dashboard</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <field name="booking_date_from"/>
+                <field name="booking_date_to"/>
+                <field name="invoice_status_filter"/>
+                <field name="payment_status_filter"/>
+                <field name="posted_invoice_count"/>
+                <field name="pending_to_invoice_order_count"/>
+                <field name="unpaid_invoice_count"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_card">
+                            <div class="o_kanban_primary_left">
+                                <div class="o_kanban_badge text-muted">Filters</div>
+                                <div class="o_kanban_tags">
+                                    <span t-if="record.booking_date_from.raw_value or record.booking_date_to.raw_value" class="badge badge-secondary">
+                                        <t t-esc="record.booking_date_from.value or '…'"/> — <t t-esc="record.booking_date_to.value or '…'"/>
+                                    </span>
+                                    <span t-if="record.invoice_status_filter.raw_value and record.invoice_status_filter.raw_value != 'all'" class="badge badge-primary">
+                                        Invoice: <t t-esc="record.invoice_status_filter.value"/>
+                                    </span>
+                                    <span t-if="record.payment_status_filter.raw_value and record.payment_status_filter.raw_value != 'all'" class="badge badge-warning">
+                                        Payment: <t t-esc="record.payment_status_filter.value"/>
+                                    </span>
+                                </div>
+                                <div class="mt-2">
+                                    <a type="object" name="action_open_posted_invoices" class="btn btn-primary btn-sm mr-1" role="button">
+                                        Posted Invoices
+                                        <span class="badge badge-light ml-1" t-esc="record.posted_invoice_count.value"/>
+                                    </a>
+                                    <a type="object" name="action_open_pending_orders" class="btn btn-info btn-sm mr-1" role="button">
+                                        Orders
+                                        <span class="badge badge-light ml-1" t-esc="record.pending_to_invoice_order_count.value"/>
+                                    </a>
+                                    <a type="object" name="action_open_unpaid_invoices" class="btn btn-danger btn-sm" role="button">
+                                        Unpaid Invoices
+                                        <span class="badge badge-light ml-1" t-esc="record.unpaid_invoice_count.value"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="o_kanban_primary_right">
+                                <div class="o_kanban_badge text-muted">Quick Charts</div>
+                                <div class="mt-2">
+                                    <a type="object" name="action_open_sales_graph" class="btn btn-secondary btn-sm btn-block mb-1" role="button">Sales by Type (Graph)</a>
+                                    <a type="object" name="action_open_booking_trend_graph" class="btn btn-secondary btn-sm btn-block mb-1" role="button">Booking Trend (Graph)</a>
+                                    <a type="object" name="action_open_invoice_payment_graph" class="btn btn-secondary btn-sm btn-block" role="button">Invoices by Payment State (Graph)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action and menu -->
+    <record id="action_osus_sales_invoicing_dashboard" model="ir.actions.act_window">
+        <field name="name">Sales &amp; Invoicing Dashboard</field>
+        <field name="res_model">osus.sales.invoicing.dashboard</field>
+        <field name="view_mode">form,kanban</field>
+        <field name="view_id" ref="view_osus_sales_invoicing_dashboard_form"/>
+        <field name="res_id" ref="osus_sales_invoicing_dashboard_record"/>
+        <!-- Open directly in edit mode and force all fields to load -->
+        <field name="context">{
+            'form_view_initial_mode': 'edit', 
+            'force_detailed_view': True,
+            'dashboard_auto_refresh': True
+        }</field>
+    </record>
+
+    <!-- Menu under Sales module -->
+    <menuitem id="menu_osus_sales_invoicing_dashboard" 
+              name="Sales &amp; Invoicing Dashboard"
+              parent="sale.sale_menu_root"
+              action="action_osus_sales_invoicing_dashboard" 
+              sequence="10"/>
+              
+    <!-- Also keep it under Settings > Technical for convenience -->
+    <menuitem id="menu_osus_sales_invoicing_dashboard_technical" 
+              name="Sales &amp; Invoicing Dashboard"
+              parent="base.menu_custom"
+              action="action_osus_sales_invoicing_dashboard" 
+              sequence="90"/>
+</odoo>
