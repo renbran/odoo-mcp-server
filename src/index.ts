@@ -4,6 +4,7 @@
  * Supports multiple instances, comprehensive operations, and Cloudflare Workers deployment
  */
 
+import dotenv from 'dotenv';
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
@@ -15,6 +16,9 @@ import {
 import { OdooClient } from './odoo-client.js';
 import { OdooTools, tools, contextPrompts } from './tools.js';
 import type { OdooConfig } from './types.js';
+
+// Load environment variables from .env file
+dotenv.config();
 
 /**
  * Environment configuration interface
@@ -260,14 +264,11 @@ async function main() {
   }
 }
 
-// Auto-start if running directly in Node.js
-try {
-  if (typeof process !== 'undefined' && process.argv && import.meta.url === `file://${process.argv[1]}`) {
-    main();
-  }
-} catch (e) {
-  // Running in Cloudflare Workers or browser, skip auto-start
-}
+// Auto-start when running from CLI
+main().catch((error) => {
+  console.error('Unhandled error:', error);
+  process.exit(1);
+});
 
 export { OdooMCPServer, main };
 

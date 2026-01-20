@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Odoo MCP Server",
+      "program": "${workspaceFolder}/dist/index.js",
+      "preLaunchTask": "npm: build",
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "env": {
+        "ODOO_INSTANCES": "{\"scholarixv2\":{\"url\":\"https://erp.sgctech.ai\",\"db\":\"scholarixv2\",\"username\":\"info@scholarixglobal.com\",\"password\":\"123456\"},\"osusproperties\":{\"url\":\"https://erposus.com\",\"db\":\"osusproperties\",\"username\":\"salescompliance@osusproperties.com\",\"password\":\"8586583\"},\"eigermarvelhr\":{\"url\":\"https://eigermarvelhr.com\",\"db\":\"eigermarvelhr.com\",\"username\":\"admin\",\"password\":\"8586583\"},\"scholarix-restaurant\":{\"url\":\"https://scholarix.cloudpepper.site\",\"db\":\"scholarix.cloudpepper.site\",\"username\":\"admin\",\"password\":\"8586583\"},\"testserver-hospital\":{\"url\":\"https://testserver.cloudpepper.site\",\"db\":\"testserver.cloudpepper.site\",\"username\":\"admin\",\"password\":\"8586583@Bran\"},\"sgctechai\":{\"url\":\"https://scholarixglobal.com\",\"db\":\"SGCTECHAI\",\"username\":\"admin\",\"password\":\"admin\"}}"
+      }
+    }
+  ]
+}
