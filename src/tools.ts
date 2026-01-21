@@ -5,6 +5,8 @@
 
 import { z } from 'zod';
 import type { OdooClient } from './odoo-client';
+import { DatabaseCleanup } from './database-cleanup.js';
+import { DeepDatabaseCleanup } from './deep-cleanup.js';
 
 // Zod schemas for tool validation
 const SearchSchema = z.object({
@@ -80,6 +82,26 @@ const CountSchema = z.object({
   domain: z.array(z.any()).optional().describe('Search domain filters'),
 });
 
+const DatabaseCleanupSchema = z.object({
+  instance: z.string().describe('Odoo instance identifier (e.g., "scholarixv2", "production")'),
+  removeTestData: z.boolean().optional().describe('Remove test/demo records (default: true)'),
+  removeInactivRecords: z.boolean().optional().describe('Archive inactive records (default: true)'),
+  cleanupDrafts: z.boolean().optional().describe('Remove draft documents (default: true)'),
+  archiveOldRecords: z.boolean().optional().describe('Archive old records (default: true)'),
+  optimizeDatabase: z.boolean().optional().describe('Optimize database (default: true)'),
+  daysThreshold: z.number().optional().describe('Days threshold for archiving/cleanup (default: 180)'),
+  dryRun: z.boolean().optional().describe('Preview changes without applying (default: false)'),
+});
+
+const DeepCleanupSchema = z.object({
+  instance: z.string().describe('Odoo instance identifier'),
+  dryRun: z.boolean().optional().describe('Preview all changes without applying (default: true)'),
+  keepCompanyDefaults: z.boolean().optional().describe('Keep default company (default: true)'),
+  keepUserAccounts: z.boolean().optional().describe('Keep admin accounts (default: true)'),
+  keepMenus: z.boolean().optional().describe('Keep menu structure (default: true)'),
+  keepGroups: z.boolean().optional().describe('Keep user groups (default: true)'),
+});
+
 /**
  * MCP Tools for Odoo operations
  */
@@ -139,6 +161,16 @@ export const tools = [
     description: 'Get model metadata including field definitions, types, and relationships.',
     inputSchema: ModelMetadataSchema,
   },
+  {
+    name: 'odoo_database_cleanup',
+    description: 'Comprehensive database cleanup for production readiness. Removes test data, archives inactive records, cleans up drafts, removes orphans, and cleans activity logs. IMPORTANT: Use dryRun=true to preview changes first!',
+    inputSchema: DatabaseCleanupSchema,
+  },
+  {
+    name: 'odoo_deep_cleanup',
+    description: 'DESTRUCTIVE: Remove ALL non-essential data and retain only default setup. Deletes partners, orders, invoices, products, CRM, projects, HR data, and logs. Keeps only admin account, company structure, and system configuration. ⚠️ ALWAYS use dryRun=true first! This cannot be undone without a backup!',
+    inputSchema: DeepCleanupSchema,
+  },
 ];
 
 /**
@@ -183,6 +215,12 @@ export class OdooTools {
 
       case 'odoo_get_model_metadata':
         return this.handleGetModelMetadata(client, args);
+
+      case 'odoo_database_cleanup':
+        return this.handleDatabaseCleanup(args);
+
+      case 'odoo_deep_cleanup':
+        return this.handleDeepCleanup(args);
 
       default:
         throw new Error(`Unknown tool: ${name}`);
@@ -460,6 +498,52 @@ export class OdooTools {
             model: result.data,
             metadata: result.metadata,
           }, null, 2),
+        },
+      ],
+    };
+  }
+
+  private async handleDatabaseCleanup(args: any) {
+    const cleanup = new DatabaseCleanup(this.getClient.bind(this));
+
+    const report = await cleanup.executeFullCleanup({
+      instance: args.instance,
+      removeTestData: args.removeTestData,
+      removeInactivRecords: args.removeInactivRecords,
+      cleanupDrafts: args.cleanupDrafts,
+      archiveOldRecords: args.archiveOldRecords,
+      optimizeDatabase: args.optimizeDatabase,
+      daysThreshold: args.daysThreshold,
+      dryRun: args.dryRun,
+    });
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: JSON.stringify(report, null, 2),
+        },
+      ],
+    };
+  }
+
+  private async handleDeepCleanup(args: any) {
+    const deepCleanup = new DeepDatabaseCleanup(this.getClient.bind(this));
+
+    const report = await deepCleanup.executeDeepCleanup({
+      instance: args.instance,
+      dryRun: args.dryRun ?? true, // Default to true for safety
+      keepCompanyDefaults: args.keepCompanyDefaults,
+      keepUserAccounts: args.keepUserAccounts,
+      keepMenus: args.keepMenus,
+      keepGroups: args.keepGroups,
+    });
+
+    return {
+      content: [
+        {
+          type: 'text',
+          text: JSON.stringify(report, null, 2),
         },
       ],
     };
