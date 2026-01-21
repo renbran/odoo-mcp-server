@@ -19,7 +19,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><i class="fa fa-dashboard"/> Sales &amp; Invoicing Dashboard</h1>
+                        <h1>
+                            <i class="fa fa-dashboard"/>
+ Sales &amp; Invoicing Dashboard</h1>
                         <p class="text-muted">Real-time insights into your sales pipeline and collection performance</p>
                         <p class="text-info" style="font-size: 12px;">💡 Filters update automatically - just change values below</p>
                     </div>
@@ -181,13 +183,17 @@
                     <div class="row mt-3">
                         <div class="col-lg-6 col-md-12">
                             <div class="o_osus_chart_card">
-                                <div class="o_osus_chart_title"><i class="fa fa-filter"/> Sales → Invoice → Collection Flow</div>
+                                <div class="o_osus_chart_title">
+                                    <i class="fa fa-filter"/>
+ Sales → Invoice → Collection Flow</div>
                                 <field name="chart_sales_funnel" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'line', 'title': ''}"/>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="o_osus_chart_card">
-                                <div class="o_osus_chart_title"><i class="fa fa-line-chart"/> Monthly Booking Trend</div>
+                                <div class="o_osus_chart_title">
+                                    <i class="fa fa-line-chart"/>
+ Monthly Booking Trend</div>
                                 <field name="chart_booking_trend" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'line', 'title': ''}"/>
                             </div>
                         </div>
@@ -196,13 +202,17 @@
                     <div class="row mt-3">
                         <div class="col-lg-6 col-md-12">
                             <div class="o_osus_chart_card">
-                                <div class="o_osus_chart_title"><i class="fa fa-pie-chart"/> Sales by Order Type</div>
+                                <div class="o_osus_chart_title">
+                                    <i class="fa fa-pie-chart"/>
+ Sales by Order Type</div>
                                 <field name="chart_sales_by_type" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'doughnut', 'title': ''}"/>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="o_osus_chart_card">
-                                <div class="o_osus_chart_title"><i class="fa fa-credit-card"/> Invoice Payment Status</div>
+                                <div class="o_osus_chart_title">
+                                    <i class="fa fa-credit-card"/>
+ Invoice Payment Status</div>
                                 <field name="chart_payment_state" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'doughnut', 'title': ''}"/>
                             </div>
                         </div>
@@ -211,13 +221,17 @@
                     <div class="row mt-3">
                         <div class="col-lg-6 col-md-12">
                             <div class="o_osus_chart_card">
-                                <div class="o_osus_chart_title"><i class="fa fa-users"/> Top 10 Customers by Outstanding</div>
+                                <div class="o_osus_chart_title">
+                                    <i class="fa fa-users"/>
+ Top 10 Customers by Outstanding</div>
                                 <field name="chart_top_customers" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'polarArea', 'title': ''}"/>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="o_osus_chart_card">
-                                <div class="o_osus_chart_title"><i class="fa fa-user-circle"/> Agent Commission Performance</div>
+                                <div class="o_osus_chart_title">
+                                    <i class="fa fa-user-circle"/>
+ Agent Commission Performance</div>
                                 <field name="chart_agent_performance" widget="osus_dashboard_chart" nolabel="1" options="{'chartType': 'radar', 'title': ''}"/>
                             </div>
                         </div>
@@ -227,32 +241,46 @@
 
                     <notebook>
                         <page string="🏆 Top 5 Agents by Sales Value" name="agent_top_sales">
-                            <div class="alert alert-success" role="alert"><i class="fa fa-star"/> Ranking of agents by total booked sales value</div>
+                            <div class="alert alert-success" role="alert">
+                                <i class="fa fa-star"/>
+ Ranking of agents by total booked sales value</div>
                             <field name="table_agent_top_sales_value_html" widget="html" nolabel="1"/>
                         </page>
                         <page string="📊 Top 5 Agents by Order Count" name="agent_top_count">
-                            <div class="alert alert-info" role="alert"><i class="fa fa-list"/> Ranking of agents by number of orders closed</div>
+                            <div class="alert alert-info" role="alert">
+                                <i class="fa fa-list"/>
+ Ranking of agents by number of orders closed</div>
                             <field name="table_agent_top_order_count_html" widget="html" nolabel="1"/>
                         </page>
                         <page string="💵 Top 5 Agents by Commission Revenue" name="agent_top_revenue">
-                            <div class="alert alert-warning" role="alert"><i class="fa fa-credit-card"/> Ranking of agents by paid commissions and revenue</div>
+                            <div class="alert alert-warning" role="alert">
+                                <i class="fa fa-credit-card"/>
+ Ranking of agents by paid commissions and revenue</div>
                             <field name="table_agent_top_revenue_html" widget="html" nolabel="1"/>
                         </page>
 
                         <page string="Order Type Analysis" name="order_types">
-                            <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"/> Breakdown of sales performance by order type</div>
+                            <div class="alert alert-info" role="alert">
+                                <i class="fa fa-info-circle"/>
+ Breakdown of sales performance by order type</div>
                             <field name="table_order_type_html" widget="html" nolabel="1"/>
                         </page>
                         <page string="Agent Commissions" name="commissions">
-                            <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"/> Commission tracking for internal agents</div>
+                            <div class="alert alert-info" role="alert">
+                                <i class="fa fa-info-circle"/>
+ Commission tracking for internal agents</div>
                             <field name="table_agent_commission_html" widget="html" nolabel="1"/>
                         </page>
                         <page string="Detailed Orders" name="orders">
-                            <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"/> Last 50 orders matching current filters</div>
+                            <div class="alert alert-info" role="alert">
+                                <i class="fa fa-info-circle"/>
+ Last 50 orders matching current filters</div>
                             <field name="table_detailed_orders_html" widget="html" nolabel="1"/>
                         </page>
                         <page string="Invoice Aging" name="aging">
-                            <div class="alert alert-warning" role="alert"><i class="fa fa-exclamation-triangle"/> Overdue invoice analysis by aging bucket</div>
+                            <div class="alert alert-warning" role="alert">
+                                <i class="fa fa-exclamation-triangle"/>
+ Overdue invoice analysis by aging bucket</div>
                             <field name="table_invoice_aging_html" widget="html" nolabel="1"/>
                         </page>
                     </notebook>
@@ -261,16 +289,24 @@
 
                     <div class="row">
                         <div class="col-lg-3 col-md-6 mb-2">
-                            <button type="object" name="action_export_order_types_csv" class="btn btn-secondary btn-block" icon="fa-download"><span>Export Order Types</span></button>
+                            <button type="object" name="action_export_order_types_csv" class="btn btn-secondary btn-block" icon="fa-download">
+                                <span>Export Order Types</span>
+                            </button>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-2">
-                            <button type="object" name="action_export_agent_commissions_csv" class="btn btn-secondary btn-block" icon="fa-download"><span>Export Commissions</span></button>
+                            <button type="object" name="action_export_agent_commissions_csv" class="btn btn-secondary btn-block" icon="fa-download">
+                                <span>Export Commissions</span>
+                            </button>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-2">
-                            <button type="object" name="action_export_detailed_orders_csv" class="btn btn-secondary btn-block" icon="fa-download"><span>Export Orders</span></button>
+                            <button type="object" name="action_export_detailed_orders_csv" class="btn btn-secondary btn-block" icon="fa-download">
+                                <span>Export Orders</span>
+                            </button>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-2">
-                            <button type="object" name="action_export_invoice_aging_csv" class="btn btn-secondary btn-block" icon="fa-download"><span>Export Aging Report</span></button>
+                            <button type="object" name="action_export_invoice_aging_csv" class="btn btn-secondary btn-block" icon="fa-download">
+                                <span>Export Aging Report</span>
+                            </button>
                         </div>
                     </div>
                 </sheet>
@@ -298,7 +334,8 @@
                                 <div class="o_kanban_badge text-muted">Filters</div>
                                 <div class="o_kanban_tags">
                                     <span t-if="record.booking_date_from.raw_value or record.booking_date_to.raw_value" class="badge badge-secondary">
-                                        <t t-esc="record.booking_date_from.value or '…'"/> — <t t-esc="record.booking_date_to.value or '…'"/>
+                                        <t t-esc="record.booking_date_from.value or '…'"/>
+ —                                        <t t-esc="record.booking_date_to.value or '…'"/>
                                     </span>
                                     <span t-if="record.invoice_status_filter.raw_value and record.invoice_status_filter.raw_value != 'all'" class="badge badge-primary">
                                         Invoice: <t t-esc="record.invoice_status_filter.value"/>
@@ -353,16 +390,8 @@
     </record>
 
     <!-- Menu under Sales module -->
-    <menuitem id="menu_osus_sales_invoicing_dashboard" 
-              name="Sales &amp; Invoicing Dashboard"
-              parent="sale.sale_menu_root"
-              action="action_osus_sales_invoicing_dashboard" 
-              sequence="10"/>
-              
+    <menuitem id="menu_osus_sales_invoicing_dashboard" name="Sales &amp; Invoicing Dashboard" parent="sale.sale_menu_root" action="action_osus_sales_invoicing_dashboard" sequence="10"/>
+
     <!-- Also keep it under Settings > Technical for convenience -->
-    <menuitem id="menu_osus_sales_invoicing_dashboard_technical" 
-              name="Sales &amp; Invoicing Dashboard"
-              parent="base.menu_custom"
-              action="action_osus_sales_invoicing_dashboard" 
-              sequence="90"/>
+    <menuitem id="menu_osus_sales_invoicing_dashboard_technical" name="Sales &amp; Invoicing Dashboard" parent="base.menu_custom" action="action_osus_sales_invoicing_dashboard" sequence="90"/>
 </odoo>
