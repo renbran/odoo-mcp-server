@@ -1,0 +1,177 @@
+================================================================================
+OSUSPROPERTIES QUICK FIX - COPY & PASTE COMMANDS
+================================================================================
+
+ISSUE: Database cannot initialize - "user cannot have more than one user types"
+
+⚠️  READ FIRST: This is the FASTEST path to fix. Execute in order.
+   Full details in: OSUSPROPERTIES_FIX_GUIDE.md
+
+================================================================================
+STEP 1: SSH to Server
+================================================================================
+
+ssh odoo@104.207.139.132
+
+================================================================================
+STEP 2: Stop Odoo
+================================================================================
+
+sudo systemctl stop odoo-osusproperties
+ps aux | grep odoo | grep osusproperties
+
+# If any processes shown, kill them:
+# sudo kill -9 <PID>
+
+================================================================================
+STEP 3: Fix User Type Conflicts (CRITICAL)
+================================================================================
+
+sudo -u postgres psql osusproperties << 'EOSQL'
+
+-- Find the user type category
+SELECT id, name FROM ir_module_category WHERE name = 'User types';
+-- Note the ID (likely 14)
+
+-- Find conflicted users (replace 14 with actual category ID if different)
+SELECT u.id, u.login, array_agg(g.name) as groups
+FROM res_users u
+JOIN res_groups_users_rel r ON u.id = r.user_id
+JOIN res_groups g ON r.group_id = g.id
+WHERE g.category_id = 14
+GROUP BY u.id, u.login
+HAVING COUNT(*) > 1;
+
+-- Get group IDs
+SELECT g.id, g.name 
+FROM res_groups g
+WHERE g.category_id = 14;
+
+-- FOR EACH CONFLICTED USER:
+-- If keeping Internal User (ID 10), remove Portal (13) and Public (15):
+-- DELETE FROM res_groups_users_rel WHERE user_id = X AND group_id = 13;
+-- DELETE FROM res_groups_users_rel WHERE user_id = X AND group_id = 15;
+
+-- If keeping Portal (ID 13), remove Internal (10) and Public (15):
+-- DELETE FROM res_groups_users_rel WHERE user_id = X AND group_id = 10;
+-- DELETE FROM res_groups_users_rel WHERE user_id = X AND group_id = 15;
+
+-- Verify no conflicts remain
+SELECT u.login, COUNT(*) 
+FROM res_users u
+JOIN res_groups_users_rel r ON u.id = r.user_id
+JOIN res_groups g ON r.group_id = g.id
+WHERE g.category_id = 14
+GROUP BY u.id, u.login
+HAVING COUNT(*) > 1;
+-- Should return ZERO rows
+
+\q
+
+EOSQL
+
+================================================================================
+STEP 4: Disable Bad Translation File (Optional but Recommended)
+================================================================================
+
+find /var/odoo/osusproperties -name "ar_001.po" 2>/dev/null -exec mv {} {}.bak \;
+
+echo "✓ Translation files backed up"
+
+================================================================================
+STEP 5: Fix View Warnings (Optional)
+================================================================================
+
+# Fix 'group' vs 'groups' attribute
+cd /var/odoo/osusproperties/extra-addons/odoo17_final.git-6880b7fcd4844/account_line_view/views
+for f in *.xml; do sed -i 's/group="/groups="/g' "$f"; done
+
+# Fix missing alt attribute
+cd /var/odoo/osusproperties/extra-addons/odoo17_final.git-6880b7fcd4844/base_account_budget/views
+sed -i 's/<img /<img alt="Budget" /g' account_budget_views.xml
+
+echo "✓ View warnings fixed"
+
+================================================================================
+STEP 6: Start Odoo & Verify
+================================================================================
+
+sudo systemctl start odoo-osusproperties
+
+# Wait 10 seconds for startup
+sleep 10
+
+# Check status
+sudo systemctl status odoo-osusproperties --no-pager | head -20
+
+# Check for critical errors
+echo ""
+echo "Checking for CRITICAL errors..."
+sudo tail -50 /var/odoo/osusproperties/logs/odoo-server.log | grep CRITICAL
+
+# Check for user type errors
+echo ""
+echo "Checking for user type errors..."
+sudo tail -100 /var/odoo/osusproperties/logs/odoo-server.log | grep -i "user type"
+
+# If no output above, SUCCESS!
+
+echo ""
+echo "================================"
+echo "Monitor full logs:"
+echo "sudo tail -f /var/odoo/osusproperties/logs/odoo-server.log"
+echo ""
+echo "Test web access:"
+echo "http://104.207.139.132:8070"
+echo "================================"
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+If errors persist:
+
+1. Check what users are still conflicted:
+   sudo -u postgres psql osusproperties -c "
+   SELECT u.login, array_agg(g.name)
+   FROM res_users u
+   JOIN res_groups_users_rel r ON u.id = r.user_id
+   JOIN res_groups g ON r.group_id = g.id
+   JOIN ir_module_category c ON g.category_id = c.id
+   WHERE c.name = 'User types'
+   GROUP BY u.id, u.login
+   HAVING COUNT(*) > 1;"
+
+2. Check Odoo is actually running:
+   ps aux | grep odoo | grep osusproperties
+
+3. Check port is listening:
+   sudo netstat -tlnp | grep 8070
+
+4. Full log review:
+   sudo tail -100 /var/odoo/osusproperties/logs/odoo-server.log
+
+5. If completely stuck, refer to:
+   OSUSPROPERTIES_FIX_GUIDE.md (comprehensive manual)
+
+================================================================================
+BACKUP COMMAND (OPTIONAL - Run BEFORE fixes if cautious)
+================================================================================
+
+pg_dump -U postgres osusproperties | gzip > ~/osusproperties_backup_$(date +%Y%m%d_%H%M%S).sql.gz
+
+echo "✓ Backup created in home directory"
+
+================================================================================
+SUCCESS CHECKLIST
+================================================================================
+
+[ ] Service shows "active (running)"
+[ ] No CRITICAL errors in logs
+[ ] No "user type" errors in logs
+[ ] Web interface loads at http://104.207.139.132:8070
+[ ] Can login with: salescompliance@osusproperties.com / 8586583
+
+================================================================================
+END OF QUICK FIX GUIDE
+================================================================================

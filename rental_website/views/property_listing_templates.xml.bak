@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Property Listing Page Template -->
+    <template id="property_listing_page" name="Property Listings">
+        <t t-call="website.layout">
+            <div id="wrap" class="o_property_listing">
+                <!-- Hero Section with Search -->
+                <section class="o_property_hero bg-light py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h1 class="mb-4">Find Your Dream Property</h1>
+                                <form action="/properties" method="get" class="o_property_search_form">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <input type="text" name="search" class="form-control" placeholder="Search properties..." t-att-value="search"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select name="property_type" class="form-select">
+                                                <option value="">Property Type</option>
+                                                <t t-foreach="property_types" t-as="ptype">
+                                                    <option t-att-value="ptype[0]" t-att-selected="'selected' if ptype[0] == property_type else None">
+                                                        <t t-esc="ptype[1]"/>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select name="bedrooms" class="form-select">
+                                                <option value="">Bedrooms</option>
+                                                <t t-foreach="bedroom_options" t-as="bed_opt">
+                                                    <option t-att-value="bed_opt" t-att-selected="'selected' if str(bed_opt) == bedrooms else None">
+                                                        <t t-esc="bed_opt"/> <t t-if="bed_opt == 1">Bedroom</t><t t-else="">Bedrooms</t>
+                                                    </option>
+                                                </t>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="number" name="min_price" class="form-control" placeholder="Min Price" t-att-value="min_price"/>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input type="number" name="max_price" class="form-control" placeholder="Max Price" t-att-value="max_price"/>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-primary w-100">
+                                                <i class="fa fa-search"/> Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="o_property_results py-5">
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col-lg-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3>
+                                        <span t-esc="total_count"/> Properties Found
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Property Grid -->
+                        <div class="row">
+                            <t t-foreach="properties" t-as="property">
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card o_property_card h-100">
+                                        <!-- Property Image -->
+                                        <div class="card-img-top position-relative" style="height: 250px; overflow: hidden;">
+                                            <a t-attf-href="/properties/#{slug(property)}">
+                                                <img t-if="property.image_1920" 
+                                                     t-att-src="image_data_uri(property.image_1920)" 
+                                                     class="w-100 h-100" 
+                                                     style="object-fit: cover;"
+                                                     t-att-alt="property.name"/>
+                                                <img t-else="" 
+                                                     src="/web/static/img/placeholder.png" 
+                                                     class="w-100 h-100" 
+                                                     style="object-fit: cover;"
+                                                     alt="No Image"/>
+                                            </a>
+                                            <!-- Badges -->
+                                            <span t-if="property.website_featured" class="badge bg-warning position-absolute top-0 start-0 m-2">
+                                                <i class="fa fa-star"/> Featured
+                                            </span>
+                                            <span t-if="property.sale_lease == 'for_sale'" class="badge bg-success position-absolute top-0 end-0 m-2">
+                                                For Sale
+                                            </span>
+                                            <span t-elif="property.sale_lease == 'for_tenancy'" class="badge bg-info position-absolute top-0 end-0 m-2">
+                                                For Rent
+                                            </span>
+                                        </div>
+
+                                        <!-- Property Details -->
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <a t-attf-href="/properties/#{slug(property)}" class="text-decoration-none text-dark">
+                                                    <t t-esc="property.name"/>
+                                                </a>
+                                            </h5>
+                                            <p class="text-muted mb-2">
+                                                <i class="fa fa-map-marker"/> <t t-esc="property.location or 'Location not specified'"/>
+                                            </p>
+                                            <div class="row g-2 mb-3 text-muted small">
+                                                <div class="col-4" t-if="property.bed">
+                                                    <i class="fa fa-bed"/> <t t-esc="property.bed"/> Bed
+                                                </div>
+                                                <div class="col-4" t-if="property.bathroom">
+                                                    <i class="fa fa-bath"/> <t t-esc="property.bathroom"/> Bath
+                                                </div>
+                                                <div class="col-4" t-if="property.sq_ft">
+                                                    <i class="fa fa-arrows-alt"/> <t t-esc="property.sq_ft"/> sqft
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h4 class="text-primary mb-0">
+                                                    AED <t t-esc="'{:,.0f}'.format(property.price or 0)"/>
+                                                </h4>
+                                                <a t-attf-href="/properties/#{slug(property)}" class="btn btn-sm btn-outline-primary">
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+
+                            <!-- No Results -->
+                            <t t-if="not properties">
+                                <div class="col-12 text-center py-5">
+                                    <h3 class="text-muted">No properties found</h3>
+                                    <p>Try adjusting your search filters</p>
+                                    <a href="/properties" class="btn btn-primary">Clear Filters</a>
+                                </div>
+                            </t>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="row" t-if="properties">
+                            <div class="col-lg-12">
+                                <t t-call="website.pager"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+</odoo>

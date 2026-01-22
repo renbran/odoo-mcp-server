@@ -1,0 +1,59 @@
+services:
+  db:
+    image: postgres:15
+    container_name: odoo17_postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - odoo-network
+    restart: unless-stopped
+
+  odoo:
+    image: odoo:17.0
+    container_name: odoo17_test
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+      - "8072:8072"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      - ./rental_management:/mnt/extra-addons/rental_management
+      - ./rental_website:/mnt/extra-addons/rental_website
+      - ./rental_portal_syndication:/mnt/extra-addons/rental_portal_syndication
+      - ./rental_account_fields:/mnt/extra-addons/rental_account_fields
+      - ./test_modules/synconics_bi_dashboard:/mnt/extra-addons/synconics_bi_dashboard
+      - ./test_modules/commission_ax:/mnt/extra-addons/commission_ax
+      - ./test_modules/hr_uae:/mnt/extra-addons/hr_uae
+      - ./test_modules/le_sale_type:/mnt/extra-addons/le_sale_type
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./logs:/var/log/odoo
+    networks:
+      - odoo-network
+    restart: unless-stopped
+    command: --
+      --database=odoo17_test
+      --db_host=db
+      --db_port=5432
+      --db_user=odoo
+      --db_password=odoo
+      --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons
+      --log-level=info
+
+networks:
+  odoo-network:
+    driver: bridge
+
+volumes:
+  odoo-db-data:
+  odoo-web-data:

@@ -1,0 +1,71 @@
+/* global_dom_protection.js - Defensive wrapper for DOM queries */
+(function() {
+    'use strict';
+
+    // Do NOT run in iframes (website editor runs in iframe)
+    if (window !== window.top) {
+        console.log('[rental_management] Skipping DOM protection in iframe context');
+        return;
+    }
+
+    console.log('[rental_management] DOM protection initialized');
+
+    // Validate selector - only block truly invalid patterns
+    const isValidSelector = (selector) => {
+        if (!selector || typeof selector !== 'string') {
+            return false;
+        }
+        
+        if (selector.trim() === '') {
+            return false;
+        }
+
+        // Only block patterns that would cause actual syntax errors
+        const invalidPatterns = [
+            /&&/,              // Double ampersand
+            /\|\|/,            // Double pipe  
+            /^[0-9]/,          // Starting with number
+        ];
+
+        for (let pattern of invalidPatterns) {
+            if (pattern.test(selector)) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    // Store original methods
+    const originalQuerySelector = Document.prototype.querySelector;
+    const originalQuerySelectorAll = Document.prototype.querySelectorAll;
+
+    // Override with error handling only
+    Document.prototype.querySelector = function(selector) {
+        if (!isValidSelector(selector)) {
+            return null;
+        }
+        
+        try {
+            return originalQuerySelector.call(this, selector);
+        } catch (error) {
+            console.error('[rental_management] querySelector error:', selector, error);
+            return null;
+        }
+    };
+
+    Document.prototype.querySelectorAll = function(selector) {
+        if (!isValidSelector(selector)) {
+            return [];
+        }
+        
+        try {
+            return originalQuerySelectorAll.call(this, selector);
+        } catch (error) {
+            console.error('[rental_management] querySelectorAll error:', selector, error);
+            return [];
+        }
+    };
+
+    console.log('[rental_management] DOM protection active');
+})();

@@ -1,0 +1,79 @@
+/* Property Listing Styles */
+.o_property_listing {
+    background-color: #f8f9fa;
+}
+
+.o_property_hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.o_property_hero h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.o_property_search_form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.o_property_card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.o_property_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.o_property_card .card-img-top img {
+    transition: transform 0.3s ease;
+}
+
+.o_property_card:hover .card-img-top img {
+    transform: scale(1.05);
+}
+
+.o_property_card .card-title a:hover {
+    color: #667eea !important;
+}
+
+/* Property Detail Styles */
+.o_property_detail h1 {
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.o_property_detail .sticky-top {
+    z-index: 100;
+}
+
+.o_property_detail .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Featured Badge */
+.badge.bg-warning {
+    background-color: #fbbf24 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .o_property_hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .o_property_search_form {
+        padding: 20px;
+    }
+    
+    .o_property_card .card-img-top {
+        height: 200px !important;
+    }
+}

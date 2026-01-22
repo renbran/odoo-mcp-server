@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(scp:*)",
+      "Bash(wc:*)",
+      "Bash(docker-compose down:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(docker exec:*)",
+      "Bash(docker logs:*)",
+      "Bash(powershell -Command \"docker logs odoo17_test 2>&1 | Select-Object -Last 50\")",
+      "Bash(curl:*)",
+      "Bash(docker stop:*)",
+      "Bash(docker start:*)",
+      "Bash(powershell -Command \"Get-Content ''d:/01_WORK_PROJECTS/odoo-mcp-server/test_modules/synconics_bi_dashboard/static/src/lib/amcharts/index.js'' | Select-Object -Last 10\")",
+      "Bash(powershell -Command:*)"
+    ]
+  }
+}

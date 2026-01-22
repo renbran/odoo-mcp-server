@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_property_publish_wizard,access_property_publish_wizard,model_property_publish_wizard,base.group_user,1,1,1,1
+access_property_publish_wizard_public,access_property_publish_wizard_public,model_property_publish_wizard,base.group_public,1,0,0,0
+access_property_details_public,access_property_details_public,model_property_details,base.group_public,1,0,0,0
+access_property_website_inquiry_user,access_property_website_inquiry_user,model_property_website_inquiry,base.group_user,1,1,1,0

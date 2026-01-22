@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Property Publish Wizard Form -->
+    <record id="view_property_publish_wizard_form" model="ir.ui.view">
+        <field name="name">property.publish.wizard.form</field>
+        <field name="model">property.publish.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Publish Property">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="property_id" readonly="1" options="{'no_create': True, 'no_open': True}"/>
+                        </h1>
+                    </div>
+                    
+                    <group>
+                        <group string="Publishing Options">
+                            <field name="publish_to_website" widget="boolean_toggle"/>
+                            <field name="publish_to_portals" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+
+                    <group invisible="not publish_to_portals">
+                        <group string="Portal Selection">
+                            <field name="portal_publish_mode" widget="radio"/>
+                            <field name="selected_portals_count" readonly="1" string="Portals to Publish"/>
+                        </group>
+                    </group>
+
+                    <notebook invisible="portal_publish_mode != 'selected'">
+                        <page string="Select Portals" name="portals">
+                            <field name="portal_ids" nolabel="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="active"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                    <div class="alert alert-info" role="alert" style="margin-top: 20px;">
+                        <h4>What happens when you publish:</h4>
+                        <ul>
+                            <li invisible="not publish_to_website">
+                                <strong>Website:</strong> Property will be visible on your public website
+                            </li>
+                            <li invisible="not publish_to_portals">
+                                <strong>Portals:</strong> Property will be syndicated to <field name="selected_portals_count" class="badge badge-primary" readonly="1"/> portal(s)
+                            </li>
+                            <li>
+                                All fields will be automatically populated (portal reference, last sync, status)
+                            </li>
+                        </ul>
+                    </div>
+                </sheet>
+                <footer>
+                    <button string="Publish" name="action_publish" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Root menu -->
+        <menuitem id="menu_rps_root" name="Portal Syndication" sequence="10"/>
+        
+        <!-- Submenus -->
+        <menuitem id="menu_portal_connector" name="Connectors" parent="menu_rps_root" 
+            action="rental_portal_syndication.action_portal_connector" sequence="10"/>
+        
+        <menuitem id="menu_portal_lead" name="Leads" parent="menu_rps_root" 
+            action="rental_portal_syndication.action_portal_lead" sequence="20"/>
+        
+        <menuitem id="menu_portal_sync_log" name="Sync Logs" parent="menu_rps_root" 
+            action="rental_portal_syndication.action_portal_sync_log" sequence="30"/>
+        
+        <menuitem id="menu_xml_feed_config" name="Feed Config" parent="menu_rps_root" 
+            action="rental_portal_syndication.action_xml_feed_config" sequence="40"/>
+    </data>
+</odoo>

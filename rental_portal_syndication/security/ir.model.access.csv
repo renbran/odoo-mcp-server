@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_portal_connector_system,portal.connector.system,model_portal_connector,base.group_system,1,1,1,1
+access_portal_connector_admin,portal.connector.admin,model_portal_connector,rental_portal_syndication.group_portal_admin,1,1,1,1
+access_portal_connector_manager,portal.connector.manager,model_portal_connector,rental_portal_syndication.group_portal_manager,1,1,1,1
+access_portal_connector_user,portal.connector.user,model_portal_connector,rental_portal_syndication.group_portal_user,1,0,0,0
+access_portal_sync_log_system,portal.sync.log.system,model_portal_sync_log,base.group_system,1,1,1,1
+access_portal_sync_log_admin,portal.sync.log.admin,model_portal_sync_log,rental_portal_syndication.group_portal_admin,1,1,1,1
+access_portal_sync_log_user,portal.sync.log.user,model_portal_sync_log,rental_portal_syndication.group_portal_user,1,0,0,0
+access_property_portal_line_system,property.portal.line.system,model_property_portal_line,base.group_system,1,1,1,1
+access_property_portal_line_admin,property.portal.line.admin,model_property_portal_line,rental_portal_syndication.group_portal_admin,1,1,1,1
+access_property_portal_line_manager,property.portal.line.manager,model_property_portal_line,rental_portal_syndication.group_portal_manager,1,1,1,1
+access_property_portal_line_user,property.portal.line.user,model_property_portal_line,rental_portal_syndication.group_portal_user,1,0,0,0
+access_portal_lead_system,portal.lead.system,model_portal_lead,base.group_system,1,1,1,1
+access_portal_lead_admin,portal.lead.admin,model_portal_lead,rental_portal_syndication.group_portal_admin,1,1,1,1
+access_portal_lead_user,portal.lead.user,model_portal_lead,rental_portal_syndication.group_portal_user,1,0,0,0
+access_xml_feed_config_system,xml.feed.config.system,model_xml_feed_config,base.group_system,1,1,1,1
+access_xml_feed_config_admin,xml.feed.config.admin,model_xml_feed_config,rental_portal_syndication.group_portal_admin,1,1,1,1

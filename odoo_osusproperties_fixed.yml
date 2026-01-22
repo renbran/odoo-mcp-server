@@ -1,0 +1,70 @@
+http:
+  routers:
+    odoo_osusproperties_1_http:
+      entryPoints: [http]
+      rule: "Host(`erp.erposus.com`)"
+      service: odoo_osusproperties
+      middlewares: [1m-buffering, compress]
+
+    odoo_osusproperties_1_http_longpolling:
+      entryPoints: [http]
+      rule: "Host(`erp.erposus.com`) && PathPrefix(`/websocket`)"
+      service: odoo_osusproperties_longpolling
+      middlewares: []
+
+    odoo_osusproperties_1_https:
+      entryPoints: [https]
+      rule: "Host(`erp.erposus.com`)"
+      service: odoo_osusproperties
+      middlewares: [1m-buffering, compress]
+      tls: {}
+
+    odoo_osusproperties_1_https_longpolling:
+      entryPoints: [https]
+      rule: "Host(`erp.erposus.com`) && PathPrefix(`/websocket`)"
+      service: odoo_osusproperties_longpolling
+      middlewares: []
+      tls: {}
+
+    odoo_osusproperties_2_http:
+      entryPoints: [http]
+      rule: "Host(`erposus.com`)"
+      service: odoo_osusproperties
+      middlewares: [1m-buffering, compress]
+
+    odoo_osusproperties_2_http_longpolling:
+      entryPoints: [http]
+      rule: "Host(`erposus.com`) && PathPrefix(`/websocket`)"
+      service: odoo_osusproperties_longpolling
+      middlewares: []
+
+    odoo_osusproperties_2_https:
+      entryPoints: [https]
+      rule: "Host(`erposus.com`)"
+      service: odoo_osusproperties
+      middlewares: [1m-buffering, compress]
+      tls: {}
+
+    odoo_osusproperties_2_https_longpolling:
+      entryPoints: [https]
+      rule: "Host(`erposus.com`) && PathPrefix(`/websocket`)"
+      service: odoo_osusproperties_longpolling
+      middlewares: []
+      tls: {}
+
+  services:
+    odoo_osusproperties:
+      loadBalancer:
+        servers:
+        - url: http://localhost:8070
+    odoo_osusproperties_longpolling:
+      loadBalancer:
+        servers:
+        - url: http://localhost:8076
+
+tls:
+  certificates:
+    - certFile: /etc/letsencrypt/live/erp.erposus.com/fullchain.pem
+      keyFile: /etc/letsencrypt/live/erp.erposus.com/privkey.pem
+    - certFile: /etc/letsencrypt/live/erposus.com/fullchain.pem
+      keyFile: /etc/letsencrypt/live/erposus.com/privkey.pem

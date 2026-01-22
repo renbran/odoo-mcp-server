@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Property Detail Page Template -->
+    <template id="property_detail_page" name="Property Detail">
+        <t t-call="website.layout">
+            <div id="wrap" class="o_property_detail">
+                <!-- Breadcrumb -->
+                <section class="bg-light py-3">
+                    <div class="container">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/properties">Properties</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" t-esc="property.name"/>
+                            </ol>
+                        </nav>
+                    </div>
+                </section>
+
+                <!-- Property Details -->
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Left Column - Images and Details -->
+                            <div class="col-lg-8">
+                                <!-- Property Header -->
+                                <div class="mb-4">
+                                    <h1 class="mb-2" t-esc="property.name"/>
+                                    <p class="text-muted mb-3">
+                                        <i class="fa fa-map-marker"/> <span t-esc="property.location or 'Location not specified'"/>
+                                    </p>
+                                    <div class="d-flex gap-3 align-items-center">
+                                        <h3 class="text-primary mb-0">
+                                            AED <span t-esc="'{:,.0f}'.format(property.price or 0)"/>
+                                        </h3>
+                                        <span t-if="property.sale_lease == 'for_sale'" class="badge bg-success px-3 py-2">For Sale</span>
+                                        <span t-elif="property.sale_lease == 'for_tenancy'" class="badge bg-info px-3 py-2">For Rent</span>
+                                        <span class="text-muted">
+                                            <i class="fa fa-eye"/> <span t-esc="property.website_views_count"/> views
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Property Image -->
+                                <div class="mb-4">
+                                    <img t-if="property.image_1920" 
+                                         t-att-src="image_data_uri(property.image_1920)" 
+                                         class="img-fluid rounded"
+                                         t-att-alt="property.name"
+                                         style="width: 100%; max-height: 500px; object-fit: cover;"/>
+                                    <img t-else="" 
+                                         src="/web/static/img/placeholder.png" 
+                                         class="img-fluid rounded"
+                                         alt="No Image"
+                                         style="width: 100%; max-height: 500px; object-fit: cover;"/>
+                                </div>
+
+                                <!-- Property Features -->
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-4">Property Features</h4>
+                                        <div class="row g-4">
+                                            <div class="col-md-3 col-6" t-if="property.bed">
+                                                <div class="text-center">
+                                                    <i class="fa fa-bed fa-2x text-primary mb-2"/>
+                                                    <p class="mb-0"><strong t-esc="property.bed"/></p>
+                                                    <small class="text-muted">Bedrooms</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-6" t-if="property.bathroom">
+                                                <div class="text-center">
+                                                    <i class="fa fa-bath fa-2x text-primary mb-2"/>
+                                                    <p class="mb-0"><strong t-esc="property.bathroom"/></p>
+                                                    <small class="text-muted">Bathrooms</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-6" t-if="property.sq_ft">
+                                                <div class="text-center">
+                                                    <i class="fa fa-arrows-alt fa-2x text-primary mb-2"/>
+                                                    <p class="mb-0"><strong t-esc="'{:,.0f}'.format(property.sq_ft)"/></p>
+                                                    <small class="text-muted">Sq Ft</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-6" t-if="property.type">
+                                                <div class="text-center">
+                                                    <i class="fa fa-home fa-2x text-primary mb-2"/>
+                                                    <p class="mb-0"><strong t-esc="dict(property._fields['type'].selection).get(property.type, property.type)"/></p>
+                                                    <small class="text-muted">Property Type</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Property Description -->
+                                <div class="card mb-4" t-if="property.description">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-3">Description</h4>
+                                        <p class="card-text" t-field="property.description"/>
+                                    </div>
+                                </div>
+
+                                <!-- Similar Properties -->
+                                <div t-if="similar_properties">
+                                    <h4 class="mb-4">Similar Properties</h4>
+                                    <div class="row">
+                                        <t t-foreach="similar_properties" t-as="sim_prop">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card h-100">
+                                                    <div style="height: 150px; overflow: hidden;">
+                                                        <a t-attf-href="/properties/#{slug(sim_prop)}">
+                                                            <img t-if="sim_prop.image_1920" 
+                                                                 t-att-src="image_data_uri(sim_prop.image_1920)" 
+                                                                 class="card-img-top"
+                                                                 style="width: 100%; height: 150px; object-fit: cover;"
+                                                                 t-att-alt="sim_prop.name"/>
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">
+                                                            <a t-attf-href="/properties/#{slug(sim_prop)}" class="text-decoration-none">
+                                                                <t t-esc="sim_prop.name"/>
+                                                            </a>
+                                                        </h6>
+                                                        <p class="text-primary mb-0">
+                                                            AED <t t-esc="'{:,.0f}'.format(sim_prop.price or 0)"/>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column - Contact Form -->
+                            <div class="col-lg-4">
+                                <div class="card sticky-top" style="top: 20px;">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-4">Interested in this property?</h5>
+                                        <form action="/properties/contact" method="post">
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                            <input type="hidden" name="property_id" t-att-value="property.id"/>
+                                            
+                                            <div class="mb-3">
+                                                <label class="form-label">Name *</label>
+                                                <input type="text" name="name" class="form-control" required="required"/>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label class="form-label">Email *</label>
+                                                <input type="email" name="email" class="form-control" required="required"/>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label class="form-label">Phone</label>
+                                                <input type="tel" name="phone" class="form-control"/>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label class="form-label">Message</label>
+                                                <textarea name="message" class="form-control" rows="4" placeholder="I'm interested in this property..."></textarea>
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary w-100">
+                                                <i class="fa fa-paper-plane"/> Send Inquiry
+                                            </button>
+                                        </form>
+
+                                        <!-- Contact Information -->
+                                        <hr class="my-4"/>
+                                        <h6 class="mb-3">Contact Us</h6>
+                                        <p class="mb-2">
+                                            <i class="fa fa-phone text-primary"/> <a href="tel:+971XXXXXXXX">+971 XX XXX XXXX</a>
+                                        </p>
+                                        <p class="mb-2">
+                                            <i class="fa fa-envelope text-primary"/> <a href="mailto:info@sgctech.ai">info@sgctech.ai</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+    <!-- Thank You Page -->
+    <template id="property_thank_you_page" name="Thank You">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <section class="py-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 text-center">
+                                <i class="fa fa-check-circle text-success" style="font-size: 5rem;"/>
+                                <h1 class="mt-4 mb-3">Thank You!</h1>
+                                <p class="lead">Your inquiry has been received. We'll contact you shortly.</p>
+                                <a href="/properties" class="btn btn-primary mt-3">
+                                    <i class="fa fa-arrow-left"/> Back to Properties
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </t>
+    </template>
+
+</odoo>
