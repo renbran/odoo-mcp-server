@@ -1,0 +1,146 @@
+{
+  "timestamp": "2026-01-22T22:44:49.585272",
+  "total_contacts": 1557,
+  "active_contacts": 1557,
+  "inactive_contacts": 0,
+  "duplicate_summary": {
+    "by_email": 3,
+    "by_phone": 0,
+    "by_mobile": 3,
+    "by_name": 0
+  },
+  "duplicates": {
+    "email": [
+      {
+        "email": "rahul@osusproperties.com",
+        "count": 2,
+        "contacts": [
+          {
+            "id": 20976,
+            "name": "RAHUL KAIPURADD",
+            "active": true,
+            "is_company": false,
+            "customer_rank": 0,
+            "supplier_rank": 0,
+            "create_date": "2025-06-26 03:47:51"
+          },
+          {
+            "id": 24482,
+            "name": "RAHUL KAIPURAM KYPURAM",
+            "active": true,
+            "is_company": false,
+            "customer_rank": 0,
+            "supplier_rank": 5,
+            "create_date": "2025-08-26 09:13:48"
+          }
+        ]
+      },
+      {
+        "email": "r.anthony@osusproperties.com",
+        "count": 2,
+        "contacts": [
+          {
+            "id": 5594,
+            "name": "RENBRAN MADELO",
+            "active": true,
+            "is_company": false,
+            "customer_rank": 15,
+            "supplier_rank": 17,
+            "create_date": "2025-06-02 20:31:18"
+          },
+          {
+            "id": 34567,
+            "name": "TESTRENBRAN",
+            "active": true,
+            "is_company": false,
+            "customer_rank": 0,
+            "supplier_rank": 0,
+            "create_date": "2026-01-13 08:22:18"
+          }
+        ]
+      },
+      {
+        "email": "wsimon@lmduae.com",
+        "count": 2,
+        "contacts": [
+          {
+            "id": 20980,
+            "name": "TRIPTI SHETDD",
+            "active": true,
+            "is_company": false,
+            "customer_rank": 0,
+            "supplier_rank": 5,
+            "create_date": "2025-06-26 03:47:51"
+          },
+          {
+            "id": 5673,
+            "name": "WESSAM SIMON",
+            "active": true,
+            "is_company": false,
+            "customer_rank": 0,
+            "supplier_rank": 162,
+            "create_date": "2025-06-03 12:21:27"
+          }
+        ]
+      }
+    ],
+    "phone": [],
+    "mobile": [
+      {
+        "mobile": "971563905772",
+        "count": 2,
+        "contacts": [
+          {
+            "id": 3,
+            "name": "ADMINISTRATOR- RENBRAN",
+            "email": "salescompliance@osusproperties.com",
+            "active": true
+          },
+          {
+            "id": 20976,
+            "name": "RAHUL KAIPURADD",
+            "email": "rahul@osusproperties.com",
+            "active": true
+          }
+        ]
+      },
+      {
+        "mobile": "971557578360",
+        "count": 2,
+        "contacts": [
+          {
+            "id": 20951,
+            "name": "AHMED GABER",
+            "email": "documentcontroller@osusproperties.com",
+            "active": true
+          },
+          {
+            "id": 34539,
+            "name": "AHMED GABER (COPY)",
+            "email": false,
+            "active": true
+          }
+        ]
+      },
+      {
+        "mobile": "043364500",
+        "count": 2,
+        "contacts": [
+          {
+            "id": 24705,
+            "name": "ARLYN TABIRARA",
+            "email": "hr@osusproperties.com",
+            "active": true
+          },
+          {
+            "id": 10,
+            "name": "OSUS PROPERTIES REAL ESTATE BROKERAGE",
+            "email": "info@osusproperties.com",
+            "active": true
+          }
+        ]
+      }
+    ],
+    "name": []
+  }
+}

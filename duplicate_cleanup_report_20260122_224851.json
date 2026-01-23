@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-01-22T22:48:51.384560",
+  "mode": "dry_run",
+  "actions": [
+    {
+      "action": "delete",
+      "id": 34567,
+      "name": "TESTRENBRAN",
+      "status": "pending"
+    },
+    {
+      "action": "delete",
+      "id": 34539,
+      "name": "AHMED GABER (COPY)",
+      "status": "pending"
+    },
+    {
+      "action": "manual_update_required",
+      "id": 20980,
+      "name": "TRIPTI SHETDD",
+      "current_email": "wsimon@lmduae.com",
+      "issue": "Wrong email assigned",
+      "status": "needs_manual_action"
+    },
+    {
+      "action": "manual_review_required",
+      "ids": [
+        20976,
+        24482
+      ],
+      "issue": "Email conflict - same email on 2 accounts",
+      "status": "needs_decision"
+    }
+  ],
+  "summary": {
+    "deleted": 0,
+    "pending_delete": 2,
+    "manual_action_needed": 2
+  }
+}

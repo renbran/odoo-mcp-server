@@ -199,3 +199,145 @@
 2026-01-22 04:44:34,128 1 INFO odoo17_test werkzeug: 172.18.0.1 - - [22/Jan/2026 04:44:34] "POST /mail/thread/data HTTP/1.1" 200 - 26 0.025 0.031
 2026-01-22 04:44:34,151 1 INFO odoo17_test werkzeug: 172.18.0.1 - - [22/Jan/2026 04:44:34] "POST /mail/thread/messages HTTP/1.1" 200 - 21 0.026 0.025
 2026-01-22 04:44:35,799 1 INFO odoo17_test werkzeug: 172.18.0.1 - - [22/Jan/2026 04:44:35] "GET /web/service-worker.js HTTP/1.1" 200 - 1 0.000 0.005
+2026-01-22 05:41:05,616 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete: Sync with remote DB`. 
+2026-01-22 05:41:05,641 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Partner Autocomplete: Sync with remote DB` (0.012s). 
+2026-01-22 05:41:05,650 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-01-22 05:41:05,657 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `SMS: SMS Queue Manager` (0.006s). 
+2026-01-22 05:41:05,664 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-01-22 05:41:05,673 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Snailmail: process letters queue` (0.007s). 
+2026-01-22 05:41:05,680 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-01-22 05:41:05,687 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Mail: Email Queue Manager` (0.005s). 
+2026-01-22 05:41:05,695 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Notification: Send scheduled message notifications`. 
+2026-01-22 05:41:05,701 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Notification: Send scheduled message notifications` (0.005s). 
+2026-01-22 05:42:05,770 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Digest Emails`. 
+2026-01-22 05:42:06,043 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Digest Emails` (0.271s). 
+2026-01-22 05:42:06,052 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `CRM: enrich leads (IAP)`. 
+2026-01-22 05:42:06,057 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `CRM: enrich leads (IAP)` (0.003s). 
+2026-01-22 05:50:03,739 1 INFO odoo17_test werkzeug: 172.18.0.1 - - [22/Jan/2026 05:50:03] "GET /websocket?version=17.0-3 HTTP/1.1" 101 - 1 0.000 0.017
+2026-01-22 06:41:09,412 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete: Sync with remote DB`. 
+2026-01-22 06:41:09,421 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Partner Autocomplete: Sync with remote DB` (0.006s). 
+2026-01-22 06:41:09,428 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-01-22 06:41:09,432 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `SMS: SMS Queue Manager` (0.004s). 
+2026-01-22 06:41:09,442 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-01-22 06:41:09,447 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Snailmail: process letters queue` (0.004s). 
+2026-01-22 06:41:09,456 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-01-22 06:41:09,484 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Mail: Email Queue Manager` (0.026s). 
+2026-01-22 06:41:09,494 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Notification: Send scheduled message notifications`. 
+2026-01-22 06:41:09,498 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Notification: Send scheduled message notifications` (0.003s). 
+2026-01-22 06:42:09,565 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `CRM: enrich leads (IAP)`. 
+2026-01-22 06:42:09,571 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `CRM: enrich leads (IAP)` (0.005s). 
+2026-01-22 07:12:20,065 1 INFO odoo17_test werkzeug: 172.18.0.1 - - [22/Jan/2026 07:12:20] "GET /websocket?version=17.0-3 HTTP/1.1" 101 - 1 0.000 0.006
+2026-01-22 21:48:20,412 1 WARNING ? py.warnings: /usr/lib/python3/dist-packages/odoo/tools/config.py:580: DeprecationWarning: The longpolling-port is a deprecated alias to the gevent-port option, please use the latter.
+  File "/usr/bin/odoo", line 8, in <module>
+    odoo.cli.main()
+  File "/usr/lib/python3/dist-packages/odoo/cli/command.py", line 76, in main
+    o.run(args)
+  File "/usr/lib/python3/dist-packages/odoo/cli/server.py", line 186, in run
+    main(args)
+  File "/usr/lib/python3/dist-packages/odoo/cli/server.py", line 133, in main
+    odoo.tools.config.parse_config(args)
+  File "/usr/lib/python3/dist-packages/odoo/tools/config.py", line 391, in parse_config
+    self._warn_deprecated_options()
+  File "/usr/lib/python3/dist-packages/odoo/tools/config.py", line 580, in _warn_deprecated_options
+    warnings.warn(
+ 
+2026-01-22 21:48:20,414 1 INFO ? odoo: Odoo version 17.0-20251222 
+2026-01-22 21:48:20,416 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+2026-01-22 21:48:20,416 1 INFO ? odoo: addons paths: ['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/.local/share/Odoo/addons/17.0', '/mnt/extra-addons'] 
+2026-01-22 21:48:20,417 1 INFO ? odoo: database: odoo@db:5432 
+2026-01-22 21:48:20,521 1 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/local/bin/wkhtmltopdf 
+2026-01-22 21:48:20,693 1 INFO ? odoo.service.server: HTTP service (werkzeug) running on 168cf35cf0a7:8069 
+2026-01-22 21:48:20,729 1 INFO odoo17_test odoo.modules.loading: loading 1 modules... 
+2026-01-22 21:48:20,734 1 INFO odoo17_test odoo.modules.loading: 1 modules loaded in 0.00s, 0 queries (+0 extra) 
+2026-01-22 21:48:20,883 1 INFO odoo17_test odoo.modules.loading: loading 74 modules... 
+2026-01-22 21:48:21,694 1 INFO odoo17_test odoo.addons.commission_ax.models: ✅ commission_type model loaded 
+2026-01-22 21:48:21,751 1 WARNING odoo17_test odoo.api.create: The model odoo.addons.commission_ax.models.commission_line is not overriding the create method in batch 
+2026-01-22 21:48:21,753 1 INFO odoo17_test odoo.addons.commission_ax.models: ✅ commission_line model loaded 
+2026-01-22 21:48:21,809 1 INFO odoo17_test odoo.addons.commission_ax.models: ✅ commission_dashboard model loaded 
+2026-01-22 21:48:21,877 1 INFO odoo17_test odoo.addons.commission_ax.models: ✅ commission_report_generator model loaded 
+2026-01-22 21:48:21,878 1 INFO odoo17_test odoo.addons.commission_ax.models: ⚠️  commission_assignment model temporarily disabled 
+2026-01-22 21:48:21,904 1 INFO odoo17_test odoo.addons.commission_ax.models: ✅ sale_order model loaded 
+2026-01-22 21:48:21,965 1 INFO odoo17_test odoo.addons.commission_ax.models: ✅ purchase_order model loaded 
+2026-01-22 21:48:22,019 1 INFO odoo17_test odoo.addons.commission_ax.models: ✅ res_partner model loaded 
+2026-01-22 21:48:22,021 1 WARNING odoo17_test odoo.addons.commission_ax.models: ⚠️  commission_ai_analytics not loaded: cannot import name 'commission_ai_analytics' from partially initialized module 'odoo.addons.commission_ax.models' (most likely due to a circular import) (/mnt/extra-addons/commission_ax/models/__init__.py) 
+2026-01-22 21:48:22,022 1 INFO odoo17_test odoo.addons.commission_ax.models: 🎯 Commission models initialization completed 
+2026-01-22 21:48:22,749 1 WARNING odoo17_test odoo.api.create: The model odoo.addons.hr_uae.models.uae_leave_allocation is not overriding the create method in batch 
+2026-01-22 21:48:22,793 1 WARNING odoo17_test odoo.api.create: The model odoo.addons.hr_uae.models.hr_air_ticket is not overriding the create method in batch 
+2026-01-22 21:48:22,802 1 INFO odoo17_test odoo.modules.loading: 74 modules loaded in 1.92s, 0 queries (+0 extra) 
+2026-01-22 21:48:22,871 1 WARNING odoo17_test odoo.fields: hr.agent.commission.agent_type: selection attribute will be ignored as the field is related 
+2026-01-22 21:48:22,954 1 INFO odoo17_test odoo.modules.loading: Modules loaded. 
+2026-01-22 21:48:22,959 1 INFO odoo17_test odoo.modules.registry: Registry loaded in 2.267s 
+2026-01-22 21:49:23,040 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete: Sync with remote DB`. 
+2026-01-22 21:49:23,048 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Partner Autocomplete: Sync with remote DB` (0.006s). 
+2026-01-22 21:49:23,054 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-01-22 21:49:23,059 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `SMS: SMS Queue Manager` (0.004s). 
+2026-01-22 21:49:23,063 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-01-22 21:49:23,068 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Snailmail: process letters queue` (0.003s). 
+2026-01-22 21:49:23,072 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-01-22 21:49:23,078 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Mail: Email Queue Manager` (0.005s). 
+2026-01-22 21:49:23,083 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Notification: Send scheduled message notifications`. 
+2026-01-22 21:49:23,086 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Notification: Send scheduled message notifications` (0.003s). 
+2026-01-22 21:49:23,091 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `CRM: enrich leads (IAP)`. 
+2026-01-22 21:49:23,102 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `CRM: enrich leads (IAP)` (0.010s). 
+2026-01-22 22:41:25,530 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete: Sync with remote DB`. 
+2026-01-22 22:41:25,553 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Partner Autocomplete: Sync with remote DB` (0.012s). 
+2026-01-22 22:41:25,563 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-01-22 22:41:25,568 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `SMS: SMS Queue Manager` (0.005s). 
+2026-01-22 22:41:25,575 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-01-22 22:41:25,580 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Snailmail: process letters queue` (0.004s). 
+2026-01-22 22:41:25,584 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-01-22 22:41:25,591 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Mail: Email Queue Manager` (0.006s). 
+2026-01-22 22:41:25,596 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Notification: Send scheduled message notifications`. 
+2026-01-22 22:41:25,600 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Notification: Send scheduled message notifications` (0.003s). 
+2026-01-22 22:42:25,670 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `CRM: enrich leads (IAP)`. 
+2026-01-22 22:42:25,687 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `CRM: enrich leads (IAP)` (0.014s). 
+2026-01-22 23:41:28,626 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete: Sync with remote DB`. 
+2026-01-22 23:41:28,638 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Partner Autocomplete: Sync with remote DB` (0.008s). 
+2026-01-22 23:41:28,645 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-01-22 23:41:28,650 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `SMS: SMS Queue Manager` (0.004s). 
+2026-01-22 23:41:28,656 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-01-22 23:41:28,659 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Snailmail: process letters queue` (0.003s). 
+2026-01-22 23:41:28,664 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-01-22 23:41:28,669 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Mail: Email Queue Manager` (0.004s). 
+2026-01-22 23:41:28,673 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Notification: Send scheduled message notifications`. 
+2026-01-22 23:41:28,676 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Notification: Send scheduled message notifications` (0.002s). 
+2026-01-22 23:42:28,746 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `CRM: enrich leads (IAP)`. 
+2026-01-22 23:42:28,758 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `CRM: enrich leads (IAP)` (0.009s). 
+2026-01-23 00:41:31,867 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-01-23 00:41:31,875 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `SMS: SMS Queue Manager` (0.006s). 
+2026-01-23 00:41:31,880 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-01-23 00:41:31,884 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Snailmail: process letters queue` (0.002s). 
+2026-01-23 00:41:31,889 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-01-23 00:41:31,892 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Mail: Email Queue Manager` (0.003s). 
+2026-01-23 00:41:31,896 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Notification: Send scheduled message notifications`. 
+2026-01-23 00:41:31,899 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Notification: Send scheduled message notifications` (0.002s). 
+2026-01-23 00:41:31,905 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete: Sync with remote DB`. 
+2026-01-23 00:41:31,912 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Partner Autocomplete: Sync with remote DB` (0.001s). 
+2026-01-23 00:42:31,975 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `CRM: enrich leads (IAP)`. 
+2026-01-23 00:42:31,983 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `CRM: enrich leads (IAP)` (0.007s). 
+2026-01-23 01:41:35,037 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-01-23 01:41:35,045 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `SMS: SMS Queue Manager` (0.004s). 
+2026-01-23 01:41:35,053 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-01-23 01:41:35,057 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Snailmail: process letters queue` (0.002s). 
+2026-01-23 01:41:35,065 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-01-23 01:41:35,070 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Mail: Email Queue Manager` (0.003s). 
+2026-01-23 01:41:35,075 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Notification: Send scheduled message notifications`. 
+2026-01-23 01:41:35,077 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Notification: Send scheduled message notifications` (0.002s). 
+2026-01-23 01:41:35,081 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete: Sync with remote DB`. 
+2026-01-23 01:41:35,084 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Partner Autocomplete: Sync with remote DB` (0.002s). 
+2026-01-23 01:42:35,152 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `CRM: enrich leads (IAP)`. 
+2026-01-23 01:42:35,157 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `CRM: enrich leads (IAP)` (0.003s). 
+2026-01-23 02:00:36,109 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Account: Post draft entries with auto_post enabled and accounting date up to today`. 
+2026-01-23 02:00:36,168 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Account: Post draft entries with auto_post enabled and accounting date up to today` (0.058s). 
+2026-01-23 02:41:38,307 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `SMS: SMS Queue Manager`. 
+2026-01-23 02:41:38,317 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `SMS: SMS Queue Manager` (0.005s). 
+2026-01-23 02:41:38,323 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Snailmail: process letters queue`. 
+2026-01-23 02:41:38,328 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Snailmail: process letters queue` (0.003s). 
+2026-01-23 02:41:38,333 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Mail: Email Queue Manager`. 
+2026-01-23 02:41:38,338 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Mail: Email Queue Manager` (0.003s). 
+2026-01-23 02:41:38,344 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Notification: Send scheduled message notifications`. 
+2026-01-23 02:41:38,349 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Notification: Send scheduled message notifications` (0.002s). 
+2026-01-23 02:41:38,357 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `Partner Autocomplete: Sync with remote DB`. 
+2026-01-23 02:41:38,360 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `Partner Autocomplete: Sync with remote DB` (0.002s). 
+2026-01-23 02:42:38,427 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Starting job `CRM: enrich leads (IAP)`. 
+2026-01-23 02:42:38,433 1 INFO odoo17_test odoo.addons.base.models.ir_cron: Job done: `CRM: enrich leads (IAP)` (0.004s). 

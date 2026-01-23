@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-01-22T22:41:41.823116",
+  "mode": "dry_run",
+  "total_employees": 57,
+  "employees_with_users": 4,
+  "employees_without_users": 53,
+  "already_agents": 0,
+  "newly_activated": 0,
+  "pending_activation": 4,
+  "employees_activated": [],
+  "employees_pending": [
+    "AHMED WAHAB",
+    "ARLYN TABIRARA",
+    "MOHAMMAD RAZIL",
+    "Renbran Anthony Madelo"
+  ]
+}
