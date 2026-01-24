@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="osus_sales_invoicing_dashboard.DashboardChart" owl="1">
+        <div class="o_osus_dashboard_chart" style="position: relative; width: 100%; height: 220px;">
+            <canvas t-ref="canvas"/>
+        </div>
+    </t>
+</templates>

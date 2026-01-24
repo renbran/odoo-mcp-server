@@ -1,0 +1,352 @@
+[
+  {
+    "id": 2521,
+    "name": "hr.employee.view.graph",
+    "type": "graph",
+    "model": "hr.employee",
+    "xml_id": "hr_contract.hr_employee_view_graph_inherit_hr_contract"
+  },
+  {
+    "id": 2522,
+    "name": "hr.employee.view.pivot",
+    "type": "pivot",
+    "model": "hr.employee",
+    "xml_id": "hr_contract.hr_employee_view_pivot_inherit_hr_contract"
+  },
+  {
+    "id": 223,
+    "name": "res.config.settings.view.form.inherit.base.setup",
+    "type": "form",
+    "model": "res.config.settings",
+    "xml_id": "base_setup.res_config_settings_view_form"
+  },
+  {
+    "id": 406,
+    "name": "account.analytic.line.form",
+    "type": "form",
+    "model": "account.analytic.line",
+    "xml_id": "analytic.view_account_analytic_line_form"
+  },
+  {
+    "id": 3783,
+    "name": "account.bank.statement.form",
+    "type": "form",
+    "model": "account.bank.statement",
+    "xml_id": "account_statement_base.view_bank_statement_form"
+  },
+  {
+    "id": 828,
+    "name": "account.journal.form",
+    "type": "form",
+    "model": "account.journal",
+    "xml_id": "account.view_account_journal_form"
+  },
+  {
+    "id": 832,
+    "name": "account.journal.group.form",
+    "type": "form",
+    "model": "account.journal.group",
+    "xml_id": "account.view_account_journal_group_form"
+  },
+  {
+    "id": 831,
+    "name": "account.journal.group.tree",
+    "type": "tree",
+    "model": "account.journal.group",
+    "xml_id": "account.view_account_journal_group_tree"
+  },
+  {
+    "id": 829,
+    "name": "account.journal.kanban",
+    "type": "kanban",
+    "model": "account.journal",
+    "xml_id": "account.account_journal_view_kanban"
+  },
+  {
+    "id": 830,
+    "name": "account.journal.search",
+    "type": "search",
+    "model": "account.journal",
+    "xml_id": "account.view_account_journal_search"
+  },
+  {
+    "id": 827,
+    "name": "account.journal.tree",
+    "type": "tree",
+    "model": "account.journal",
+    "xml_id": "account.view_account_journal_tree"
+  },
+  {
+    "id": 442,
+    "name": "calendar.event.form",
+    "type": "form",
+    "model": "calendar.event",
+    "xml_id": "calendar.view_calendar_event_form"
+  },
+  {
+    "id": 3961,
+    "name": "crm.lead.kanban.lead",
+    "type": "kanban",
+    "model": "crm.lead",
+    "xml_id": "crm.crm_case_kanban_view_leads"
+  },
+  {
+    "id": 3964,
+    "name": "crm.lead.tree.opportunity",
+    "type": "tree",
+    "model": "crm.lead",
+    "xml_id": "crm.crm_case_tree_view_oppor"
+  },
+  {
+    "id": 3955,
+    "name": "crm.stage.form",
+    "type": "form",
+    "model": "crm.stage",
+    "xml_id": "crm.crm_stage_form"
+  },
+  {
+    "id": 763,
+    "name": "payment.method.kanban",
+    "type": "kanban",
+    "model": "payment.method",
+    "xml_id": "payment.payment_method_kanban"
+  },
+  {
+    "id": 517,
+    "name": "product.category.list",
+    "type": "tree",
+    "model": "product.category",
+    "xml_id": "product.product_category_list_view"
+  },
+  {
+    "id": 2044,
+    "name": "purchase.order.tree",
+    "type": "tree",
+    "model": "purchase.order",
+    "xml_id": "purchase.purchase_order_tree"
+  },
+  {
+    "id": 125,
+    "name": "res.partner.form",
+    "type": "form",
+    "model": "res.partner",
+    "xml_id": "base.view_partner_form"
+  },
+  {
+    "id": 161,
+    "name": "res.users.simplified.form",
+    "type": "form",
+    "model": "res.users",
+    "xml_id": "base.view_users_simple_form"
+  },
+  {
+    "id": 449,
+    "name": "res_partner.view.form.calendar",
+    "type": "form",
+    "model": "res.partner",
+    "xml_id": "calendar.view_partners_form"
+  },
+  {
+    "id": 269,
+    "name": "resource.calendar.leaves.tree",
+    "type": "tree",
+    "model": "resource.calendar.leaves",
+    "xml_id": "resource.resource_calendar_leave_tree"
+  },
+  {
+    "id": 4887,
+    "name": "stock.move.form",
+    "type": "form",
+    "model": "stock.move",
+    "xml_id": "stock.view_move_form"
+  },
+  {
+    "id": 3980,
+    "name": "view.res.partner.form.crm.inherited1",
+    "type": "form",
+    "model": "res.partner",
+    "xml_id": "crm.view_partners_form_crm1"
+  },
+  {
+    "id": 5202,
+    "name": "Hr Applicants Calendar",
+    "type": "calendar",
+    "model": "hr.applicant",
+    "xml_id": "hr_recruitment.hr_applicant_calendar_view"
+  },
+  {
+    "id": 789,
+    "name": "account.move.line.form",
+    "type": "form",
+    "model": "account.move.line",
+    "xml_id": "account.view_move_line_form"
+  },
+  {
+    "id": 444,
+    "name": "calendar.event.calendar",
+    "type": "calendar",
+    "model": "calendar.event",
+    "xml_id": "calendar.view_calendar_event_calendar"
+  },
+  {
+    "id": 443,
+    "name": "calendar.event.form.quick_create",
+    "type": "form",
+    "model": "calendar.event",
+    "xml_id": "calendar.view_calendar_event_form_quick_create"
+  },
+  {
+    "id": 3958,
+    "name": "crm.lead.calendar.lead",
+    "type": "calendar",
+    "model": "crm.lead",
+    "xml_id": "crm.crm_case_calendar_view_leads"
+  },
+  {
+    "id": 2625,
+    "name": "event.event.calendar",
+    "type": "calendar",
+    "model": "event.event",
+    "xml_id": "event.view_event_calendar"
+  },
+  {
+    "id": 2612,
+    "name": "event.registration.calendar",
+    "type": "calendar",
+    "model": "event.registration",
+    "xml_id": "event.view_event_registration_calendar"
+  },
+  {
+    "id": 2793,
+    "name": "event.track.calendar",
+    "type": "calendar",
+    "model": "event.track",
+    "xml_id": "website_event_track.view_event_track_calendar"
+  },
+  {
+    "id": 2512,
+    "name": "hr.hr.employee.view.form3",
+    "type": "form",
+    "model": "hr.employee",
+    "xml_id": "hr_contract.hr_hr_employee_view_form3"
+  },
+  {
+    "id": 31,
+    "name": "ir.cron calendar",
+    "type": "calendar",
+    "model": "ir.cron",
+    "xml_id": "base.ir_cron_view_calendar"
+  },
+  {
+    "id": 348,
+    "name": "mail.activity.view.calendar",
+    "type": "calendar",
+    "model": "mail.activity",
+    "xml_id": "mail.mail_activity_view_calendar"
+  },
+  {
+    "id": 7206,
+    "name": "project.task.calendar",
+    "type": "calendar",
+    "model": "project.task",
+    "xml_id": "project.view_task_calendar"
+  },
+  {
+    "id": 7199,
+    "name": "project.task.form",
+    "type": "form",
+    "model": "project.task",
+    "xml_id": "project.view_task_form2"
+  },
+  {
+    "id": 7205,
+    "name": "project.task.tree",
+    "type": "tree",
+    "model": "project.task",
+    "xml_id": "project.view_task_tree2"
+  },
+  {
+    "id": 2036,
+    "name": "purchase.order.calendar",
+    "type": "calendar",
+    "model": "purchase.order",
+    "xml_id": "purchase.purchase_order_calendar"
+  },
+  {
+    "id": 907,
+    "name": "res.partner.property.form.inherit",
+    "type": "form",
+    "model": "res.partner",
+    "xml_id": "account.view_partner_property_form"
+  },
+  {
+    "id": 2115,
+    "name": "sale.order.tree (orders)",
+    "type": "tree",
+    "model": "sale.order",
+    "xml_id": "sale.view_order_tree"
+  },
+  {
+    "id": 4909,
+    "name": "stock.location.tree",
+    "type": "tree",
+    "model": "stock.location",
+    "xml_id": "stock.view_location_tree2"
+  },
+  {
+    "id": 4870,
+    "name": "stock.picking.calendar",
+    "type": "calendar",
+    "model": "stock.picking",
+    "xml_id": "stock.stock_picking_calendar"
+  },
+  {
+    "id": 2811,
+    "name": "event.event.view.from.inherit.track",
+    "type": "form",
+    "model": "event.event",
+    "xml_id": "website_event_track.event_event_view_form"
+  },
+  {
+    "id": 2141,
+    "name": "res.partner.view.buttons",
+    "type": "form",
+    "model": "res.partner",
+    "xml_id": "sale.res_partner_view_buttons"
+  },
+  {
+    "id": 4888,
+    "name": "stock.move.search",
+    "type": "search",
+    "model": "stock.move",
+    "xml_id": "stock.view_move_search"
+  },
+  {
+    "id": 5149,
+    "name": "event.event.view.form.inherit.mass.mailing",
+    "type": "form",
+    "model": "event.event",
+    "xml_id": "mass_mailing_event.event_event_view_form_inherit_mass_mailing"
+  },
+  {
+    "id": 5178,
+    "name": "event.event.view.form.inherit.mass.mailing.track",
+    "type": "form",
+    "model": "event.event",
+    "xml_id": "mass_mailing_event_track.event_event_view_form_inherit_mass_mailing_track"
+  },
+  {
+    "id": 2116,
+    "name": "sale.order.tree (quotes)",
+    "type": "tree",
+    "model": "sale.order",
+    "xml_id": "sale.view_quotation_tree"
+  },
+  {
+    "id": 2695,
+    "name": "Picture Layout",
+    "type": "qweb",
+    "model": false,
+    "xml_id": "website_event.dynamic_filter_template_event_event_picture"
+  }
+]

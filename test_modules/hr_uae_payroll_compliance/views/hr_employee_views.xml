@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- ========== HR EMPLOYEE FORM VIEW - UAE COMPLIANCE ========== -->
+        <record id="hr_employee_view_form_uae_compliance" model="ir.ui.view">
+            <field name="name">hr.employee.form.uae.compliance</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                
+                <!-- Add compliance score in header -->
+                <xpath expr="//form/sheet/div[@name='button_box']" position="inside">
+                    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive" groups="hr.group_hr_user">
+                        <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                    </button>
+                    <button name="action_view_compliance_report" type="object" class="oe_stat_button" icon="fa-check-circle" attrs="{'invisible': [('x_compliance_score', '&lt;', 50)]}">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="x_compliance_score" widget="percentage"/>
+                            </span>
+                            <span class="o_stat_text">Compliance</span>
+                        </div>
+                    </button>
+                </xpath>
+                
+                <!-- Add status badges in header -->
+                <xpath expr="//form/sheet/div[@name='button_box']" position="after">
+                    <widget name="web_ribbon" title="WPS Ready" bg_color="bg-success" attrs="{'invisible': [('x_wps_ready', '=', False)]}"/>
+                    <widget name="web_ribbon" title="WPS Incomplete" bg_color="bg-warning" attrs="{'invisible': [('x_wps_ready', '=', True)]}"/>
+                </xpath>
+                
+                <!-- Add UAE Compliance notebook page -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="UAE Compliance" name="uae_compliance">
+                        
+                        <!-- WPS Section -->
+                        <group string="WPS (Wages Protection System)" name="wps_section">
+                            <group>
+                                <field name="x_mohre_person_id" required="1"/>
+                                <field name="x_wps_agent_id"/>
+                                <field name="x_payment_method" required="1"/>
+                            </group>
+                            <group>
+                                <field name="x_bank_routing_code"/>
+                                <field name="x_iban_number" attrs="{'invisible': [('x_payment_method', '!=', 'bank')], 'required': [('x_payment_method', '=', 'bank')]}"/>
+                                <field name="x_wps_ready" widget="boolean" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <!-- Emirates ID Section -->
+                        <group string="Emirates ID" name="emirates_id_section">
+                            <group>
+                                <field name="x_emirates_id" required="1"/>
+                                <field name="x_emirates_id_expiry" required="1"/>
+                                <field name="x_emirates_id_status" readonly="1" widget="badge" decoration-success="x_emirates_id_status == 'valid'" decoration-warning="x_emirates_id_status == 'expiring'" decoration-danger="x_emirates_id_status == 'expired'"/>
+                            </group>
+                            <group>
+                                <field name="x_days_to_emirates_id_expiry" readonly="1" attrs="{'invisible': [('x_emirates_id_status', '=', 'expired')]}"/>
+                                <label for="x_days_to_emirates_id_expiry" attrs="{'invisible': [('x_emirates_id_status', '!=', 'expiring')]}"/>
+                                <div attrs="{'invisible': [('x_emirates_id_status', '!=', 'expiring')]}" class="alert alert-warning">
+                                    Emirates ID expiring soon! Please renew.
+                                </div>
+                            </group>
+                        </group>
+                        
+                        <!-- Visa & Immigration Section -->
+                        <group string="Visa & Immigration" name="visa_section">
+                            <group>
+                                <field name="x_visa_number"/>
+                                <field name="x_visa_expiry"/>
+                                <field name="x_visa_status" readonly="1" widget="badge" decoration-success="x_visa_status == 'valid'" decoration-warning="x_visa_status == 'expiring'" decoration-danger="x_visa_status == 'expired'"/>
+                            </group>
+                            <group>
+                                <field name="x_passport_expiry"/>
+                                <field name="x_days_to_visa_expiry" readonly="1" attrs="{'invisible': [('x_visa_status', '=', 'expired')]}"/>
+                                <field name="x_days_to_passport_expiry" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <!-- Labor Card Section -->
+                        <group string="Labor Card" name="labor_card_section">
+                            <group>
+                                <field name="x_labor_card_number"/>
+                                <field name="x_labor_card_expiry"/>
+                            </group>
+                            <group>
+                                <field name="x_labor_card_status" readonly="1" widget="badge" decoration-success="x_labor_card_status == 'valid'" decoration-warning="x_labor_card_status == 'expiring'" decoration-danger="x_labor_card_status == 'expired'"/>
+                                <field name="x_days_to_labor_card_expiry" readonly="1" attrs="{'invisible': [('x_labor_card_status', '=', 'expired')]}"/>
+                            </group>
+                        </group>
+                        
+                        <!-- GPSSA Section (UAE Nationals) -->
+                        <group string="GPSSA (General Pension &amp; Social Security Authority)" name="gpssa_section" attrs="{'invisible': [('x_is_uae_national', '=', False)]}">
+                            <group>
+                                <field name="x_is_uae_national"/>
+                                <field name="x_gpssa_registered" attrs="{'invisible': [('x_is_uae_national', '=', False)]}"/>
+                            </group>
+                            <group>
+                                <field name="x_gpssa_number" attrs="{'invisible': [('x_gpssa_registered', '=', False)], 'required': [('x_gpssa_registered', '=', True)]}"/>
+                            </group>
+                        </group>
+                        
+                        <!-- Compliance Summary -->
+                        <group string="Compliance Summary" name="compliance_summary">
+                            <field name="x_compliance_score" widget="progressbar" readonly="1"/>
+                            <div class="alert alert-info" attrs="{'invisible': [('x_compliance_score', '&gt;=', 80)]}">
+                                <strong>Action Required:</strong> Complete missing fields to improve compliance score.
+                            </div>
+                            <div class="alert alert-success" attrs="{'invisible': [('x_compliance_score', '&lt;', 80)]}">
+                                <strong>Compliant:</strong> All required UAE documentation is up to date.
+                            </div>
+                        </group>
+                        
+                    </page>
+                </xpath>
+                
+            </field>
+        </record>
+        
+        <!-- ========== HR EMPLOYEE TREE VIEW - COMPLIANCE COLUMNS ========== -->
+        <record id="hr_employee_view_tree_uae_compliance" model="ir.ui.view">
+            <field name="name">hr.employee.tree.uae.compliance</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">x_compliance_score &lt; 50</attribute>
+                    <attribute name="decoration-warning">x_compliance_score &lt; 80 and x_compliance_score &gt;= 50</attribute>
+                    <attribute name="decoration-success">x_compliance_score &gt;= 80</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="x_emirates_id" optional="show"/>
+                    <field name="x_mohre_person_id" optional="show"/>
+                    <field name="x_wps_ready" widget="boolean" optional="show"/>
+                    <field name="x_compliance_score" widget="progressbar" optional="show"/>
+                    <field name="x_emirates_id_status" optional="hide" invisible="1"/>
+                    <field name="x_visa_status" optional="hide" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- ========== HR EMPLOYEE SEARCH VIEW - COMPLIANCE FILTERS ========== -->
+        <record id="hr_employee_view_search_uae_compliance" model="ir.ui.view">
+            <field name="name">hr.employee.search.uae.compliance</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_filter"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//search" position="inside">
+                    <!-- UAE Compliance Filters -->
+                    <separator/>
+                    <filter string="WPS Ready" name="filter_wps_ready" domain="[('x_wps_ready', '=', True)]"/>
+                    <filter string="WPS Incomplete" name="filter_wps_incomplete" domain="[('x_wps_ready', '=', False)]"/>
+                    <separator/>
+                    <filter string="Emirates ID Expiring" name="filter_emirates_expiring" domain="[('x_emirates_id_status', '=', 'expiring')]"/>
+                    <filter string="Emirates ID Expired" name="filter_emirates_expired" domain="[('x_emirates_id_status', '=', 'expired')]"/>
+                    <separator/>
+                    <filter string="Visa Expiring" name="filter_visa_expiring" domain="[('x_visa_status', '=', 'expiring')]"/>
+                    <filter string="Visa Expired" name="filter_visa_expired" domain="[('x_visa_status', '=', 'expired')]"/>
+                    <separator/>
+                    <filter string="Low Compliance (&lt;50%)" name="filter_low_compliance" domain="[('x_compliance_score', '&lt;', 50)]"/>
+                    <filter string="Medium Compliance (50-80%)" name="filter_medium_compliance" domain="[('x_compliance_score', '&gt;=', 50), ('x_compliance_score', '&lt;', 80)]"/>
+                    <filter string="High Compliance (≥80%)" name="filter_high_compliance" domain="[('x_compliance_score', '&gt;=', 80)]"/>
+                    <separator/>
+                    <filter string="UAE Nationals" name="filter_uae_nationals" domain="[('x_is_uae_national', '=', True)]"/>
+                    <filter string="GPSSA Registered" name="filter_gpssa_registered" domain="[('x_gpssa_registered', '=', True)]"/>
+                </xpath>
+                
+                <xpath expr="//search/group" position="inside">
+                    <filter string="WPS Status" name="group_wps_status" context="{'group_by': 'x_wps_ready'}"/>
+                    <filter string="Emirates ID Status" name="group_emirates_status" context="{'group_by': 'x_emirates_id_status'}"/>
+                    <filter string="Visa Status" name="group_visa_status" context="{'group_by': 'x_visa_status'}"/>
+                </xpath>
+                
+            </field>
+        </record>
+        
+    </data>
+</odoo>

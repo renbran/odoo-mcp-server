@@ -1,0 +1,25 @@
+{
+  "id": 845,
+  "name": "hr_payroll_account_community",
+  "state": "installed",
+  "shortdesc": "Odoo17 Payroll Accounting",
+  "summary": "Odoo 17 HR Payroll, payroll, Odoo17 Payroll, Odoo Payroll, Payroll, Odoo17 Payslips, Employee Payroll, HR Payroll,Odoo17, Odoo17 HR, odoo hr,odoo17, Accounting,Odoo Apps",
+  "description": "This module helps you to manage payroll and \n    accounting.",
+  "author": "Cybrosys Techno Solutions",
+  "website": "https://www.openhrms.com",
+  "installed_version": "17.0.1.0.0",
+  "latest_version": "17.0.1.0.0",
+  "category_id": [
+    19,
+    "Human Resources"
+  ],
+  "license": "LGPL-3",
+  "dependencies_id": [
+    2108,
+    2109
+  ],
+  "dependencies": [
+    "hr_payroll_community",
+    "account"
+  ]
+}

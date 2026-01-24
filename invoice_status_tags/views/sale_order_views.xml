@@ -16,7 +16,7 @@
 
             <!-- Add Invoice Progress Group after partner_id -->
             <xpath expr="//field[@name='partner_id']" position="after">
-                <group name="invoice_progress" string="Invoice Progress" invisible="state not in ['sale', 'done']">
+                <group name="invoice_progress_group" string="Invoice Progress" invisible="state not in ['sale', 'done']">
                     <group>
                         <field name="invoice_type_tag" widget="badge" decoration-success="invoice_type_tag == 'fully_invoiced'" decoration-warning="invoice_type_tag in ['partial', 'draft_only']" decoration-danger="invoice_type_tag == 'not_started'" decoration-info="invoice_type_tag == 'upsell'"/>
                         <field name="invoicing_percentage" widget="progressbar"/>

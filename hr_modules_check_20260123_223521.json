@@ -1,0 +1,69 @@
+{
+  "local": {
+    "installed": [
+      {
+        "id": 50,
+        "name": "commission_ax",
+        "state": "installed",
+        "shortdesc": "Advanced Commission Management",
+        "summary": "Professional commission management with full workflow and analytics",
+        "installed_version": "17.0.3.2.2"
+      },
+      {
+        "id": 100,
+        "name": "hr_uae",
+        "state": "installed",
+        "shortdesc": "UAE HR Extended",
+        "summary": "Extended HR features for UAE labor law compliance and agent commission management",
+        "installed_version": "17.0.1.0"
+      }
+    ],
+    "uninstalled": []
+  },
+  "osusproperties": {
+    "installed": [
+      {
+        "id": 843,
+        "name": "commission_ax",
+        "state": "installed",
+        "shortdesc": "Advanced Commission Management",
+        "summary": "Professional commission management with full workflow and analytics",
+        "installed_version": "17.0.3.2.2"
+      },
+      {
+        "id": 828,
+        "name": "hr_payroll_community",
+        "state": "installed",
+        "shortdesc": "Odoo 17 HR Payroll",
+        "summary": "Odoo 17 HR Payroll, payroll, Odoo17 Payroll, Odoo Payroll, Payroll, Odoo17 Payslips, Employee Payroll, HR Payroll,Odoo17, Odoo17 HR, odoo hr,odoo17, Accounting,Odoo Apps",
+        "installed_version": "17.0.1.0.0"
+      },
+      {
+        "id": 845,
+        "name": "hr_payroll_account_community",
+        "state": "installed",
+        "shortdesc": "Odoo17 Payroll Accounting",
+        "summary": "Odoo 17 HR Payroll, payroll, Odoo17 Payroll, Odoo Payroll, Payroll, Odoo17 Payslips, Employee Payroll, HR Payroll,Odoo17, Odoo17 HR, odoo hr,odoo17, Accounting,Odoo Apps",
+        "installed_version": "17.0.1.0.0"
+      },
+      {
+        "id": 889,
+        "name": "hr_uae",
+        "state": "installed",
+        "shortdesc": "UAE HR Extended",
+        "summary": "Extended HR features for UAE labor law compliance and agent commission management",
+        "installed_version": "17.0.1.0"
+      }
+    ],
+    "uninstalled": [
+      {
+        "id": 950,
+        "name": "commission_lines",
+        "state": "uninstalled",
+        "shortdesc": "Commission Lines",
+        "summary": "Manage commission lines and calculations",
+        "installed_version": "17.0.1.0.0"
+      }
+    ]
+  }
+}

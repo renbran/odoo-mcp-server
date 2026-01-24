@@ -1,0 +1,528 @@
+// ============================================================================
+// OSUS Sales & Invoicing Dashboard - Professional Reporting Design
+// ============================================================================
+
+// Color Palette & Variables
+$primary-blue: #1e3a8a;
+$success-green: #10b981;
+$warning-amber: #f59e0b;
+$danger-red: #ef4444;
+$info-cyan: #06b6d4;
+$light-gray: #f3f4f6;
+$medium-gray: #e5e7eb;
+$dark-gray: #374151;
+$white: #ffffff;
+
+$chart-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+$chart-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+
+// ============================================================================
+// Base Chart Styles
+// ============================================================================
+.o_osus_dashboard_chart {
+    position: relative;
+    width: 100% !important;
+    height: 320px !important;
+    margin: 0 !important;
+
+    canvas {
+        max-height: 320px;
+    }
+}
+
+.o_osus_chart_card {
+    background: $white;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: $chart-shadow;
+    transition: all 0.3s ease;
+    border: 1px solid $medium-gray;
+    position: relative;
+    overflow: hidden;
+    height: auto;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, $primary-blue, $success-green);
+    }
+
+    &:hover {
+        box-shadow: $chart-shadow-lg;
+        transform: translateY(-4px);
+        border-color: $primary-blue;
+    }
+}
+
+.o_osus_chart_title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $primary-blue;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 18px;
+        background: linear-gradient(180deg, $primary-blue, $success-green);
+        border-radius: 2px;
+        margin-right: 10px;
+    }
+}
+
+// ============================================================================
+// Dashboard Form & Layout Improvements
+// ============================================================================
+.o_form_view[data-model="osus.sales.invoicing.dashboard"] {
+    background: linear-gradient(135deg, $light-gray 0%, $white 100%);
+    min-height: 100vh;
+
+    .o_form_sheet {
+        background: $white;
+        box-shadow: $chart-shadow-lg;
+        border-radius: 12px;
+        margin: 20px 0;
+    }
+
+    .oe_button_box {
+        background: linear-gradient(135deg, $primary-blue 0%, #1e40af 100%);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        border: none;
+        box-shadow: $chart-shadow-lg;
+
+        .oe_stat_button {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 10px;
+            color: $primary-blue;
+            font-weight: 600;
+            padding: 15px 20px;
+            margin: 10px 10px 10px 0;
+            transition: all 0.3s ease;
+            box-shadow: $chart-shadow;
+            min-width: 150px;
+            text-align: center;
+
+            &:hover {
+                background: $white;
+                transform: translateY(-2px);
+                box-shadow: $chart-shadow-lg;
+            }
+
+            .o_stat_info {
+                .o_stat_value {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: $primary-blue;
+                }
+
+                .o_stat_text {
+                    font-size: 12px;
+                    color: $dark-gray;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+
+    .oe_title {
+        margin: 0 0 20px 0;
+
+        h1 {
+            font-size: 28px;
+            color: $primary-blue;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+    }
+
+    .oe_group {
+        &[string="Filters"] {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+            border: 2px solid $medium-gray;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+
+            > div > div > label {
+                color: $primary-blue;
+                font-weight: 600;
+                font-size: 13px;
+            }
+
+            .o_field_widget {
+                border-radius: 8px;
+                border: 1px solid $medium-gray;
+
+                &:focus,
+                &:focus-within {
+                    border-color: $primary-blue;
+                    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+                }
+            }
+        }
+
+        &[string="Visual Charts"] {
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin-top: 30px;
+
+            > div > label {
+                font-size: 18px;
+                color: $primary-blue;
+                font-weight: 700;
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+        }
+    }
+}
+
+// ============================================================================
+// Dashboard Button Box Enhancements
+// ============================================================================
+.oe_button_box {
+    .oe_stat_button {
+        min-width: 120px;
+        margin: 4px;
+        padding: 8px 12px;
+
+        .o_stat_info {
+            .o_stat_value {
+                font-size: 24px;
+                font-weight: 700;
+            }
+            .o_stat_text {
+                font-size: 11px;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+// Dashboard filters group
+.o_group {
+    &[string="Filters"] {
+        background: #f8f9fa;
+        padding: 12px;
+        border-radius: 6px;
+        margin-bottom: 16px;
+    }
+}
+
+// ============================================================================
+// TABLET LANDSCAPE & DESKTOP (≥ 992px)
+// ============================================================================
+@media (min-width: 992px) {
+    .o_osus_dashboard_chart {
+        min-height: 240px;
+    }
+
+    .o_osus_chart_card {
+        padding: 16px;
+    }
+
+    .o_osus_chart_title {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+}
+
+// ============================================================================
+// TABLET PORTRAIT (768px - 991px)
+// ============================================================================
+@media (min-width: 768px) and (max-width: 991px) {
+    .o_osus_dashboard_chart {
+        min-height: 200px;
+    }
+
+    .o_osus_chart_card {
+        padding: 14px;
+        margin-bottom: 14px;
+    }
+
+    .o_osus_chart_title {
+        font-size: 14px;
+    }
+
+    // Stack chart columns on tablet
+    .o_row .o_col_6 {
+        width: 100% !important;
+        margin-bottom: 14px;
+    }
+
+    // Adjust stat buttons for tablet
+    .oe_button_box {
+        text-align: center;
+
+        .oe_stat_button {
+            min-width: 140px;
+            margin: 6px;
+        }
+    }
+}
+
+// ============================================================================
+// MOBILE LANDSCAPE (576px - 767px)
+// ============================================================================
+@media (min-width: 576px) and (max-width: 767px) {
+    .o_osus_dashboard_chart {
+        min-height: 180px;
+    }
+
+    .o_osus_chart_card {
+        padding: 12px;
+        margin-bottom: 12px;
+        border-radius: 4px;
+    }
+
+    .o_osus_chart_title {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    // Full width charts on mobile landscape
+    .o_row .o_col_6 {
+        width: 100% !important;
+        margin-bottom: 12px;
+    }
+
+    // Compact stat buttons
+    .oe_button_box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+
+        .oe_stat_button {
+            flex: 1 1 calc(50% - 8px);
+            min-width: 130px;
+            margin: 0;
+            padding: 10px;
+
+            .o_stat_info .o_stat_value {
+                font-size: 20px;
+            }
+        }
+    }
+
+    // Stack filter groups
+    .o_group {
+        > .o_group {
+            width: 100% !important;
+        }
+    }
+}
+
+// ============================================================================
+// MOBILE PORTRAIT (< 576px)
+// ============================================================================
+@media (max-width: 575px) {
+    .o_osus_dashboard_chart {
+        min-height: 160px;
+    }
+
+    .o_osus_chart_card {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+
+    .o_osus_chart_title {
+        font-size: 12px;
+        margin-bottom: 6px;
+        font-weight: 700;
+    }
+
+    // Full width for all columns on small mobile
+    .o_row .o_col_6,
+    .o_row .o_col_4,
+    .o_row .o_col_3 {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+
+    // Vertical stat buttons for mobile
+    .oe_button_box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .oe_stat_button {
+            width: 100%;
+            min-width: unset;
+            margin: 0;
+            padding: 12px;
+            text-align: left;
+
+            .o_stat_info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .o_stat_value {
+                    font-size: 22px;
+                    font-weight: 700;
+                }
+
+                .o_stat_text {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    // Stack all filter fields vertically
+    .o_group[string="Filters"] {
+        padding: 10px;
+        margin-bottom: 12px;
+
+        .o_group {
+            width: 100% !important;
+            margin-bottom: 0;
+
+            .o_field_widget {
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    // Adjust form sheet padding
+    .o_form_sheet {
+        padding: 12px !important;
+    }
+}
+
+// ============================================================================
+// SMALL MOBILE (< 400px)
+// ============================================================================
+@media (max-width: 399px) {
+    .o_osus_dashboard_chart {
+        min-height: 140px;
+    }
+
+    .o_osus_chart_card {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+
+    .o_osus_chart_title {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+
+    .oe_button_box .oe_stat_button {
+        padding: 10px;
+
+        .o_stat_info .o_stat_value {
+            font-size: 20px;
+        }
+    }
+}
+
+// ============================================================================
+// PRINT STYLES
+// ============================================================================
+@media print {
+    .o_osus_chart_card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+
+    .oe_button_box {
+        display: none;
+    }
+
+    .o_osus_dashboard_chart {
+        min-height: 200px;
+    }
+}
+
+// ============================================================================
+// TOUCH DEVICE ENHANCEMENTS
+// ============================================================================
+@media (hover: none) and (pointer: coarse) {
+    // Larger touch targets for mobile devices
+    .oe_stat_button {
+        min-height: 48px;
+        padding: 12px !important;
+    }
+
+    .o_field_widget input,
+    .o_field_widget select {
+        min-height: 44px;
+        font-size: 16px; // Prevents iOS zoom on focus
+    }
+
+    // Remove hover effects on touch devices
+    .o_osus_chart_card:hover {
+        transform: none;
+    }
+}
+
+// ============================================================================
+// DARK MODE SUPPORT (Optional - if Odoo theme supports it)
+// ============================================================================
+@media (prefers-color-scheme: dark) {
+    .o_osus_chart_card {
+        background: #2c3e50;
+        border-color: #34495e;
+        color: #ecf0f1;
+
+        &:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .o_osus_chart_title {
+        color: #ecf0f1;
+    }
+
+    .o_group[string="Filters"] {
+        background: #34495e;
+        color: #ecf0f1;
+    }
+}
+
+// ============================================================================
+// ACCESSIBILITY ENHANCEMENTS
+// ============================================================================
+.o_osus_chart_card:focus-within {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+.oe_stat_button:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+// Screen reader only text
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

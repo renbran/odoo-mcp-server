@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-01-23T22:30:27.132766",
+  "source_instance": "osusproperties",
+  "source_version": "v17",
+  "target_version": "v19",
+  "modules": {
+    "hr_payroll_community": {
+      "version": "17.0.1.0.0",
+      "dependencies": [
+        "hr_contract",
+        "hr_holidays"
+      ],
+      "data_records": 100,
+      "models": 789,
+      "views": 50,
+      "export_path": "payroll_export\\hr_payroll_community"
+    },
+    "hr_payroll_account_community": {
+      "version": "17.0.1.0.0",
+      "dependencies": [
+        "hr_payroll_community",
+        "account"
+      ],
+      "data_records": 27,
+      "models": 789,
+      "views": 50,
+      "export_path": "payroll_export\\hr_payroll_account_community"
+    }
+  }
+}

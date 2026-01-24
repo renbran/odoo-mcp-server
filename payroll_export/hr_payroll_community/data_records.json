@@ -1,0 +1,702 @@
+[
+  {
+    "id": 1814082,
+    "name": "decimal_payroll",
+    "model": "decimal.precision",
+    "res_id": 9,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814083,
+    "name": "decimal_payroll_rate",
+    "model": "decimal.precision",
+    "res_id": 10,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814059,
+    "name": "contribution_register_employees",
+    "model": "hr.contribution.register",
+    "res_id": 1,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814081,
+    "name": "structure_base",
+    "model": "hr.payroll.structure",
+    "res_id": 1,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814072,
+    "name": "hr_rule_basic",
+    "model": "hr.salary.rule",
+    "res_id": 1,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 5590531,
+    "name": "hr_rule_da",
+    "model": "hr.salary.rule",
+    "res_id": 12,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814075,
+    "name": "hr_rule_hra",
+    "model": "hr.salary.rule",
+    "res_id": 4,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 5590532,
+    "name": "hr_rule_meal",
+    "model": "hr.salary.rule",
+    "res_id": 13,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 5590533,
+    "name": "hr_rule_medical",
+    "model": "hr.salary.rule",
+    "res_id": 14,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814074,
+    "name": "hr_rule_net",
+    "model": "hr.salary.rule",
+    "res_id": 3,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814080,
+    "name": "hr_rule_other",
+    "model": "hr.salary.rule",
+    "res_id": 9,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814073,
+    "name": "hr_rule_taxable",
+    "model": "hr.salary.rule",
+    "res_id": 2,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814077,
+    "name": "hr_rule_travel",
+    "model": "hr.salary.rule",
+    "res_id": 6,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814061,
+    "name": "ALW",
+    "model": "hr.salary.rule.category",
+    "res_id": 2,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814060,
+    "name": "BASIC",
+    "model": "hr.salary.rule.category",
+    "res_id": 1,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814065,
+    "name": "COMP",
+    "model": "hr.salary.rule.category",
+    "res_id": 6,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814067,
+    "name": "DA",
+    "model": "hr.salary.rule.category",
+    "res_id": 8,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814063,
+    "name": "DED",
+    "model": "hr.salary.rule.category",
+    "res_id": 4,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814062,
+    "name": "GROSS",
+    "model": "hr.salary.rule.category",
+    "res_id": 3,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814066,
+    "name": "HRA",
+    "model": "hr.salary.rule.category",
+    "res_id": 7,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814069,
+    "name": "Meal",
+    "model": "hr.salary.rule.category",
+    "res_id": 10,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814070,
+    "name": "Medical",
+    "model": "hr.salary.rule.category",
+    "res_id": 11,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814064,
+    "name": "NET",
+    "model": "hr.salary.rule.category",
+    "res_id": 5,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814071,
+    "name": "Other",
+    "model": "hr.salary.rule.category",
+    "res_id": 12,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814068,
+    "name": "Travel",
+    "model": "hr.salary.rule.category",
+    "res_id": 9,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814126,
+    "name": "action_hr_payslip",
+    "model": "ir.actions.act_window",
+    "res_id": 1186,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814130,
+    "name": "action_hr_payslip_line",
+    "model": "ir.actions.act_window",
+    "res_id": 1187,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814140,
+    "name": "action_open_payroll",
+    "model": "ir.actions.act_window",
+    "res_id": 1190,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814112,
+    "name": "hr_contribution_register_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1183,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814119,
+    "name": "hr_payroll_structure_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1184,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814124,
+    "name": "hr_payslip_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1185,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814085,
+    "name": "hr_payslip_by_employees_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1176,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814132,
+    "name": "hr_payslip_line_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1188,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814138,
+    "name": "hr_payslip_run_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1189,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814102,
+    "name": "hr_salary_rule_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1181,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814108,
+    "name": "hr_salary_rule_category_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1182,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814087,
+    "name": "payslip_lines_contribution_register_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1177,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814142,
+    "name": "res_config_settings_action",
+    "model": "ir.actions.act_window",
+    "res_id": 1191,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814088,
+    "name": "contribution_register_action",
+    "model": "ir.actions.report",
+    "res_id": 1178,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814089,
+    "name": "hr_payslip_new_report_action",
+    "model": "ir.actions.report",
+    "res_id": 1179,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814090,
+    "name": "hr_payslip_report_action",
+    "model": "ir.actions.report",
+    "res_id": 1180,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813616,
+    "name": "model_hr_contract",
+    "model": "ir.model",
+    "res_id": 931,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813621,
+    "name": "model_hr_contract_advantage_template",
+    "model": "ir.model",
+    "res_id": 4711,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813622,
+    "name": "model_hr_contribution_register",
+    "model": "ir.model",
+    "res_id": 4712,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813619,
+    "name": "model_hr_employee",
+    "model": "ir.model",
+    "res_id": 415,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813617,
+    "name": "model_hr_leave_type",
+    "model": "ir.model",
+    "res_id": 936,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813623,
+    "name": "model_hr_payroll_structure",
+    "model": "ir.model",
+    "res_id": 4715,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813624,
+    "name": "model_hr_payslip",
+    "model": "ir.model",
+    "res_id": 4716,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813634,
+    "name": "model_hr_payslip_employees",
+    "model": "ir.model",
+    "res_id": 4728,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813625,
+    "name": "model_hr_payslip_input",
+    "model": "ir.model",
+    "res_id": 4717,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813627,
+    "name": "model_hr_payslip_line",
+    "model": "ir.model",
+    "res_id": 4719,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813628,
+    "name": "model_hr_payslip_run",
+    "model": "ir.model",
+    "res_id": 4720,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813629,
+    "name": "model_hr_payslip_worked_days",
+    "model": "ir.model",
+    "res_id": 4721,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813630,
+    "name": "model_hr_rule_input",
+    "model": "ir.model",
+    "res_id": 4722,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813626,
+    "name": "model_hr_salary_rule",
+    "model": "ir.model",
+    "res_id": 4718,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813631,
+    "name": "model_hr_salary_rule_category",
+    "model": "ir.model",
+    "res_id": 4723,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813635,
+    "name": "model_payslip_lines_contribution_register",
+    "model": "ir.model",
+    "res_id": 4729,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813633,
+    "name": "model_report_hr_payroll_community_report_contributionregister",
+    "model": "ir.model",
+    "res_id": 4727,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813632,
+    "name": "model_report_hr_payroll_community_report_payslipdetails",
+    "model": "ir.model",
+    "res_id": 4726,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813620,
+    "name": "model_res_config_settings",
+    "model": "ir.model",
+    "res_id": 91,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813618,
+    "name": "model_resource_mixin",
+    "model": "ir.model",
+    "res_id": 145,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814056,
+    "name": "access_group_user",
+    "model": "ir.model.access",
+    "res_id": 2103,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814053,
+    "name": "access_hr_contract_advantage_template",
+    "model": "ir.model.access",
+    "res_id": 2100,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814054,
+    "name": "access_hr_contract_advantage_template_hr_user",
+    "model": "ir.model.access",
+    "res_id": 2101,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814044,
+    "name": "access_hr_contribution_register",
+    "model": "ir.model.access",
+    "res_id": 2091,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814042,
+    "name": "access_hr_payroll_community_structure",
+    "model": "ir.model.access",
+    "res_id": 2089,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814043,
+    "name": "access_hr_payroll_community_structure_hr_user",
+    "model": "ir.model.access",
+    "res_id": 2090,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814046,
+    "name": "access_hr_payslip",
+    "model": "ir.model.access",
+    "res_id": 2093,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814055,
+    "name": "access_hr_payslip_employees",
+    "model": "ir.model.access",
+    "res_id": 2102,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814048,
+    "name": "access_hr_payslip_input_user",
+    "model": "ir.model.access",
+    "res_id": 2095,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814047,
+    "name": "access_hr_payslip_line",
+    "model": "ir.model.access",
+    "res_id": 2094,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814050,
+    "name": "access_hr_payslip_run",
+    "model": "ir.model.access",
+    "res_id": 2097,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814049,
+    "name": "access_hr_payslip_worked_days_officer",
+    "model": "ir.model.access",
+    "res_id": 2096,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814051,
+    "name": "access_hr_rule_input_officer",
+    "model": "ir.model.access",
+    "res_id": 2098,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814045,
+    "name": "access_hr_salary_rule_category",
+    "model": "ir.model.access",
+    "res_id": 2092,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1814052,
+    "name": "access_hr_salary_rule_user",
+    "model": "ir.model.access",
+    "res_id": 2099,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813642,
+    "name": "field_hr_contract__da",
+    "model": "ir.model.fields",
+    "res_id": 25792,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813640,
+    "name": "field_hr_contract__hra",
+    "model": "ir.model.fields",
+    "res_id": 25790,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813643,
+    "name": "field_hr_contract__meal_allowance",
+    "model": "ir.model.fields",
+    "res_id": 25793,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813644,
+    "name": "field_hr_contract__medical_allowance",
+    "model": "ir.model.fields",
+    "res_id": 25794,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813645,
+    "name": "field_hr_contract__other_allowance",
+    "model": "ir.model.fields",
+    "res_id": 25795,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813636,
+    "name": "field_hr_contract__resource_calendar_id",
+    "model": "ir.model.fields",
+    "res_id": 13934,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813639,
+    "name": "field_hr_contract__schedule_pay",
+    "model": "ir.model.fields",
+    "res_id": 25789,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813638,
+    "name": "field_hr_contract__struct_id",
+    "model": "ir.model.fields",
+    "res_id": 25788,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813641,
+    "name": "field_hr_contract__travel_allowance",
+    "model": "ir.model.fields",
+    "res_id": 25791,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813647,
+    "name": "field_hr_contract_advantage_template__code",
+    "model": "ir.model.fields",
+    "res_id": 25797,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813654,
+    "name": "field_hr_contract_advantage_template__create_date",
+    "model": "ir.model.fields",
+    "res_id": 25804,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813653,
+    "name": "field_hr_contract_advantage_template__create_uid",
+    "model": "ir.model.fields",
+    "res_id": 25803,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813650,
+    "name": "field_hr_contract_advantage_template__default_value",
+    "model": "ir.model.fields",
+    "res_id": 25800,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813652,
+    "name": "field_hr_contract_advantage_template__display_name",
+    "model": "ir.model.fields",
+    "res_id": 25802,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813651,
+    "name": "field_hr_contract_advantage_template__id",
+    "model": "ir.model.fields",
+    "res_id": 25801,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813648,
+    "name": "field_hr_contract_advantage_template__lower_bound",
+    "model": "ir.model.fields",
+    "res_id": 25798,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813646,
+    "name": "field_hr_contract_advantage_template__name",
+    "model": "ir.model.fields",
+    "res_id": 25796,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813649,
+    "name": "field_hr_contract_advantage_template__upper_bound",
+    "model": "ir.model.fields",
+    "res_id": 25799,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813656,
+    "name": "field_hr_contract_advantage_template__write_date",
+    "model": "ir.model.fields",
+    "res_id": 25806,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813655,
+    "name": "field_hr_contract_advantage_template__write_uid",
+    "model": "ir.model.fields",
+    "res_id": 25805,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813657,
+    "name": "field_hr_contribution_register__company_id",
+    "model": "ir.model.fields",
+    "res_id": 25807,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813665,
+    "name": "field_hr_contribution_register__create_date",
+    "model": "ir.model.fields",
+    "res_id": 25815,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813664,
+    "name": "field_hr_contribution_register__create_uid",
+    "model": "ir.model.fields",
+    "res_id": 25814,
+    "module": "hr_payroll_community"
+  },
+  {
+    "id": 1813663,
+    "name": "field_hr_contribution_register__display_name",
+    "model": "ir.model.fields",
+    "res_id": 25813,
+    "module": "hr_payroll_community"
+  }
+]

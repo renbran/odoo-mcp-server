@@ -1,0 +1,191 @@
+[
+  {
+    "id": 1829569,
+    "name": "model_hr_contract",
+    "model": "ir.model",
+    "res_id": 931,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829570,
+    "name": "model_hr_payslip",
+    "model": "ir.model",
+    "res_id": 4716,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829574,
+    "name": "model_hr_payslip_employees",
+    "model": "ir.model",
+    "res_id": 4728,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829572,
+    "name": "model_hr_payslip_line",
+    "model": "ir.model",
+    "res_id": 4719,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829573,
+    "name": "model_hr_payslip_run",
+    "model": "ir.model",
+    "res_id": 4720,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829571,
+    "name": "model_hr_salary_rule",
+    "model": "ir.model",
+    "res_id": 4718,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829575,
+    "name": "field_hr_contract__analytic_account_id",
+    "model": "ir.model.fields",
+    "res_id": 29962,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829576,
+    "name": "field_hr_contract__journal_id",
+    "model": "ir.model.fields",
+    "res_id": 29963,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829577,
+    "name": "field_hr_payslip__date",
+    "model": "ir.model.fields",
+    "res_id": 29964,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829578,
+    "name": "field_hr_payslip__journal_id",
+    "model": "ir.model.fields",
+    "res_id": 29965,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829579,
+    "name": "field_hr_payslip__move_id",
+    "model": "ir.model.fields",
+    "res_id": 29966,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829583,
+    "name": "field_hr_payslip_line__account_credit_id",
+    "model": "ir.model.fields",
+    "res_id": 29970,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829582,
+    "name": "field_hr_payslip_line__account_debit_id",
+    "model": "ir.model.fields",
+    "res_id": 29969,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829581,
+    "name": "field_hr_payslip_line__account_tax_id",
+    "model": "ir.model.fields",
+    "res_id": 29968,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829580,
+    "name": "field_hr_payslip_line__analytic_account_id",
+    "model": "ir.model.fields",
+    "res_id": 29967,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829584,
+    "name": "field_hr_payslip_run__journal_id",
+    "model": "ir.model.fields",
+    "res_id": 29971,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829588,
+    "name": "field_hr_salary_rule__account_credit_id",
+    "model": "ir.model.fields",
+    "res_id": 29975,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829587,
+    "name": "field_hr_salary_rule__account_debit_id",
+    "model": "ir.model.fields",
+    "res_id": 29974,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829586,
+    "name": "field_hr_salary_rule__account_tax_id",
+    "model": "ir.model.fields",
+    "res_id": 29973,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829585,
+    "name": "field_hr_salary_rule__analytic_account_id",
+    "model": "ir.model.fields",
+    "res_id": 29972,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829640,
+    "name": "model_inherit__hr_payslip_line__hr_salary_rule",
+    "model": "ir.model.inherit",
+    "res_id": 430,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829642,
+    "name": "hr_contract_view_form",
+    "model": "ir.ui.view",
+    "res_id": 4053,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829643,
+    "name": "hr_payslip_run_search",
+    "model": "ir.ui.view",
+    "res_id": 4054,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829645,
+    "name": "hr_payslip_run_view_form",
+    "model": "ir.ui.view",
+    "res_id": 4056,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829644,
+    "name": "hr_payslip_run_view_tree",
+    "model": "ir.ui.view",
+    "res_id": 4055,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829646,
+    "name": "hr_payslip_view_form",
+    "model": "ir.ui.view",
+    "res_id": 4057,
+    "module": "hr_payroll_account_community"
+  },
+  {
+    "id": 1829647,
+    "name": "hr_salary_rule_view_form",
+    "model": "ir.ui.view",
+    "res_id": 4058,
+    "module": "hr_payroll_account_community"
+  }
+]

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- ========== HR CONTRACT FORM VIEW - UAE SALARY STRUCTURE ========== -->
+        <record id="hr_contract_view_form_uae_salary" model="ir.ui.view">
+            <field name="name">hr.contract.form.uae.salary</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                
+                <!-- Add compliance badges in header -->
+                <xpath expr="//header" position="inside">
+                    <button name="action_validate_wps" string="Validate WPS" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('x_wps_compliant', '=', True), ('state', 'not in', ['draft', 'open'])]}" groups="hr.group_hr_user"/>
+                </xpath>
+                
+                <!-- Add compliance ribbon -->
+                <xpath expr="//form/sheet" position="before">
+                    <widget name="web_ribbon" title="WPS Compliant" bg_color="bg-success" attrs="{'invisible': [('x_wps_compliant', '=', False)]}"/>
+                    <widget name="web_ribbon" title="WPS Non-Compliant" bg_color="bg-danger" attrs="{'invisible': [('x_wps_compliant', '=', True)]}"/>
+                </xpath>
+                
+                <!-- Replace wage field with UAE salary structure -->
+                <xpath expr="//field[@name='wage']" position="replace">
+                    <group string="UAE Salary Structure (WPS Compliant)" colspan="4">
+                        <group>
+                            <field name="x_basic_salary" required="1" widget="monetary"/>
+                            <field name="x_housing_allowance" widget="monetary"/>
+                            <field name="x_transport_allowance" widget="monetary"/>
+                            <field name="x_other_allowances" widget="monetary"/>
+                        </group>
+                        <group>
+                            <field name="x_total_salary" readonly="1" widget="monetary" class="oe_subtotal_footer_separator"/>
+                            <field name="x_basic_salary_percentage" readonly="1" widget="percentage" decoration-danger="x_basic_salary_percentage &lt; 50" decoration-success="x_basic_salary_percentage &gt;= 50"/>
+                            <field name="x_wps_compliant" readonly="1" widget="boolean"/>
+                            <div class="alert alert-danger" attrs="{'invisible': [('x_wps_compliant', '=', True)]}">
+                                <strong>WPS ALERT:</strong> Basic salary must be ≥ 50% of total!
+                            </div>
+                        </group>
+                    </group>
+                </xpath>
+                
+                <!-- Add UAE Contract notebook page -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="UAE Contract Details" name="uae_contract_details">
+                        
+                        <!-- Contract Type Section -->
+                        <group string="Contract Classification" name="contract_type">
+                            <group>
+                                <field name="x_contract_type_uae" required="1" widget="radio"/>
+                                <label for="date_end" attrs="{'invisible': [('x_contract_type_uae', '!=', 'limited')]}"/>
+                                <div attrs="{'invisible': [('x_contract_type_uae', '!=', 'limited')]}" class="alert alert-info">
+                                    <strong>Limited Contract:</strong> Must specify end date (max 3 years per UAE Law)
+                                </div>
+                            </group>
+                            <group>
+                                <field name="x_weekly_working_hours"/>
+                                <field name="x_daily_working_hours"/>
+                                <div class="alert alert-info">
+                                    UAE Standard: 8 hours/day, 48 hours/week
+                                </div>
+                            </group>
+                        </group>
+                        
+                        <!-- Gratuity Calculation Section -->
+                        <group string="End-of-Service Gratuity" name="gratuity">
+                            <group>
+                                <field name="x_gratuity_base_salary" readonly="1" widget="monetary"/>
+                                <label for="x_gratuity_base_salary"/>
+                                <div class="text-muted">
+                                    Daily Rate: <span class="fw-bold"><field name="x_gratuity_base_salary" invisible="1"/> AED / 30</span><br/>
+                                    Gratuity = (Basic Salary / 30) × Days of Service
+                                </div>
+                            </group>
+                            <group>
+                                <div class="alert alert-info">
+                                    <strong>UAE Gratuity Formula:</strong><br/>
+                                    • Years 1-5: 21 days per year<br/>
+                                    • Years 5+: 30 days per year<br/>
+                                    • Based on Basic Salary only
+                                </div>
+                            </group>
+                        </group>
+                        
+                        <!-- GPSSA Section (UAE Nationals) -->
+                        <group string="GPSSA (UAE Nationals Only)" name="gpssa" attrs="{'invisible': [('employee_id.x_is_uae_national', '=', False)]}">
+                            <group>
+                                <field name="x_gpssa_base_salary" readonly="1" widget="monetary"/>
+                                <label for="x_gpssa_base_salary"/>
+                                <div class="text-muted">
+                                    Pensionable Salary = Basic + Housing + Transport
+                                </div>
+                            </group>
+                            <group>
+                                <field name="x_gpssa_employee_contribution" readonly="1" widget="monetary"/>
+                                <field name="x_gpssa_employer_contribution" readonly="1" widget="monetary"/>
+                                <div class="text-muted">
+                                    <strong>Contribution Rates:</strong><br/>
+                                    Employee: 5% | Employer: 12.5%
+                                </div>
+                            </group>
+                        </group>
+                        
+                        <!-- Overtime Rates Section -->
+                        <group string="Overtime & Leave Calculations" name="overtime">
+                            <group>
+                                <label for="x_basic_salary"/>
+                                <div>
+                                    <strong>Hourly Rate:</strong> <span class="text-muted">(Basic / 240 hours)</span><br/>
+                                    = <field name="x_basic_salary" invisible="1"/> AED / 240 = <span class="fw-bold">AED [calculated]</span>
+                                </div>
+                                <div class="mt-2">
+                                    <strong>Regular OT (125%):</strong> <span class="fw-bold">AED [calculated × 1.25]</span><br/>
+                                    <strong>Premium OT (150%):</strong> <span class="fw-bold">AED [calculated × 1.50]</span>
+                                </div>
+                            </group>
+                            <group>
+                                <label for="x_total_salary"/>
+                                <div>
+                                    <strong>Daily Wage:</strong> <span class="text-muted">(Total Salary / 30)</span><br/>
+                                    = <span class="fw-bold">AED [calculated]</span>
+                                </div>
+                                <div class="alert alert-info mt-2">
+                                    Used for: Leave deductions, absence calculations
+                                </div>
+                            </group>
+                        </group>
+                        
+                        <!-- Compliance Status -->
+                        <group string="Contract Compliance" name="compliance">
+                            <field name="x_contract_compliant" readonly="1" widget="boolean"/>
+                            <div class="alert alert-success" attrs="{'invisible': [('x_contract_compliant', '=', False)]}">
+                                ✓ Contract meets UAE Labor Law requirements
+                            </div>
+                            <div class="alert alert-warning" attrs="{'invisible': [('x_contract_compliant', '=', True)]}">
+                                ⚠ Contract requires attention to meet compliance standards
+                            </div>
+                        </group>
+                        
+                    </page>
+                </xpath>
+                
+            </field>
+        </record>
+        
+        <!-- ========== HR CONTRACT TREE VIEW - SALARY SUMMARY ========== -->
+        <record id="hr_contract_view_tree_uae_salary" model="ir.ui.view">
+            <field name="name">hr.contract.tree.uae.salary</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_tree"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">x_wps_compliant == False</attribute>
+                    <attribute name="decoration-success">x_wps_compliant == True and x_contract_compliant == True</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='wage']" position="replace">
+                    <field name="x_basic_salary" widget="monetary" optional="show"/>
+                    <field name="x_total_salary" widget="monetary" optional="show"/>
+                    <field name="x_basic_salary_percentage" widget="percentage" optional="show" decoration-danger="x_basic_salary_percentage &lt; 50" decoration-success="x_basic_salary_percentage &gt;= 50"/>
+                    <field name="x_wps_compliant" widget="boolean" optional="show"/>
+                    <field name="x_contract_type_uae" optional="hide"/>
+                </xpath>
+                
+            </field>
+        </record>
+        
+        <!-- ========== HR CONTRACT SEARCH VIEW - COMPLIANCE FILTERS ========== -->
+        <record id="hr_contract_view_search_uae" model="ir.ui.view">
+            <field name="name">hr.contract.search.uae</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//search" position="inside">
+                    <!-- UAE Contract Filters -->
+                    <separator/>
+                    <filter string="WPS Compliant" name="filter_wps_compliant" domain="[('x_wps_compliant', '=', True)]"/>
+                    <filter string="WPS Non-Compliant" name="filter_wps_non_compliant" domain="[('x_wps_compliant', '=', False)]"/>
+                    <separator/>
+                    <filter string="Unlimited Contracts" name="filter_unlimited" domain="[('x_contract_type_uae', '=', 'unlimited')]"/>
+                    <filter string="Limited Contracts" name="filter_limited" domain="[('x_contract_type_uae', '=', 'limited')]"/>
+                    <separator/>
+                    <filter string="Fully Compliant" name="filter_fully_compliant" domain="[('x_contract_compliant', '=', True)]"/>
+                    <filter string="Requires Attention" name="filter_non_compliant" domain="[('x_contract_compliant', '=', False)]"/>
+                </xpath>
+                
+                <xpath expr="//search/group" position="inside">
+                    <filter string="WPS Status" name="group_wps" context="{'group_by': 'x_wps_compliant'}"/>
+                    <filter string="Contract Type" name="group_contract_type" context="{'group_by': 'x_contract_type_uae'}"/>
+                </xpath>
+                
+            </field>
+        </record>
+        
+    </data>
+</odoo>

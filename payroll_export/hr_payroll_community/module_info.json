@@ -1,0 +1,25 @@
+{
+  "id": 828,
+  "name": "hr_payroll_community",
+  "state": "installed",
+  "shortdesc": "Odoo 17 HR Payroll",
+  "summary": "Odoo 17 HR Payroll, payroll, Odoo17 Payroll, Odoo Payroll, Payroll, Odoo17 Payslips, Employee Payroll, HR Payroll,Odoo17, Odoo17 HR, odoo hr,odoo17, Accounting,Odoo Apps",
+  "description": "odoo17, Odoo 17 HR Payroll, odoo payroll, odoo17 payroll, payroll community,odoo 17, payroll,Odoo 17 Payroll for Community version where can manage Employee Payroll Records",
+  "author": "Cybrosys Techno Solutions",
+  "website": "https://www.openhrms.com",
+  "installed_version": "17.0.1.0.0",
+  "latest_version": "17.0.1.0.0",
+  "category_id": [
+    19,
+    "Human Resources"
+  ],
+  "license": "LGPL-3",
+  "dependencies_id": [
+    2110,
+    2111
+  ],
+  "dependencies": [
+    "hr_contract",
+    "hr_holidays"
+  ]
+}

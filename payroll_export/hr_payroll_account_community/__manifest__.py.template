@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Odoo17 Payroll Accounting',
+    'version': '19.0.1.0.0',  # Updated to v19
+    'category': 'Human Resources',
+    'summary': 'Odoo 17 HR Payroll, payroll, Odoo17 Payroll, Odoo Payroll, Payroll, Odoo17 Payslips, Employee Payroll, HR Payroll,Odoo17, Odoo17 HR, odoo hr,odoo17, Accounting,Odoo Apps',
+    'description': """
+This module helps you to manage payroll and 
+    accounting.
+    """,
+    'author': 'Cybrosys Techno Solutions',
+    'website': 'https://www.openhrms.com',
+    'license': 'LGPL-3',
+    'depends': ['hr_payroll_community', 'account'],
+    'data': [
+        # TODO: Add your data files here
+        # 'security/ir.model.access.csv',
+        # 'views/*.xml',
+        # 'data/*.xml',
+    ],
+    'demo': [],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}
